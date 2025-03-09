@@ -11,14 +11,16 @@ const links = [
 ---
 
 <nav
-  class="fixed flex bg-[#ffffff30] items-center justify-center px-2 py-1 mb-8 top-[20px] left-1/2 h-[56px] -translate-x-1/2 rounded-4xl border cursor-pointer border-gray-200 backdrop-blur-sm md:top-[20px] transition-all duration-300 hover:scale-102 hover:shadow-2xl"
+  class="fixed flex flex-col md:flex-row bg-[#ffffff30] items-center justify-center px-2 py-1 bottom-4 left-1/2 -translate-x-1/2 rounded-4xl border cursor-pointer border-gray-200 backdrop-blur-sm md:top-[20px] md:bottom-auto transition-all duration-300 hover:scale-102 hover:shadow-2xl"
 >
   {
     links.map((link, index) => (
       <a
         href="#"
-        class={`flex items-center px-4 py-2 justify-center gap-2 w-full backdrop-blur-2xl text-gray-500 hover:text-gray-900 hover:rounded-2xl hover:border hover:border-gray-200 ${
-          index === links.length - 1 ? "border-l border-gray-300" : ""
+        class={`flex flex-col md:flex-row items-center px-4 py-2 justify-center gap-1 md:gap-2 w-full backdrop-blur-2xl text-gray-500 hover:text-gray-900 hover:rounded-2xl hover:border hover:border-gray-200 ${
+          index === links.length - 1
+            ? "border-l border-gray-300 md:border-l"
+            : ""
         }`}
       >
         {link.name === "Autograph" && (

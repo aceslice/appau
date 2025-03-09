@@ -9,7 +9,7 @@ import "../styles/global.css";
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Aceslice</title>
@@ -17,9 +17,8 @@ import "../styles/global.css";
 
   <body
     id="container"
-    class="container max-w-7xl w-6xl border-l border-r border-gray-300"
-    style="margin: 0 auto;
-	padding:5rem"
+    class="max-w-7xl md:w-5xl w-full border-l border-r border-gray-300 p-8 md:p-20"
+    style="margin: 0 auto;"
   >
     <img id="background" src={background.src} alt="" fetchpriority="high" />
 
@@ -31,16 +30,12 @@ import "../styles/global.css";
     @import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
     * {
       font-family: "Syne", sans-serif;
-
-      box-sizing: border-box;
     }
     body {
-      font-family: "Syne", sans-serif;
       font-size: 16px;
       line-height: 1.5;
       color: #333;
       margin: 0;
-      padding: 0;
     }
     #background {
       position: fixed;
