@@ -1,0 +1,35 @@
+---
+import HomeIcon from "../assets/home.svg";
+import AboutIcon from "../assets/about.svg";
+import ProjectIcon from "../assets/projects.svg";
+import ContactIcon from "../assets/contact.svg";
+import AtSign from "../assets/Autograph.svg";
+
+const links = [
+  { name: "Home" },
+  { name: "About" },
+  { name: "Projects" },
+  { name: "Contact" },
+  { name: "Autograph" },
+];
+---
+
+<nav
+  class="fixed flex bg-[#ffffff30] items-center justify-center px-2 py-1 mb-8 top-[20px] left-1/2 h-[56px] -translate-x-1/2 rounded-4xl border cursor-pointer border-gray-200 backdrop-blur-sm md:top-[20px] transition-all duration-300 hover:scale-102 hover:shadow-2xl"
+>
+  {
+    links.map((link, index) => (
+      <a
+        href="#"
+        class={`flex items-center px-4 py-2 justify-center gap-2 w-full backdrop-blur-2xl text-gray-500 hover:text-gray-900 hover:rounded-2xl hover:border hover:border-gray-200 ${
+          index === links.length - 1 ? "border-l border-gray-300" : ""
+        }`}
+      >
+        {link.name === "Autograph" && (
+          <img src={AtSign.src} alt="Autograph" class="h-5 w-5" />
+        )}
+        <p class="font-medium text-xs">{link.name}</p>
+      </a>
+    ))
+  }
+</nav>

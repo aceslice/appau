@@ -1,0 +1,103 @@
+---
+import PG from "./PG.astro";
+const greetings = [
+  "Akwaaba!",
+  "こんにちは",
+  "안녕하세요",
+  "你好",
+  "Здравствуйте!",
+  "いらっしゃいませ",
+];
+
+// Initialize with a random greeting
+let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+---
+
+<div class="mt-8">
+  <h1 class="text-6xl font-bold mb-4">
+    <span class="text-2xl text-[#333]">
+      <style>
+        #greeting {
+          transition: opacity 0.5s ease;
+        }
+        #greeting.fade {
+          opacity: 0;
+        }
+      </style>
+
+      <span id="greeting">{randomGreeting}</span>
+    </span>
+    <br /> I'm Gideon Appau.
+  </h1>
+  <p
+    class="text-sm font-medium mb-4 text-gray-500 w-3/4"
+    style="line-height: 2"
+  >
+    I'm exploring various creative avenues—chess, coding, music, poetry, and
+    writing. Here you'll find honest stories about my work and a glimpse into
+    what I'm building. Whether it's a new project or a simple thought, I keep it
+    real.
+    <span
+      class="font-semibold text-green-900"
+      style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
+    >
+      about me 🙈
+    </span> or
+    <span
+      class="font-semibold text-orange-900"
+      style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
+    >
+      what I'm working on 🎢
+    </span>. If you want to keep up, follow my socials or join my
+    <span
+      class="text-indigo-900 font-semibold"
+      style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
+    >
+      Discord community
+    </span>.
+  </p>
+
+  <p class="italic text-sm font-medium text-gray-500 w-3/4 mb-8">
+    You can just call me
+    <span
+      class="text-fuchsia-900"
+      style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
+    >
+      Ace
+    </span>- a name that inspires me to live boldly and embrace mastery in every
+    endeavor.
+  </p>
+
+  <PG />
+</div>
+<script>
+  const greetings = [
+    "Akwaaba!",
+    "こんにちは",
+    "안녕하세요",
+    "你好",
+    "Здравствуйте!",
+    "いらっしゃいませ",
+  ];
+
+  // Initialize with a random greeting
+  let currentGreeting = greetings[Math.floor(Math.random() * greetings.length)];
+  const greetingEl = document.getElementById("greeting");
+
+  // Function to fade out, change text, then fade in
+  function changeGreeting() {
+    const el = document.getElementById("greeting");
+    if (el) {
+      el.classList.add("fade");
+      setTimeout(() => {
+        currentGreeting =
+          greetings[Math.floor(Math.random() * greetings.length)];
+        el.textContent = currentGreeting;
+        el.classList.remove("fade");
+      }, 1000); // Duration for fade-out transition
+    }
+  }
+
+  // Change every 3000 ms
+  setInterval(changeGreeting, 10000);
+</script>
