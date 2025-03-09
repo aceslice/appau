@@ -23,7 +23,7 @@ const links = [
       links.map((link, index) => (
         <a
           href="#"
-          class={`flex items-center justify-center gap-2 px-4 py-2 text-gray-500 font-medium text-xs hover:text-gray-900 hover:rounded-lg hover:border hover:border-gray-200 ${index === links.length - 1 ? "border-l border-gray-300" : ""}`}
+          class={`flex items-center justify-center gap-2 px-4 py-2 text-gray-500 font-medium text-xs hover:text-gray-900 hover:rounded-2xl hover:border hover:border-gray-200 ${index === links.length - 1 ? "border-l border-gray-300" : ""}`}
         >
           {link.name === "Autograph" && (
             <img src={AtSign.src} alt="Autograph" class="h-5 w-5" />
