@@ -10,24 +10,100 @@ const links = [
 ];
 ---
 
-<nav
-  class="fixed flex flex-col md:flex-row bg-[#ffffff30] items-center justify-center px-2 py-1 bottom-4 left-1/2 -translate-x-1/2 rounded-4xl border cursor-pointer border-gray-200 backdrop-blur-sm md:top-[20px] md:bottom-auto transition-all duration-300 hover:scale-102 hover:shadow-2xl"
->
-  {
-    links.map((link, index) => (
-      <a
-        href="#"
-        class={`flex flex-col md:flex-row items-center px-4 py-2 justify-center gap-1 md:gap-2 w-full backdrop-blur-2xl text-gray-500 hover:text-gray-900 hover:rounded-2xl hover:border hover:border-gray-200 ${
-          index === links.length - 1
-            ? "border-l border-gray-300 md:border-l"
-            : ""
-        }`}
-      >
-        {link.name === "Autograph" && (
-          <img src={AtSign.src} alt="Autograph" class="h-5 w-5" />
-        )}
-        <p class="font-medium text-xs">{link.name}</p>
-      </a>
-    ))
-  }
-</nav>
+<!-- Include Alpine.js -->
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer
+></script>
+
+<div x-data="{ open: false }">
+  <!-- Horizontal nav for md and up -->
+  <nav
+    class="hidden md:flex fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white/30 px-4 py-2 rounded-full border border-gray-200 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-lg z-50"
+  >
+    {
+      links.map((link, index) => (
+        <a
+          href="#"
+          class={`flex items-center justify-center gap-2 px-4 py-2 text-gray-500 font-medium text-xs hover:text-gray-900 hover:rounded-lg hover:border hover:border-gray-200 ${index === links.length - 1 ? "border-l border-gray-300" : ""}`}
+        >
+          {link.name === "Autograph" && (
+            <img src={AtSign.src} alt="Autograph" class="h-5 w-5" />
+          )}
+          <span>{link.name}</span>
+        </a>
+      ))
+    }
+  </nav>
+
+  <!-- Hamburger button for sm screens -->
+  <div class="md:hidden fixed top-4 right-4 z-50">
+    <button
+      @click="open = !open"
+      class="p-2 rounded-md bg-white/70 border border-gray-200"
+    >
+      <template x-if="!open">
+        <svg
+          class="w-6 h-6 text-gray-700"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </template>
+      <template x-if="open">
+        <svg
+          class="w-6 h-6 text-gray-700"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </template>
+    </button>
+  </div>
+
+  <!-- Mobile vertical menu with smooth animation & limited height -->
+  <nav
+    x-show="open"
+    x-transition:enter="transition ease-out duration-300"
+    x-transition:enter-start="opacity-0 transform scale-95"
+    x-transition:enter-end="opacity-100 transform scale-100"
+    x-transition:leave="transition ease-in duration-200"
+    x-transition:leave-start="opacity-100 transform scale-100"
+    x-transition:leave-end="opacity-0 transform scale-95"
+    @click.away="open = false"
+    class="fixed top-16 left-1/2 transform -translate-x-1/2 bg-white/90 flex flex-col items-center justify-center space-y-4 z-40 md:hidden max-w-xs w-full p-4 rounded-lg shadow-lg"
+  >
+    {
+      links.map((link) => (
+        <a
+          href="#"
+          @click="open = false"
+          class="px-4 py-2 text-gray-700 font-semibold text-lg"
+        >
+          {link.name === "Autograph" ? (
+            <>
+              <img
+                src={AtSign.src}
+                alt="Autograph"
+                class="h-5 w-5 inline-block mr-2"
+              />
+              {link.name}
+            </>
+          ) : (
+            link.name
+          )}
+        </a>
+      ))
+    }
+  </nav>
+</div>

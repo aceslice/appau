@@ -13,9 +13,9 @@ const greetings = [
 let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
 ---
 
-<div class="mt-8">
-  <h1 class="text-6xl font-bold mb-4">
-    <span class="text-2xl text-[#333]">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+  <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
+    <span class="text-xl sm:text-2xl text-[#333]">
       <style>
         #greeting {
           transition: opacity 0.5s ease;
@@ -24,13 +24,12 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
           opacity: 0;
         }
       </style>
-
       <span id="greeting">{randomGreeting}</span>
     </span>
     <br /> I'm Gideon Appau.
   </h1>
   <p
-    class="text-sm font-medium mb-4 text-gray-500 md:w-3/4"
+    class="text-base md:text-sm font-medium mb-4 text-gray-500 md:w-3/4"
     style="line-height: 2"
   >
     I'm exploring various creative avenues—chess, coding, music, poetry, and
@@ -57,19 +56,20 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
     </span>.
   </p>
 
-  <p class="italic text-sm font-medium text-gray-500 w-3/4 mb-8">
+  <p class="italic text-sm md:text-sm font-medium text-gray-500 md:w-3/4 mb-8">
     You can just call me
     <span
       class="text-fuchsia-900"
       style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
     >
       Ace
-    </span>- a name that inspires me to live boldly and embrace mastery in every
-    endeavor.
+    </span>
+    —a name that inspires me to live boldly and embrace mastery in every endeavor.
   </p>
 
   <PG />
 </div>
+
 <script>
   const greetings = [
     "Akwaaba!",
@@ -80,24 +80,19 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
     "いらっしゃいませ",
   ];
 
-  // Initialize with a random greeting
-  let currentGreeting = greetings[Math.floor(Math.random() * greetings.length)];
-  const greetingEl = document.getElementById("greeting");
-
   // Function to fade out, change text, then fade in
   function changeGreeting() {
     const el = document.getElementById("greeting");
     if (el) {
       el.classList.add("fade");
       setTimeout(() => {
-        currentGreeting =
+        el.textContent =
           greetings[Math.floor(Math.random() * greetings.length)];
-        el.textContent = currentGreeting;
         el.classList.remove("fade");
-      }, 1000); // Duration for fade-out transition
+      }, 500); // Fade-out duration reduced for snappier UX
     }
   }
 
-  // Change every 3000 ms
+  // Change greeting every 10 seconds
   setInterval(changeGreeting, 10000);
 </script>
