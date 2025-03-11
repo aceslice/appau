@@ -1,11 +1,106 @@
 ---
-import Homepage from "../components/Homepage.astro";
+import PG from "../components/PG.astro";
 import Layout from "../layouts/Layout.astro";
+const greetings = [
+  "Akwaaba!",
+  "こんにちは",
+  "안녕하세요",
+  "你好",
+  "Здравствуйте!",
+  "いらっしゃいませ",
+];
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Initialize with a random greeting
+let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
 ---
 
-<Layout>
-  <Homepage />
+<Layout title="Home">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
+      <span class="text-xl sm:text-2xl text-[#333]">
+        <style>
+          #greeting {
+            transition: opacity 0.5s ease;
+          }
+          #greeting.fade {
+            opacity: 0;
+          }
+        </style>
+        <span id="greeting">{randomGreeting}</span>
+      </span>
+      <br /> I'm Gideon Appau.
+    </h1>
+    <p
+      class="text-base md:text-sm font-medium mb-4 text-gray-500 md:w-3/4"
+      style="line-height: 2"
+    >
+      I'm exploring various creative avenues—chess, coding, music, poetry, and
+      writing. Here you'll find honest stories about my work and a glimpse into
+      what I'm building. Whether it's a new project or a simple thought, I keep
+      it real
+      <a href="about">
+        <span
+          class="font-semibold text-green-900"
+          style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
+        >
+          about me 🙈
+        </span></a
+      > or
+      <a href="projects">
+        <span
+          class="font-semibold text-orange-900"
+          style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
+        >
+          what I'm working on 🎢
+        </span></a
+      >. If you want to keep up, follow my socials or join my
+      <span
+        class="text-indigo-900 font-semibold"
+        style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
+      >
+        Discord community
+      </span>.
+    </p>
+
+    <p
+      class="italic text-sm md:text-sm font-medium text-gray-500 md:w-3/4 mb-8"
+    >
+      You can just call me
+      <span
+        class="text-fuchsia-900"
+        style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
+      >
+        Ace
+      </span>
+      — a name that inspires me to live boldly and embrace mastery in every endeavor.
+    </p>
+
+    <PG />
+  </div>
 </Layout>
+<script>
+  const greetings = [
+    "Akwaaba!",
+    "こんにちは",
+    "안녕하세요",
+    "你好",
+    "Здравствуйте!",
+    "いらっしゃいませ",
+  ];
+
+  // Function to fade out, change text, then fade in
+  function changeGreeting() {
+    const el = document.getElementById("greeting");
+    if (el) {
+      el.classList.add("fade");
+      setTimeout(() => {
+        el.textContent =
+          greetings[Math.floor(Math.random() * greetings.length)];
+        el.classList.remove("fade");
+      }, 500); // Fade-out duration reduced for snappier UX
+    }
+  }
+
+  // Change greeting every 10 seconds
+  setInterval(changeGreeting, 10000);
+</script>
