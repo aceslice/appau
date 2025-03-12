@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import featuredLinks from "../libs/featuredLinks";
 import Link from "../components/Link.astro";
 import Ce from "../components/ads/Ce.astro";
+import MarketMate from "../components/ads/MarketMate.astro";
 const greetings = [
   "Akwaaba!",
   "こんにちは",
@@ -83,17 +84,17 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
     </p>
 
     <PG />
-    <Ce/>
+    <Ce />
+    <MarketMate />
 
     <!-- <h2
     class="mb-4 flex items-center gap-2 font-bold max-sm:mt-8"
     id="featured">
     <div class="i-lucide-book-heart inline-block opacity-60"></div> Featured
   </h2> -->
-
   </div>
 </Layout>
-<Footer/>
+<Footer />
 <script>
   const greetings = [
     "Akwaaba!",

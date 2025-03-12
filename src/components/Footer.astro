@@ -1,78 +1,123 @@
 ---
-const today = new Date()
+const today = new Date();
 ---
 
-<footer class="container mx-auto font-medium mb-8 mt-32 sm:border-t border-zinc-200 bg-white/50 backdrop-blur-2xl rounded-2xl p-5 dark:border-t-neutral-800">
-    <div class="grid grid-cols-1 lg:grid-cols-2">
-        <div class="space-y-2">
-            <div class="text-secondary text-sm">
-                &copy; {today.getFullYear()} Gideon Appau. All rights reserved.
-            </div>
+<footer
+  class="container mx-auto font-medium mb-8 mt-32 border-t border-zinc-200 bg-white/50 backdrop-blur-2xl md:rounded-2xl p-5 dark:border-t-neutral-800"
+>
+  <div class="grid grid-cols-1 lg:grid-cols-2">
+    <div class="space-y-2">
+      <div class="text-secondary text-sm">
+        &copy; {today.getFullYear()} Gideon Appau. All rights reserved.
+      </div>
 
-            <div class="text-secondary ms-4 font-mono text-sm">
-                version <span class="bg-green-400 bg-opacity-10 font-mono text-green-600">
-                    {today.getFullYear()}</span>.{today.getMonth() + 1}.{today.getDate().toString().padStart(2, '0')}/1
-            </div>
+      <div class="text-secondary ms-4 font-mono text-sm">
+        version <span
+          class="bg-green-400 bg-opacity-10 font-mono text-green-600"
+        >
+          {today.getFullYear()}</span
+        >.{today.getMonth() + 1}.{today.getDate().toString().padStart(2, "0")}/1
+      </div>
 
-            <div class="font-mono text-sm space-y-1">
-                <div class="text-secondary ms-4">Astro x Netlify</div>
-                <div class="text-secondary ms-4">
-                    Source code:
-                    <a class="underline hover:text-indigo-600" href="https://github.com/aceslice/appau" target="_blank" rel="noopener noreferrer">
-                        gh/aceslice/appau
-                    </a>
-                </div>
-            </div>
+      <div class="font-mono text-sm space-y-1">
+        <div class="text-secondary ms-4">Astro x Netlify</div>
+        <div class="text-secondary ms-4">
+          Source code:
+          <a
+            class="underline hover:text-indigo-600"
+            href="https://github.com/aceslice/appau"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            gh/aceslice/appau
+          </a>
         </div>
-
-        <div class="text-secondary col-span-1 ms-4 mt-8 lg:mt-0 lg:text-end">
-            <div class="flex justify-center lg:justify-end gap-4">
-                <div class="relative group">
-                    <div class="i-lucide-rocket hover:scale-110 transition-transform duration-200"></div>
-                    <span class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2">
-                        Builder
-                    </span>
-                </div>
-                <div class="relative group">
-                    <div class="i-lucide-message-circle hover:scale-110 transition-transform duration-200"></div>
-                    <span class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2">
-                        Human
-                    </span>
-                </div>
-                <div class="relative group">
-                    <div class="i-lucide-calendar-range hover:scale-110 transition-transform duration-200"></div>
-                    <span class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2">
-                        Calendar
-                    </span>
-                </div>
-                <div class="relative group">
-                    <div class="i-lucide-library-square hover:scale-110 transition-transform duration-200"></div>
-                    <span class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2">
-                        Learner
-                    </span>
-                </div>
-                <div class="relative group">
-                    <div class="i-lucide-sparkle hover:scale-110 transition-transform duration-200"></div>
-                    <span class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2">
-                        Sparkle
-                    </span>
-                </div>
-                <div class="relative group">
-                    <div class="i-lucide-badge hover:scale-110 transition-transform duration-200"></div>
-                    <span class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2">
-                        Thinker
-                    </span>
-                </div>
-                <div class="relative group">
-                    <div class="i-lucide-shopping-bag hover:scale-110 transition-transform duration-200"></div>
-                    <span class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2">
-                        Entrpreneur
-                    </span>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-<!-- 
+
+    <div class="text-secondary col-span-1 ms-4 mt-8 lg:mt-0 lg:text-end">
+      <div class="flex justify-center lg:justify-end gap-4">
+        <div class="relative group">
+          <div
+            class="i-lucide-rocket hover:scale-110 transition-transform duration-200"
+          >
+          </div>
+          <span
+            class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2"
+          >
+            Builder
+          </span>
+        </div>
+        <div class="relative group">
+          <div
+            class="i-lucide-message-circle hover:scale-110 transition-transform duration-200"
+          >
+          </div>
+          <span
+            class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2"
+          >
+            Human
+          </span>
+        </div>
+        <div class="relative group">
+          <div
+            class="i-lucide-calendar-range hover:scale-110 transition-transform duration-200"
+          >
+          </div>
+          <span
+            class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2"
+          >
+            Calendar
+          </span>
+        </div>
+        <div class="relative group">
+          <div
+            class="i-lucide-library-square hover:scale-110 transition-transform duration-200"
+          >
+          </div>
+          <span
+            class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2"
+          >
+            Learner
+          </span>
+        </div>
+        <div class="relative group">
+          <div
+            class="i-lucide-sparkle hover:scale-110 transition-transform duration-200"
+          >
+          </div>
+          <span
+            class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2"
+          >
+            Sparkle
+          </span>
+        </div>
+        <div class="relative group">
+          <div
+            class="i-lucide-badge hover:scale-110 transition-transform duration-200"
+          >
+          </div>
+          <span
+            class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2"
+          >
+            Thinker
+          </span>
+        </div>
+        <div class="relative group">
+          <div
+            class="i-lucide-shopping-bag hover:scale-110 transition-transform duration-200"
+          >
+          </div>
+          <span
+            class="absolute bottom-full mb-1 hidden group-hover:block border border-zinc-200 text-black text-xs rounded py-1 px-2"
+          >
+            Entrpreneur
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 
     <button 
         onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
         class="mt-6 block mx-auto p-2 border border-gray-600 rounded-full transition-all duration-300 hover:border-blue-400 hover:shadow-lg focus:outline-none"
