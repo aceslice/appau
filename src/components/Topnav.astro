@@ -1,12 +1,12 @@
 ---
-import AtSign from "../assets/autograph.svg";
+
 
 const links = [
-  { name: "Home" },
-  { name: "About" },
-  { name: "Projects" },
-  { name: "Contact" },
-  { name: "Autograph" },
+  { name: "Home", icon: "i-lucide-home" },
+  { name: "About", icon: "i-lucide-user" },
+  { name: "Projects", icon: "i-lucide-code" },
+  { name: "Contact", icon: "i-lucide-mail" },
+  { name: "Autograph", icon: "i-lucide-signature" },
 ];
 ---
 
@@ -17,7 +17,7 @@ const links = [
 <div x-data="{ open: false }">
   <!-- Horizontal nav for md and up -->
   <nav
-    class="hidden md:flex fixed top-4 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white/30 px-4 py-2 rounded-full border border-gray-200 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-lg z-50"
+    class="hidden md:flex fixed top-4 transform w-full max-w-md bg-white/30 px-4 py-2 rounded-full mx-auto border border-zinc-200 backdrop-blur-md transition-all duration-300 hover:scale-102 hover:shadow-lg z-50"
   >
     {
       links.map((link, index) => (
@@ -26,7 +26,7 @@ const links = [
           class={`flex items-center justify-center gap-2 px-4 py-2 text-gray-500 font-medium text-xs hover:text-gray-900 hover:rounded-2xl hover:border hover:border-gray-200 ${index === links.length - 1 ? "border-l border-gray-300" : ""}`}
         >
           {link.name === "Autograph" && (
-            <img src={AtSign.src} alt="Autograph" class="h-5 w-5" />
+          <span class="i-lucide-signature" title="My mail" role="img"></span>
           )}
           <span>{link.name}</span>
         </a>
@@ -90,18 +90,13 @@ const links = [
           @click="open = false"
           class="px-4 py-2 text-gray-700 font-semibold text-lg"
         >
-          {link.name === "Autograph" ? (
-            <>
-              <img
-                src={AtSign.src}
-                alt="Autograph"
-                class="h-5 w-5 inline-block mr-2"
-              />
+        
+            <div class="flex items-center gap-4">
+             <div class={link.icon}></div>
               {link.name}
-            </>
-          ) : (
-            link.name
-          )}
+            </div>
+      
+         
         </a>
       ))
     }
