@@ -1,8 +1,10 @@
 ---
-import NavLink from './NavLink.astro'
+import NavLink from "./NavLink.astro";
 ---
 
-<header class="container mx-auto sticky top-5 z-5 dark:bg-neutral-900 dark:border-b border-neutral-800">
+<header
+  class="container mx-auto md:sticky md:top-5 z-5 dark:bg-neutral-900 dark:border-b border-neutral-800"
+>
   <header class="mb-2 flex items-center justify-between py-3">
     <img
       src="/ace.svg"
@@ -13,12 +15,14 @@ import NavLink from './NavLink.astro'
     />
 
     <div
-      class="flex items-center gap-1 rounded-full border border-zinc-300 bg-[#ffffff20] backdrop-blur-2xl bg-opacity-40 px-1 text-zinc-600 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300">
+      class="flex items-center gap-1 rounded-full border border-zinc-300 bg-[#ffffff20] backdrop-blur-2xl bg-opacity-40 px-1 text-zinc-600 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-300"
+    >
       <NavLink
         class="!p-1"
         href="mailto:gideonad.codez@gmail.com"
         target="_blank"
-        aria-label="My mail">
+        aria-label="My mail"
+      >
         <span class="i-lucide-mail" title="My mail" role="img"></span>
       </NavLink>
 
@@ -26,7 +30,8 @@ import NavLink from './NavLink.astro'
         class="!p-1"
         href="https://twitter.com/theaceslice"
         target="_blank"
-        aria-label="Twitter">
+        aria-label="Twitter"
+      >
         <span class="i-lucide-twitter" title="Twitter" role="img"></span>
       </NavLink>
 
@@ -34,10 +39,10 @@ import NavLink from './NavLink.astro'
         class="!p-1"
         href="https://github.com/aceslice"
         target="_blank"
-        aria-label="Github">
+        aria-label="Github"
+      >
         <span class="i-lucide-github" title="Github" role="img"></span>
       </NavLink>
     </div>
   </header>
-
 </header>
