@@ -1,6 +1,4 @@
 ---
-
-
 const links = [
   { name: "Home", icon: "i-lucide-home" },
   { name: "About", icon: "i-lucide-user" },
@@ -26,7 +24,7 @@ const links = [
           class={`flex items-center justify-center gap-2 px-4 py-2 text-gray-500 font-medium text-xs hover:text-gray-900 hover:rounded-2xl hover:border hover:border-gray-200 ${index === links.length - 1 ? "border-l border-gray-300" : ""}`}
         >
           {link.name === "Autograph" && (
-          <span class="i-lucide-signature" title="My mail" role="img"></span>
+            <span class="i-lucide-signature" title="My mail" role="img" />
           )}
           <span>{link.name}</span>
         </a>
@@ -90,13 +88,10 @@ const links = [
           @click="open = false"
           class="px-4 py-2 text-gray-700 font-semibold text-lg"
         >
-        
-            <div class="flex items-center gap-4">
-             <div class={link.icon}></div>
-              {link.name}
-            </div>
-      
-         
+          <div class="flex items-center gap-4">
+            <div class={link.icon} />
+            {link.name}
+          </div>
         </a>
       ))
     }
