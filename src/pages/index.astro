@@ -5,8 +5,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import featuredLinks from "../libs/featuredLinks";
 import Link from "../components/Link.astro";
-import Ce from "../components/ads/Ce.astro";
-import MarketMate from "../components/ads/MarketMate.astro";
+import AdsLink from "../components/AdsLink.astro";
 const greetings = [
   "Akwaaba!",
   "こんにちは",
@@ -84,13 +83,33 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
     </p>
 
     <PG />
-    <Ce />
-    <MarketMate />
 
+    <AdsLink
+      backgroundColor="#582FFF"
+      textColor="#fff"
+      url="https://knowva.com"
+      description="— Knowva finds you your next mentor"
+      icons={[
+        "rocket",
+        "message-circle",
+        "calendar-range",
+        "library-square",
+        "sparkle",
+        "users-round",
+        "shopping-bag",
+      ]}
+    />
+    <AdsLink
+      backgroundColor="#2BCC5A90"
+      description="— Market Mate: local gateway to fresh produce & best deals."
+      icons={["apple", "salad", "shopping-bag", "handshake", "laugh"]}
+      url="https://marketmate.example"
+      textColor="#364153"
+    />
     <!-- <h2
     class="mb-4 flex items-center gap-2 font-bold max-sm:mt-8"
     id="featured">
-    <div class="i-lucide-book-heart inline-block opacity-60"></div> Featured
+    <div class="book-heart inline-block opacity-60"></div> Featured
   </h2> -->
   </div>
 </Layout>

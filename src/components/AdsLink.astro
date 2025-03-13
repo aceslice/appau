@@ -1,0 +1,36 @@
+---
+interface Props {
+  url?: string;
+  description?: string;
+  borderColor?: string;
+  backgroundColor?: string;
+  textColor?: string;
+  icons?: string[];
+}
+
+const {
+  url = "https://example.com",
+  description = "— Another awesome project",
+  textColor = "",
+  backgroundColor = "transparent",
+  borderColor = `${backgroundColor}80 || ""`,
+
+  icons = ["globe"],
+} = Astro.props;
+---
+
+<div class="mt-8 flex">
+  <a
+    href={url}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ borderColor, backgroundColor, color: textColor }}
+    class="flex items-center gap-4 rounded-lg border px-2 py-1 font-semibold no-underline"
+  >
+    <div class="text-xs">{description}</div>
+
+    <div class="flex gap-2 opacity-80">
+      {icons.map((icon) => <div class={`i-lucide-${icon}`} />)}
+    </div>
+  </a>
+</div>

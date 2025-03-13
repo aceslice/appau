@@ -1,34 +1,35 @@
 ---
-import { SITE_HOST } from '../consts'
-import Link from './Link.astro'
+import { SITE_HOST } from "../consts";
+import Link from "./Link.astro";
 
 interface Props {
-  href: string
+  href: string;
 }
 
-const { href } = Astro.props
-const url = new URL(Astro.props.href)
+const { href } = Astro.props;
+const url = new URL(Astro.props.href);
 
-const isGithub = url.hostname === 'github.com'
-const isHome = url.hostname === SITE_HOST
+const isGithub = url.hostname === "github.com";
+const isHome = url.hostname === SITE_HOST;
 const label = isGithub
-  ? url.pathname.split('/').pop()
+  ? url.pathname.split("/").pop()
   : isHome
     ? url.pathname
-    : url.toString().replace(/(^https:\/\/|\/$)/g, '')
+    : url.toString().replace(/(^https:\/\/|\/$)/g, "");
 
 const icon = isGithub
-  ? 'i-lucide-github'
+  ? "i-lucide-github"
   : isHome
-    ? 'i-lucide-warehouse'
-    : 'i-lucide-globe'
+    ? "i-lucide-warehouse"
+    : "i-lucide-globe";
 ---
 
 <Link
   className="cursive inline-flex gap-1 rounded-full bg-zinc-200 px-1.5 font-medium text-zinc-600 no-underline transition-[background] duration-200 dark:bg-neutral-800 dark:text-neutral-200 dark:group-hover:bg-neutral-700"
-  href={href}>
-  <div class:list={[icon, 'mt-0.75 opacity-70']}></div>
-  <spa class="flex-1 break-all">
+  href={href}
+>
+  <div class:list={[icon, "mt-0.75 opacity-70"]}></div>
+  <span class="flex-1 break-all">
     {label}
-  </spa>
+  </span>
 </Link>
