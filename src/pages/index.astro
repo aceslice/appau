@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 import featuredLinks from "../libs/featuredLinks";
 import Link from "../components/Link.astro";
 import AdsLink from "../components/AdsLink.astro";
+import Button from "../components/Button";
 const greetings = [
   "Akwaaba!",
   "こんにちは",
@@ -117,6 +118,7 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
     id="featured">
     <div class="book-heart inline-block opacity-60"></div> Featured
   </h2> -->
+    <Button client:idle />
   </div>
 </Layout>
 <Footer />
