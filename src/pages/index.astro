@@ -7,6 +7,7 @@ import featuredLinks from "../libs/featuredLinks";
 import Link from "../components/Link.astro";
 import AdsLink from "../components/AdsLink.astro";
 import Button from "../components/Button";
+import UsernameTag from "../components/UsernameTag.astro";
 const greetings = [
   "Akwaaba!",
   "こんにちは",
@@ -42,32 +43,24 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
       class="text-base md:text-sm font-medium mb-4 text-gray-500 md:w-3/4"
       style="line-height: 2"
     >
-      I'm exploring various creative avenues—chess, coding, music, poetry, and
-      writing. Here you'll find honest stories about my work and a glimpse into
-      what I'm building. Whether it's a new project or a simple thought, I keep
-      it real
-      <a href="about">
+      Hey there, I'm not just a coder—I’m someone who loves turning ideas into
+      real experiences. Every line of code is part of my story, crafted over
+      late nights filled with coffee and breakthroughs. Check out <a
+        href="about"
+      >
         <span
           class="font-semibold text-green-700"
           style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
-        >
-          about me 🙈
-        </span></a
-      > or
-      <a href="projects">
+          >my story</span
+        ></a
+      > to see where it all started, or head over to <a href="projects">
         <span
           class="font-semibold text-orange-700"
           style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
-        >
-          what I'm working on 🎢
-        </span></a
-      >. If you want to keep up, follow my socials or join my
-      <span
-        class="text-indigo-700 font-semibold"
-        style="border-bottom: 1px dashed currentColor; padding: 0 0.2em;"
-      >
-        Discord community
-      </span>.
+          >what I'm creating</span
+        ></a
+      > right now. And if you’re up for a friendly chat or some idea sharing, join
+      me on Discord!
     </p>
 
     <p
@@ -84,7 +77,6 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
     </p>
 
     <PG />
-
     <AdsLink
       backgroundColor="#582FFF"
       textColor="#fff"
@@ -128,7 +120,7 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
     "こんにちは",
     "안녕하세요",
     "你好",
-    "Здравствуйте!",
+    "Здравствуйте",
     "いらっしゃいませ",
   ];
 
