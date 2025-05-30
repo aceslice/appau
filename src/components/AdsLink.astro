@@ -30,7 +30,7 @@ const {
     <div class="text-xs">{description}</div>
 
     <div class="flex gap-2 opacity-80">
-      {icons.map((icon) => <div class={icon} />)}
+      {icons.map((icon: string | null | undefined) => <div class={icon} />)}
     </div>
   </a>
 </div>
