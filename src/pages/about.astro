@@ -1,18 +1,40 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import profileImg from "../assets/profile.jpg";
+import about1 from "../assets/about-2.jpg";
+import about2 from "../assets/about-4.jpg";
+import about3 from "../assets/about-3.jpg";
 ---
 
 <Layout title="About">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">About me</h1>
-    <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 md:w-3/4">
-      <p class="text-gray-700" style="line-height: 1.9">
-        I’m Gideon Appau. I design and build products, write about the journey, and care about craft. Chess helps me think. Music and poetry keep things human.
-      </p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-3">About me</h1>
+
+    <!-- Hero: avatar + intro -->
+    <div class="rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 md:p-5 relative overflow-hidden">
+      <div class="pointer-events-none absolute -top-14 -left-14 w-40 h-40 rounded-full bg-amber-100/30 blur-2xl"></div>
+      <div class="pointer-events-none absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-indigo-100/30 blur-2xl"></div>
+      <div class="relative flex items-start gap-3 md:gap-4">
+        <div class="relative shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl border border-zinc-200 bg-white/80 overflow-hidden">
+          <img src={profileImg.src} alt="Gideon Appau" class="w-full h-full object-cover" loading="lazy" />
+          <div class="absolute inset-0 pointer-events-none rounded-xl" style="box-shadow: inset 0 0 0 1px rgba(0,0,0,.02)"></div>
+        </div>
+        <div class="min-w-0">
+          <p class="text-gray-700" style="line-height: 1.9">
+            I’m Gideon Appau. I design and build products, write about the journey, and care about craft. Chess helps me think. Music and poetry keep things human.
+          </p>
+          <div class="mt-2 flex flex-wrap gap-2 text-[12px] text-gray-600">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Product engineering</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Writing</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Design</span>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Bio + Snapshot -->
     <section class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
         <h3 class="font-semibold mb-1">Now</h3>
@@ -34,6 +56,63 @@ import Header from "../components/Header.astro";
           <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Figma</span>
         </div>
       </div>
+    </section>
+
+    <!-- CTA row -->
+    <section class="mt-6">
+      <div class="flex flex-wrap gap-2">
+        <a href="/projects" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">Projects</a>
+        <a href="/contact" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">Contact</a>
+        <a href="/autograph" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">Autograph</a>
+      </div>
+    </section>
+
+    <!-- Small quote -->
+    <section class="mt-6">
+      <blockquote class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 text-sm text-gray-700 leading-relaxed">
+        “Build with care. Keep it simple. Make it useful.”
+      </blockquote>
+    </section>
+
+    <!-- Highlights timeline -->
+    <section class="mt-6">
+      <div class="text-xs uppercase tracking-wide text-gray-500 mb-2">Highlights</div>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <ol class="relative ms-3 text-sm text-gray-700">
+          <li class="mb-3">
+            <span class="absolute -left-3 top-1.5 w-2 h-2 rounded-full bg-indigo-500"></span>
+            2025 — Shaping MarketMate (local food infra) and Larry SMS Hub (branded messaging)
+          </li>
+          <li class="mb-3">
+            <span class="absolute -left-3 top-1.5 w-2 h-2 rounded-full bg-emerald-500"></span>
+            2024 — Published messy ideas page; rebuilt portfolio in Astro
+          </li>
+          <li>
+            <span class="absolute -left-3 top-1.5 w-2 h-2 rounded-full bg-amber-500"></span>
+            Earlier — Built small tools, wrote notes, learned in public
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Image gallery (optional) -->
+    <section class="mt-6">
+      <div class="text-xs uppercase tracking-wide text-gray-500 mb-2">Photos</div>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden">
+          <img src={about1.src} alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" />
+          <figcaption class="px-2 py-1 text-[11px] text-gray-600">Work in focus</figcaption>
+        </figure>
+        <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden">
+          <img src={about2.src} alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" />
+          <figcaption class="px-2 py-1 text-[11px] text-gray-600">Little joys</figcaption>
+        </figure>
+        <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden">
+          <img src={about3.src} alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" />
+          <figcaption class="px-2 py-1 text-[11px] text-gray-600">A quiet moment</figcaption>
+        </figure>
+      </div>
+      <div class="mt-2 text-[12px] text-gray-500">Replace the images at <code>/assets/about-*.jpg</code> to personalize.</div>
     </section>
   </div>
 </Layout>
