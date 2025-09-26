@@ -18,10 +18,10 @@ import ideas from "../libs/ideas.json";
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
     <div
-      x-data='{"open":false,"current":0,"ideas":JSON.parse(`${JSON.stringify(ideas)}`)}'
+      x-data={`{ open: false, current: 0, ideas: ${JSON.stringify(ideas)} }`}
       class="mt-6"
     >
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" x-init="$nextTick(() => { /* ensure alpine is ready */ })">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {ideas.map((idea, idx) => {
         const status = String(idea.status || '').toLowerCase();
         const badge = status === 'wip'
