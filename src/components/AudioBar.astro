@@ -127,27 +127,23 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
       }
     };
 
-    const togglePlay = () => {
-      if (!audio) return;
-      if (audio.paused) { 
-        // Send track to global player
-        if (playlist.length > 0) {
-          const track = playlist[currentIndex];
-          window.postMessage({ 
-            type: 'PLAY_MUSIC', 
-            track: { src: track.src, title: track.title, artist: track.artist }
-          }, '*');
-        }
-        audio.play(); 
-        isPlaying = true; 
-        showFloatingBar();
-      } else { 
-        audio.pause(); 
-        isPlaying = false; 
-      }
-      updateBtn(btn, isPlaying);
-      updateBtn(floatingBtn, isPlaying);
-    };
+     const togglePlay = () => {
+       if (!audio) return;
+       if (audio.paused) { 
+         audio.play(); 
+         isPlaying = true; 
+         showFloatingBar();
+       } else { 
+         audio.pause(); 
+         isPlaying = false; 
+       }
+       updateBtn(btn, isPlaying);
+       updateBtn(floatingBtn, isPlaying);
+     };
+
+     // Connect both play buttons to the same toggle function
+     btn?.addEventListener('click', togglePlay);
+     floatingBtn?.addEventListener('click', togglePlay);
 
     const circleSeek = (circleEl: HTMLDivElement | null, e: MouseEvent) => {
       if (!audio || !circleEl) return;
