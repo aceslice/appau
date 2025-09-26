@@ -1,6 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import profileImg from "../assets/profile.jpeg?url";
+import about4 from "../assets/about-5.jpeg?url";
+import about2 from "../assets/about-2.jpg?url";
+import about3 from "../assets/about-3.jpeg?url";
 ---
 
 <Layout title="About">
@@ -14,7 +18,7 @@ import Header from "../components/Header.astro";
       <div class="pointer-events-none absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-indigo-100/30 blur-2xl"></div>
       <div class="relative flex items-start gap-3 md:gap-4">
         <div class="relative shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl border border-zinc-200 bg-white/80 overflow-hidden">
-          <img src="/assets/profile.jpeg" alt="Gideon Appau" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />
+          <img src={profileImg} alt="Gideon Appau" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />
           <div class="absolute inset-0 pointer-events-none rounded-xl" style="box-shadow: inset 0 0 0 1px rgba(0,0,0,.02)"></div>
         </div>
         <div class="min-w-0">
@@ -25,6 +29,20 @@ import Header from "../components/Header.astro";
             <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Product engineering</span>
             <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Writing</span>
             <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Design</span>
+          </div>
+          <div class="mt-3 flex flex-wrap items-center gap-3 text-[12px]">
+            <span class="inline-flex items-center gap-1 rounded-full border border-emerald-200 bg-emerald-50/80 px-2 py-0.5 text-emerald-700">
+              <span class="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+              Available for light collabs
+            </span>
+            <span class="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-white/70 px-2 py-0.5 text-gray-700">
+              Accra, Ghana
+            </span>
+            <div class="ms-auto flex flex-wrap gap-2 text-gray-600">
+              <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70"><span class="font-semibold">3+</span> yrs building</span>
+              <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70"><span class="font-semibold">20+</span> projects</span>
+              <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70"><span class="font-semibold">Notes</span> in progress</span>
+            </div>
           </div>
         </div>
       </div>
@@ -95,18 +113,28 @@ import Header from "../components/Header.astro";
     <section class="mt-6">
       <div class="text-xs uppercase tracking-wide text-gray-500 mb-2">Photos</div>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-        <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden">
-          <img src="/assets/about-4.png" alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
+        <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden transition-shadow duration-300 hover:shadow-md hover:shadow-zinc-200/70">
+          <img src={about4} alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
           <figcaption class="px-2 py-1 text-[11px] text-gray-600">Work in focus</figcaption>
         </figure>
-        <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden">
-          <img src="/assets/about-2.jpg" alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
+        <figure class="group aspect:[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden transition-shadow duration-300 hover:shadow-md hover:shadow-zinc-200/70">
+          <img src={about2} alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
           <figcaption class="px-2 py-1 text-[11px] text-gray-600">Little joys</figcaption>
         </figure>
-        <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden">
-          <img src="/assets/about-3.jpeg" alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
+        <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden transition-shadow duration-300 hover:shadow-md hover:shadow-zinc-200/70">
+          <img src={about3} alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
           <figcaption class="px-2 py-1 text-[11px] text-gray-600">A quiet moment</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <!-- Social / CTA row -->
+    <section class="mt-6">
+      <div class="text-xs uppercase tracking-wide text-gray-500 mb-2">Elsewhere</div>
+      <div class="flex flex-wrap gap-2">
+        <a href="mailto:hello@" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">Email</a>
+        <a href="https://github.com/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">GitHub</a>
+        <a href="https://x.com/" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">X</a>
       </div>
     </section>
   </div>
