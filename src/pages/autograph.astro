@@ -74,7 +74,7 @@ import seedEntries from "../libs/guestbook.json";
         copyPermalink(i){ try{ const url = window.location.origin + window.location.pathname + '#sig-' + i; navigator.clipboard && navigator.clipboard.writeText(url); } catch(_){} }
       })`} x-init="fetchEntries()" class="mt-2 messy-masonry messy-grid sig-grid">
         <template x-for="(e,i) in list" :key="i">
-          <div :id="'sig-'+i" :class="'relative inline-block align-top w-full overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-3 md:p-4 idea-card sig-card ' + variantFor(e.name)" @click="spawnHeart($event)" x-data="{ hearts: [], hid: 0, spawnHeart(ev){ try { const r = ev.currentTarget.getBoundingClientRect(); const x = ev.clientX - r.left; const y = ev.clientY - r.top; const id = this.hid++; this.hearts.push({ id, x, y }); setTimeout(()=>{ this.hearts = this.hearts.filter(h=>h.id!==id); }, 800); } catch(_){} } }">
+          <div :id="'sig-'+i" :class="'relative inline-block align-top w-full overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-3 md:p-4 idea-card sig-card ' + variantFor(e.name)" @click="spawnHeart($event)" x-data="{ hearts: [], hid: 0, heartSet: ['❤️','🧡','💛','💚','💙','💜','🩷','🩵','🤍'], spawnHeart(ev){ try { const r = ev.currentTarget.getBoundingClientRect(); const x = ev.clientX - r.left; const y = ev.clientY - r.top; const id = this.hid++; const e = this.heartSet[id % this.heartSet.length]; this.hearts.push({ id, x, y, e }); setTimeout(()=>{ this.hearts = this.hearts.filter(h=>h.id!==id); }, 800); } catch(_){} } }">
             <div class="pointer-events-none absolute -top-10 -left-10 w-28 h-28 rounded-full bg-amber-100/25 blur-2xl"></div>
             <div class="pointer-events-none absolute -bottom-12 -right-12 w-32 h-32 rounded-full bg-indigo-100/25 blur-2xl"></div>
             <div class="relative">
@@ -102,7 +102,7 @@ import seedEntries from "../libs/guestbook.json";
                 </template>
               </div>
               <template x-for="h in hearts" :key="h.id">
-                <span class="heart-fx" :style="{ left: (h.x-8)+'px', top: (h.y-8)+'px' }">❤️</span>
+                <span class="heart-fx" :style="{ left: (h.x-8)+'px', top: (h.y-8)+'px' }" x-text="h.e"></span>
               </template>
             </div>
           </div>
