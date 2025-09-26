@@ -12,6 +12,7 @@ const featuredLinks = [
 		icon: "i-lucide-message-circle",
 		logo: larryLogo.src,
 		tags: ["Sender ID", "Bulk campaigns", "Delivery reports", "Business messaging","Beta"],
+		category: "Startups",
 	},
 	{
 		title: "MarketMate",
@@ -22,6 +23,7 @@ const featuredLinks = [
 		icon: "i-lucide-shopping-bag",
 		logo: marketmateLogo.src,
 		tags: ["Weekly boxes", "COCO hub‑and‑spoke", "Farmer analytics", "Starting soon"],
+		category: "Startups",
 	},
 	// {
 	// 	title: "Devlog",
@@ -41,6 +43,7 @@ const featuredLinks = [
 		icon: "i-lucide-ghost",
 		logo: whispurrLogo.src,
 		tags: ["Ephemeral", "Anonymity", "Playful privacy", "WIP"],
+		category: "Apps",
 	},
 ];
 

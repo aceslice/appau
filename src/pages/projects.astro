@@ -2,22 +2,74 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import AdsLink from "../components/AdsLink.astro";
+import featuredLinks from "../libs/featuredLinks";
+// group projects by category on the server side for clean templates
+const groups = (() => {
+  const map = new Map<string, any[]>();
+  (featuredLinks as any[]).forEach((it) => {
+    const key = (it as any).category || "Other";
+    if (!map.has(key)) map.set(key, []);
+    map.get(key)!.push(it);
+  });
+  return Array.from(map.entries());
+})();
 ---
 
 <Layout title="Projects">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
-    <h1 class="text-3xl md:text-4xl font-bold mb-6">Projects</h1>
-    <p class="text-gray-600 md:w-3/4 mb-8" style="line-height: 2">
-      Things I’m building and tinkering with.
-    </p>
-    <AdsLink
-      backgroundColor="#582FFF"
-      textColor="#fff"
-      url="https://whispurr.netlify.app"
-      description="— Whispurr - Secret chats, silly emojis, total privacy!"
-      icons={["i-lucide-party-popper","i-lucide-message-circle","i-lucide-key"]}
-    />
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Projects</h1>
+    <p class="text-gray-600 md:w-3/4 mb-4" style="line-height: 1.9">Things I’m building — apps, startups, little experiments.</p>
+    <div class="mb-4 flex flex-wrap gap-2 text-[12px]">
+      {groups.map(([cat]) => (
+        <a href={`#cat-${String(cat).toLowerCase().replace(/[^a-z0-9]+/g,'-')}`} class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70 hover:bg-white">
+          {cat}
+        </a>
+      ))}
+    </div>
+
+    <div id="proj-grid">
+      {groups.map(([cat, items]) => (
+        <section class="mt-6 first:mt-0" id={`cat-${String(cat).toLowerCase().replace(/[^a-z0-9]+/g,'-')}`}>
+          <div class="flex items-baseline justify-between mb-2">
+            <div class="text-xs uppercase tracking-wide text-gray-500">{cat}</div>
+            <div class="text-[11px] text-gray-500">{(items as any[]).length} items</div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-3">
+            {(items as any[]).map((p) => {
+              const isExternal = /^https?:\/\//.test(p.link);
+              const href = isExternal ? p.link : (p.link.startsWith('/') ? p.link : '/' + p.link);
+              return (
+                <a aria-label={`Open ${p.title}`} href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener' : undefined} class="group relative rounded-xl border border-zinc-200 bg-white/70 p-3 md:p-4 hover:bg-white transition-colors overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300/40">
+                  <div class="relative min-w-0 flex items-start justify-between gap-2">
+                    <div class="min-w-0">
+                      <div class="font-semibold leading-snug group-hover:underline underline-offset-2 truncate">{p.title}</div>
+                      <div class="mt-0.5 text-[13px] text-gray-700 line-clamp-2">{p.description}</div>
+                    </div>
+                    <span class="shrink-0 text-zinc-400 group-hover:text-zinc-700 transition">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                        <path fill-rule="evenodd" d="M10.22 3.22a.75.75 0 011.06 0l5.5 5.5a.75.75 0 010 1.06l-5.5 5.5a.75.75 0 11-1.06-1.06L14.94 10 10.22 5.28a.75.75 0 010-1.06z" clip-rule="evenodd" />
+                        <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <div class="mt-8">
+      <AdsLink
+        backgroundColor="#582FFF"
+        textColor="#fff"
+        url="https://whispurr.netlify.app"
+        description="— Whispurr - Secret chats, silly emojis, total privacy!"
+        icons={["i-lucide-party-popper","i-lucide-message-circle","i-lucide-key"]}
+      />
+    </div>
   </div>
 </Layout>
 
