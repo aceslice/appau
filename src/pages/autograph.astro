@@ -23,7 +23,7 @@ import seedEntries from "../libs/guestbook.json";
         <div class="relative w-full max-w-md rounded-2xl border border-zinc-200 bg-white/95 p-5 shadow-xl" x-data="{ name:'', msg:'', min: 10, max: 240, get remaining(){ return Math.max(0, this.max - this.msg.length); }, get valid(){ return this.name.trim().length>0 && this.msg.trim().length>=this.min; } }">
           <div class="flex items-start justify-between gap-3">
             <div>
-              <h3 class="font-semibold text-lg">Sign the wall</h3>
+              <h3 class="font-semibold text-lg">Sign the autograph</h3>
               <p class="mt-0.5 text-[12px] text-gray-600">Short and kind. Max 240 characters.</p>
             </div>
             <button @click="openForm=false" class="btn">Close</button>
@@ -56,8 +56,8 @@ import seedEntries from "../libs/guestbook.json";
 
     <section class="mt-10">
       <div class="flex items-center justify-between">
-        <div class="text-xs uppercase tracking-wide text-gray-500">Guestbook</div>
-        <button class="btn" onclick="document.getElementById('toggle-sign')?.click()">Sign the wall</button>
+        <div class="text-xs uppercase tracking-wide text-gray-500">Autograph</div>
+        <button class="btn" onclick="document.getElementById('toggle-sign')?.click()">Sign the autograph</button>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
       <div data-guestbook x-data={`({ entries: [], seed: ${JSON.stringify(seedEntries)}, query: "", isLoading: true, pageSize: 9, colors: [
