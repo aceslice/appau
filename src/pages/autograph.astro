@@ -61,7 +61,7 @@ import seedEntries from "../libs/guestbook.json";
         </div>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-      <div data-guestbook x-data={`({ entries: [], seed: ${JSON.stringify(seedEntries)}, query: "", colors: [
+      <div data-guestbook x-data={`({ entries: [], seed: ${JSON.stringify(seedEntries)}, query: "", isLoading: true, pageSize: 9, colors: [
           'border-indigo-100 text-indigo-700 bg-indigo-50/70',
           'border-emerald-100 text-emerald-700 bg-emerald-50/70',
           'border-rose-100 text-rose-700 bg-rose-50/70',
@@ -75,10 +75,28 @@ import seedEntries from "../libs/guestbook.json";
         stickerFor(n){ const idx=this.hashName(n)%this.stickers.length; return this.stickers[idx]; },
         variantFor(n){ const v=['v-a','v-b','v-c']; return v[this.hashName(n)%v.length]; },
         get list(){ const q=this.query.toLowerCase(); const base=(this.entries.length?this.entries:this.seed); if(!q) return base; return base.filter(e=> (e.name||"").toLowerCase().includes(q) || (e.message||"").toLowerCase().includes(q) ); },
-        async fetchEntries(){ try{ const r = await fetch('/.netlify/functions/guestbook'); const j = await r.json(); const api = Array.isArray(j.entries) ? j.entries : []; this.entries = (api.length ? api : this.seed); } catch(_) { this.entries = this.seed } },
+        get displayed(){ return this.list.slice(0, this.pageSize); },
+        get hasMore(){ return this.list.length > this.pageSize; },
+        loadMore(){ this.pageSize += 9; },
+        async fetchEntries(){ try{ this.isLoading = true; const r = await fetch('/.netlify/functions/guestbook'); const j = await r.json(); const api = Array.isArray(j.entries) ? j.entries : []; this.entries = (api.length ? api : this.seed); } catch(_) { this.entries = this.seed } finally { this.isLoading = false; } },
         copyPermalink(i){ try{ const url = window.location.origin + window.location.pathname + '#sig-' + i; navigator.clipboard && navigator.clipboard.writeText(url); } catch(_){} }
       })`} x-init="fetchEntries()" class="mt-2 messy-masonry messy-grid sig-grid">
-        <template x-for="(e,i) in list" :key="i">
+        <template x-if="isLoading">
+          <div class="contents">
+            <template x-for="i in 6" :key="i">
+              <div class="relative inline-block align-top w-full overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-3 md:p-4 sig-card skeleton-card">
+                <div class="skeleton pill"></div>
+                <div class="mt-3 skeleton line"></div>
+                <div class="mt-2 skeleton line short"></div>
+                <div class="mt-4 flex items-center justify-between">
+                  <div class="skeleton dot"></div>
+                  <div class="skeleton chip"></div>
+                </div>
+              </div>
+            </template>
+          </div>
+        </template>
+        <template x-for="(e,i) in displayed" :key="i">
           <div :id="'sig-'+i" :class="'relative inline-block align-top w-full overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-3 md:p-4 idea-card sig-card ' + variantFor(e.name)" @click="spawnHeart($event)" x-data="{ hearts: [], hid: 0, heartSet: ['❤️','🧡','💛','💚','💙','💜','🩷','🩵','🤍'], spawnHeart(ev){ try { const r = ev.currentTarget.getBoundingClientRect(); const x = ev.clientX - r.left; const y = ev.clientY - r.top; const id = this.hid++; const e = this.heartSet[id % this.heartSet.length]; this.hearts.push({ id, x, y, e }); setTimeout(()=>{ this.hearts = this.hearts.filter(h=>h.id!==id); }, 800); } catch(_){} } }">
             <div class="pointer-events-none absolute -top-10 -left-10 w-28 h-28 rounded-full bg-amber-100/25 blur-2xl"></div>
             <div class="pointer-events-none absolute -bottom-12 -right-12 w-32 h-32 rounded-full bg-indigo-100/25 blur-2xl"></div>
@@ -112,6 +130,9 @@ import seedEntries from "../libs/guestbook.json";
             </div>
           </div>
         </template>
+        <div class="mt-4 flex justify-center" x-show="hasMore && !isLoading" style="display:none;">
+          <button class="btn" @click="loadMore()">Load more</button>
+        </div>
       </div>
     </section>
 
@@ -189,6 +210,15 @@ import seedEntries from "../libs/guestbook.json";
   @keyframes floatUp { 0% { transform: translateY(0) scale(.9); opacity: .9; } 60% { transform: translateY(-18px) scale(1.05); opacity: .95; } 100% { transform: translateY(-32px) scale(1); opacity: 0; } }
   .link-inline { display: inline-flex; align-items: center; gap: 6px; max-width: 75%; padding: 2px 6px; border-radius: 9999px; border: 1px solid rgba(203,213,225,.9); background: rgba(255,255,255,.85); font-size: 12px; }
   .link-inline:hover { background: rgba(255,255,255,.95); }
+  /* skeletons */
+  .skeleton-card { position: relative; overflow: hidden; }
+  .skeleton { background: linear-gradient(90deg, rgba(241,245,249,.7) 25%, rgba(226,232,240,.9) 37%, rgba(241,245,249,.7) 63%); background-size: 400% 100%; animation: shimmer 1.2s ease-in-out infinite; border-radius: 8px; }
+  .skeleton.pill { width: 92px; height: 18px; border-radius: 9999px; }
+  .skeleton.line { height: 14px; width: 90%; }
+  .skeleton.line.short { width: 65%; }
+  .skeleton.dot { width: 70px; height: 12px; border-radius: 9999px; }
+  .skeleton.chip { width: 140px; height: 20px; border-radius: 9999px; }
+  @keyframes shimmer { 0%{ background-position: 100% 0; } 100% { background-position: 0 0; } }
   /* scattered, smaller signature notes */
   .sig-grid .sig-card { 
     transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
