@@ -36,7 +36,6 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
     {(tracks.length ? tracks[0].artist : artist) && <div class="text-[11px] text-gray-600 truncate" data-artist>{tracks.length ? tracks[0].artist : artist}</div>}
   </div>
   <button type="button" class="ms-auto text-zinc-600 hover:text-zinc-800 text-sm" aria-label="Next" data-next>Next ▷</button>
-  <audio src={src} preload="none" data-audio hidden></audio>
 </div>
 
 <!-- Floating Music Bar -->
@@ -72,7 +71,6 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
 <script>
   const doc = document;
   {
-    const audio = doc.querySelector('[data-audio]') as HTMLAudioElement | null;
     const btn = doc.querySelector('[data-audio-toggle]') as HTMLButtonElement | null;
     const progress = doc.querySelector('[data-audio-progress]') as HTMLDivElement | null;
     const circle = doc.querySelector('[data-audio-circle]') as HTMLDivElement | null;
@@ -105,10 +103,14 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
     };
 
     const updateProgress = (progressEl: HTMLDivElement | null, circumference: number) => {
-      if (!audio || !progressEl) return;
-      const p = audio.duration ? (audio.currentTime / audio.duration) : 0;
-      const offset = circumference * (1 - p);
-      progressEl.style.strokeDashoffset = String(offset);
+      if (!progressEl) return;
+      // Get progress from global player
+      if ((window as any).GlobalMusicPlayer && (window as any).GlobalMusicPlayer.audio) {
+        const audio = (window as any).GlobalMusicPlayer.audio;
+        const p = audio.duration ? (audio.currentTime / audio.duration) : 0;
+        const offset = circumference * (1 - p);
+        progressEl.style.strokeDashoffset = String(offset);
+      }
     };
 
     const showFloatingBar = () => {
@@ -128,17 +130,37 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
     };
 
      const togglePlay = () => {
-       if (!audio) return;
-       if (audio.paused) { 
-         audio.play(); 
-         isPlaying = true; 
-         showFloatingBar();
-       } else { 
-         audio.pause(); 
-         isPlaying = false; 
+       // Always delegate to global player
+       if ((window as any).GlobalMusicPlayer) {
+         const globalPlayer = (window as any).GlobalMusicPlayer;
+         
+         if (playlist.length > 0) {
+           // Set up global player with our playlist
+           globalPlayer.playlist = playlist;
+           globalPlayer.currentIndex = currentIndex;
+           const track = playlist[currentIndex];
+           
+           if (globalPlayer.isPlaying) {
+             // If global player is playing, just pause it
+             globalPlayer.togglePlay();
+           } else {
+             // If global player is paused, play our track
+             globalPlayer.playTrack(track);
+           }
+         } else {
+           // No playlist, just toggle global player
+           globalPlayer.togglePlay();
+         }
+         
+         // Update our local UI to match global state
+         isPlaying = globalPlayer.isPlaying;
+         updateBtn(btn, isPlaying);
+         updateBtn(floatingBtn, isPlaying);
+         
+         if (isPlaying) {
+           showFloatingBar();
+         }
        }
-       updateBtn(btn, isPlaying);
-       updateBtn(floatingBtn, isPlaying);
      };
 
      // Connect both play buttons to the same toggle function
@@ -146,22 +168,19 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
      floatingBtn?.addEventListener('click', togglePlay);
 
     const circleSeek = (circleEl: HTMLDivElement | null, e: MouseEvent) => {
-      if (!audio || !circleEl) return;
-      const rect = circleEl.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX) + Math.PI / 2;
-      const normalizedAngle = (angle + Math.PI) / (2 * Math.PI);
-      if (audio.duration) audio.currentTime = normalizedAngle * audio.duration;
+      if (!circleEl) return;
+      // Delegate seeking to global player
+      if ((window as any).GlobalMusicPlayer) {
+        (window as any).GlobalMusicPlayer.seek(e);
+      }
     };
     circle?.addEventListener('click', (e: MouseEvent) => circleSeek(circle, e));
     floatingCircle?.addEventListener('click', (e: MouseEvent) => circleSeek(floatingCircle, e));
 
     const loadTrack = (index: number, autoplay = false) => {
-      if (!audio || !playlist.length) return;
+      if (!playlist.length) return;
       currentIndex = (index + playlist.length) % playlist.length;
       const track = playlist[currentIndex];
-      audio.src = track.src;
       
       // Update titles
       if (titleEl) titleEl.textContent = track.title;
@@ -185,21 +204,36 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
       
       updateProgress(progress, 87.96);
       updateProgress(floatingProgress, 113.1);
-      if (autoplay) { audio.play(); isPlaying = true; showFloatingBar(); }
       updateBtn(btn, isPlaying);
       updateBtn(floatingBtn, isPlaying);
     };
 
-    const nextTrack = () => {
-      if (!playlist.length) return;
-      loadTrack(currentIndex + 1, true);
-    };
+     const nextTrack = () => {
+       if (!playlist.length) return;
+       
+       // Update global player
+       if ((window as any).GlobalMusicPlayer) {
+         const globalPlayer = (window as any).GlobalMusicPlayer;
+         globalPlayer.playlist = playlist;
+         globalPlayer.currentIndex = (currentIndex + 1) % playlist.length;
+         const track = playlist[globalPlayer.currentIndex];
+         globalPlayer.playTrack(track);
+         
+         // Update local state to match
+         currentIndex = globalPlayer.currentIndex;
+         loadTrack(currentIndex, false); // Don't autoplay, global player handles it
+         isPlaying = globalPlayer.isPlaying;
+         updateBtn(btn, isPlaying);
+         updateBtn(floatingBtn, isPlaying);
+       }
+     };
 
     nextBtn?.addEventListener('click', nextTrack);
 
     floatingClose?.addEventListener('click', () => {
-      if (audio) {
-        audio.pause();
+      // Delegate to global player
+      if ((window as any).GlobalMusicPlayer) {
+        (window as any).GlobalMusicPlayer.stop();
         isPlaying = false;
         updateBtn(btn, isPlaying);
         updateBtn(floatingBtn, isPlaying);
@@ -207,23 +241,11 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
       }
     });
 
-    audio?.addEventListener('timeupdate', () => {
+    // Set up progress update interval to sync with global player
+    const progressInterval = setInterval(() => {
       updateProgress(progress, 87.96);
       updateProgress(floatingProgress, 113.1);
-    });
-    
-    audio?.addEventListener('loadedmetadata', () => {
-      updateProgress(progress, 87.96);
-      updateProgress(floatingProgress, 113.1);
-    });
-    
-    audio?.addEventListener('ended', () => { 
-      if (playlist.length > 1) { nextTrack(); return; }
-      isPlaying = false; 
-      updateBtn(btn, isPlaying);
-      updateBtn(floatingBtn, isPlaying);
-      hideFloatingBar();
-    });
+    }, 100);
 
     // Initialize
     updateBtn(btn, isPlaying);
