@@ -31,7 +31,7 @@ const canonicalUrl = `https://${SITE_HOST}${Astro.url?.pathname ?? "/"}`;
 
 <body
   id="container"
-  class="max-w-7xl md:w-5xl w-full border-l border-dashed border-r border-gray-200 p-2 md:p-20"
+  class="max-w-7xl md:max-w-6xl w-full border-l border-dashed border-r border-gray-200 p-2 md:p-12 lg:p-16"
   style="margin: 0 auto;"
 >
   <img id="background" src={background.src} alt="" fetchpriority="high" aria-hidden="true" role="presentation" />
@@ -60,6 +60,6 @@ const canonicalUrl = `https://${SITE_HOST}${Astro.url?.pathname ?? "/"}`;
     width: 100%;
     height: 100%;
     z-index: -1;
-    filter: blur(900px);
+    filter: blur(700px);
   }
 </style>

@@ -55,7 +55,7 @@ import ideas from "../libs/ideas.json";
         <span class="px-2 py-0.5 rounded-full border border-indigo-100 text-indigo-600 bg-indigo-50/60">WIP</span>
         <span class="px-2 py-0.5 rounded-full border border-amber-100 text-amber-700 bg-amber-50/60">Rough/Draft</span>
       </div>
-       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 messy-grid">
+       <div class="messy-masonry messy-grid">
        {ideas.map((idea, idx) => {
         const status = String(idea.status || '').toLowerCase();
         const badge = status === 'wip'
@@ -65,7 +65,7 @@ import ideas from "../libs/ideas.json";
           : 'border-slate-100 text-slate-600 bg-slate-50/60';
         const mail = `mailto:gideonad.codez@gmail.com?subject=I%20want%20to%20build%3A%20${encodeURIComponent(idea.title)}&body=Hi%20Gideon%2C%0D%0A%0D%0AI%27m%20interested%20in%20building%20this%20idea%3A%20${encodeURIComponent(idea.title)}.%0D%0AHere%27s%20my%20plan%20and%20what%20I%27ll%20try%20first%3A%20%0D%0A%0D%0A-%20%0D%0A-%20%0D%0A-%20%0D%0A%0D%0AWill%20share%20progress%20soon.`;
         return (
-           <div id={`idea-${idx}`} class="relative overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 idea-card">
+           <div id={`idea-${idx}`} class="relative inline-block align-top w-full overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 idea-card">
             <div class="pointer-events-none absolute -top-10 -left-10 w-28 h-28 rounded-full bg-amber-100/25 blur-2xl"></div>
             <div class="pointer-events-none absolute -bottom-12 -right-12 w-32 h-32 rounded-full bg-indigo-100/25 blur-2xl"></div>
             <div class="relative flex items-start justify-between gap-3">
@@ -150,8 +150,17 @@ import ideas from "../libs/ideas.json";
     margin-left: -2px;
     margin-right: -2px;
     width: calc(100% + 4px);
+    break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  /* masonry columns */
+  .messy-masonry {
+    column-count: 1;
+    column-gap: 1rem;
   }
   @media (min-width: 768px) {
+    .messy-masonry { column-count: 2; column-gap: 1rem; }
     .messy-grid .idea-card:nth-child(6n+1) { transform: rotate(-0.6deg) translateY(2px); }
     .messy-grid .idea-card:nth-child(6n+2) { transform: rotate(0.8deg) translateY(1px); }
     .messy-grid .idea-card:nth-child(6n+3) { transform: rotate(-1deg) translateY(3px); }
@@ -166,5 +175,8 @@ import ideas from "../libs/ideas.json";
     }
     .messy-grid { overflow: visible; }
     .messy-grid .idea-card { margin-left: -6px; margin-right: -6px; width: calc(100% + 12px); }
+  }
+  @media (min-width: 1024px) {
+    .messy-masonry { column-count: 3; column-gap: 1.25rem; }
   }
 </style>
