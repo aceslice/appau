@@ -13,7 +13,7 @@ import seedEntries from "../libs/guestbook.json";
 
     <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6" x-data="{ openForm:false, init(){ try{ const p=new URLSearchParams(window.location.search); if(p.get('success')==='1'){ this.openForm=false; const t=document.getElementById('thanks'); t && t.classList.remove('hidden'); } else { const seen = sessionStorage.getItem('autographSeen'); if(!seen){ this.openForm = true; sessionStorage.setItem('autographSeen','1'); } } }catch(_){} } }" x-init="init()">
       <!-- Floating toggle button (shows on all breakpoints) -->
-      <button @click="openForm = !openForm" aria-label="Toggle sign form" class="fixed bottom-5 right-5 z-40 backdrop-blur-md btn">
+      <button id="toggle-sign" @click="openForm = !openForm" aria-label="Toggle sign form" class="fixed bottom-5 right-5 z-40 backdrop-blur-md btn">
         <span x-show="!openForm" x-transition>Sign</span>
         <span x-show="openForm" x-transition>Close</span>
       </button>
@@ -57,9 +57,7 @@ import seedEntries from "../libs/guestbook.json";
     <section class="mt-10">
       <div class="flex items-center justify-between">
         <div class="text-xs uppercase tracking-wide text-gray-500">Guestbook</div>
-        <div x-data="{ q:'' }" class="text-[12px]">
-          <input x-model="q" placeholder="Search" class="px-2 py-1 rounded-full border border-zinc-300 bg-white/70 outline-none" oninput="this.closest('section').querySelector('[data-guestbook]').__x.$data.query=this.value" />
-        </div>
+        <button class="btn" onclick="document.getElementById('toggle-sign')?.click()">Sign the wall</button>
       </div>
       <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
       <div data-guestbook x-data={`({ entries: [], seed: ${JSON.stringify(seedEntries)}, query: "", isLoading: true, pageSize: 9, colors: [
