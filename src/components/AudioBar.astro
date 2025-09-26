@@ -1,0 +1,23 @@
+---
+export interface Props {
+  src: string;
+  title?: string;
+  artist?: string;
+}
+const { src, title = "Now playing", artist = "" } = Astro.props as Props;
+---
+
+<div class="rounded-xl border border-zinc-200 bg-white/70 backdrop-blur-2xl p-3 flex items-center gap-3">
+  <div class="shrink-0 w-8 h-8 rounded-lg bg-amber-100/70 border border-amber-200 flex items-center justify-center text-amber-700" aria-hidden="true">♪</div>
+  <div class="min-w-0">
+    <div class="text-sm font-medium text-gray-800 truncate">{title}</div>
+    {artist && <div class="text-[12px] text-gray-600 truncate">{artist}</div>}
+  </div>
+  <audio src={src} controls class="ms-auto w-full md:w-64" preload="none"></audio>
+</div>
+
+<style>
+  audio::-webkit-media-controls-panel { background-color: transparent; }
+</style>
+
+

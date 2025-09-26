@@ -14,12 +14,12 @@ import about3 from "../assets/about-3.jpeg?url";
 
     <!-- Hero: avatar + intro -->
     <div class="rounded-2xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 md:p-5 relative overflow-hidden">
-      <div class="pointer-events-none absolute -top-14 -left-14 w-40 h-40 rounded-full bg-amber-100/30 blur-2xl"></div>
-      <div class="pointer-events-none absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-indigo-100/30 blur-2xl"></div>
+      <div class="pointer-events-none absolute -top-14 -left-14 w-40 h-40 rounded-full bg-amber-100/30 blur-2xl" aria-hidden="true"></div>
+      <div class="pointer-events-none absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-indigo-100/30 blur-2xl" aria-hidden="true"></div>
       <div class="relative flex items-start gap-3 md:gap-4">
-        <div class="relative shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-xl border border-zinc-200 bg-white/80 overflow-hidden">
+        <div class="relative shrink-0 w-20 h-20 md:w-24 md:h-24 aspect-square rounded-2xl border border-transparent ring-1 ring-zinc-200 bg-white shadow-sm overflow-hidden">
           <img src={profileImg} alt="Gideon Appau" class="w-full h-full object-cover" loading="lazy" onerror="this.style.display='none'" />
-          <div class="absolute inset-0 pointer-events-none rounded-xl" style="box-shadow: inset 0 0 0 1px rgba(0,0,0,.02)"></div>
+          <div class="absolute inset-0 pointer-events-none rounded-2xl" style="box-shadow: inset 0 0 0 1px rgba(0,0,0,.02)"></div>
         </div>
         <div class="min-w-0">
           <p class="text-gray-700" style="line-height: 1.9">
@@ -72,6 +72,21 @@ import about3 from "../assets/about-3.jpeg?url";
       </div>
     </section>
 
+    <!-- Hobbies -->
+    <section class="mt-6">
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-1">Hobbies</h3>
+        <div class="flex flex-wrap gap-2 text-[12px]">
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Music production</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Chess</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Poetry</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Playing instruments</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Mobile photography</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Videography</span>
+        </div>
+      </div>
+    </section>
+
     <!-- CTA row -->
     <section class="mt-6">
       <div class="flex flex-wrap gap-2">
@@ -117,12 +132,12 @@ import about3 from "../assets/about-3.jpeg?url";
           <img src={about4} alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
           <figcaption class="px-2 py-1 text-[11px] text-gray-600">Work in focus</figcaption>
         </figure>
-        <figure class="group aspect:[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden transition-shadow duration-300 hover:shadow-md hover:shadow-zinc-200/70">
-          <img src={about2} alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
+        <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden transition-shadow duration-300 hover:shadow-md hover:shadow-zinc-200/70">
+          <img src={about2} alt="Everyday things" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
           <figcaption class="px-2 py-1 text-[11px] text-gray-600">Little joys</figcaption>
         </figure>
         <figure class="group aspect-[4/3] rounded-xl border border-zinc-200 bg-white/60 overflow-hidden transition-shadow duration-300 hover:shadow-md hover:shadow-zinc-200/70">
-          <img src={about3} alt="" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
+          <img src={about3} alt="A quiet moment" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" onerror="this.style.display='none'" />
           <figcaption class="px-2 py-1 text-[11px] text-gray-600">A quiet moment</figcaption>
         </figure>
       </div>
