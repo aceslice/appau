@@ -1,14 +1,160 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import autograph from "../assets/autograph.svg";
+import seedEntries from "../libs/guestbook.json";
 ---
 
 <Layout title="Autograph">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
-    <h1 class="text-3xl md:text-4xl font-bold mb-4">Autograph</h1>
-    <img src={autograph.src} alt="Aceslice autograph" class="mt-6 w-64" />
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Autograph</h1>
+    <p class="text-sm text-gray-600">I wanna grow up to be like you. Can you sign my autograph?</p>
+
+    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6" x-data="{ openForm:false, init(){ try{ const p=new URLSearchParams(window.location.search); if(p.get('success')==='1'){ this.openForm=false; const t=document.getElementById('thanks'); t && t.classList.remove('hidden'); } else { const seen = sessionStorage.getItem('autographSeen'); if(!seen){ this.openForm = true; sessionStorage.setItem('autographSeen','1'); } } }catch(_){} } }" x-init="init()">
+      <!-- Floating toggle button (shows on all breakpoints) -->
+      <button @click="openForm = !openForm" aria-label="Toggle sign form" class="fixed bottom-5 right-5 z-40 backdrop-blur-md btn">
+        <span x-show="!openForm" x-transition>Sign</span>
+        <span x-show="openForm" x-transition>Close</span>
+      </button>
+      <!-- Modal form, inspired by ideas modal UX -->
+      <div x-show="openForm" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display:none;">
+        <div class="absolute inset-0 bg-black/30 backdrop-blur-sm" @click="openForm=false"></div>
+        <div class="relative w-full max-w-md rounded-2xl border border-zinc-200 bg-white/95 p-5 shadow-xl" x-data="{ name:'', msg:'', min:10 }">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="font-semibold text-lg">Sign the wall</h3>
+            <button @click="openForm=false" class="btn">Close</button>
+          </div>
+          <p class="mt-1 text-sm text-gray-700">Leave your name and a short note. Keep it kind.</p>
+          <form name="autograph" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="mt-3 space-y-3">
+            <input type="hidden" name="form-name" value="autograph" />
+            <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">Name</label>
+              <input name="name" x-model="name" required class="w-full rounded-lg border border-zinc-300 bg-white/80 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-300/40" />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">Message</label>
+              <textarea name="message" x-model="msg" required rows="3" minlength="10" class="w-full rounded-lg border border-zinc-300 bg-white/80 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-300/40"></textarea>
+              <div class="mt-1 text-[11px] text-gray-500" x-text="msg.length < min ? `${min - msg.length} more chars…` : 'Looks good'"></div>
+            </div>
+            <div>
+              <label class="block text-xs text-gray-600 mb-1">Link (optional)</label>
+              <input name="link" placeholder="https://" class="w-full rounded-lg border border-zinc-300 bg-white/80 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-300/40" />
+            </div>
+            <button type="submit" :disabled="msg.length < min || !name" class="btn disabled:opacity-50 disabled:cursor-not-allowed">Sign</button>
+          </form>
+          <div id="thanks" class="hidden mt-3 text-sm text-green-700">Thanks for signing! I’ll pin it soon.</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="mt-10">
+      <div class="flex items-center justify-between">
+        <div class="text-xs uppercase tracking-wide text-gray-500">Guestbook</div>
+        <div x-data="{ q:'' }" class="text-[12px]">
+          <input x-model="q" placeholder="Search" class="px-2 py-1 rounded-full border border-zinc-300 bg-white/70 outline-none" oninput="this.closest('section').querySelector('[data-guestbook]').__x.$data.query=this.value" />
+        </div>
+      </div>
+      <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+      <div data-guestbook x-data={`({ entries: [], seed: ${JSON.stringify(seedEntries)}, query: "", colors: [
+          'border-indigo-100 text-indigo-700 bg-indigo-50/70',
+          'border-emerald-100 text-emerald-700 bg-emerald-50/70',
+          'border-rose-100 text-rose-700 bg-rose-50/70',
+          'border-amber-100 text-amber-700 bg-amber-50/70',
+          'border-sky-100 text-sky-700 bg-sky-50/70',
+          'border-violet-100 text-violet-700 bg-violet-50/70',
+          'border-slate-200 text-slate-700 bg-slate-50/80'
+        ], hashName(n){ let h=0; const s=(n||'guest'); for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i))>>>0; } return h; }, pillColor(n){ const idx=this.hashName(n)%this.colors.length; return this.colors[idx]; }, get list(){ const q=this.query.toLowerCase(); const base=(this.entries.length?this.entries:this.seed); if(!q) return base; return base.filter(e=> (e.name||"").toLowerCase().includes(q) || (e.message||"").toLowerCase().includes(q) ); }, async fetchEntries(){ try{ const r = await fetch('/.netlify/functions/guestbook'); const j = await r.json(); const api = Array.isArray(j.entries) ? j.entries : []; this.entries = (api.length ? api : this.seed); } catch(_) { this.entries = this.seed } } })`} x-init="fetchEntries()" class="mt-2 messy-masonry messy-grid sig-grid">
+        <template x-for="(e,i) in list" :key="i">
+          <div class="relative inline-block align-top w-full overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-3 md:p-4 idea-card sig-card">
+            <div class="pointer-events-none absolute -top-10 -left-10 w-28 h-28 rounded-full bg-amber-100/25 blur-2xl"></div>
+            <div class="pointer-events-none absolute -bottom-12 -right-12 w-32 h-32 rounded-full bg-indigo-100/25 blur-2xl"></div>
+            <div class="relative">
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0"></div>
+                <span class="shrink-0 px-2 py-0.5 rounded-full border text-[11px]" :class="pillColor(e.name)" x-text="e.name || 'Guest'"></span>
+              </div>
+              <p class="mt-2 text-sm text-gray-700 leading-relaxed">“<span x-text="e.message"></span>”</p>
+              <template x-if="e.link">
+                <div class="mt-1 text-[11px]"><a :href="e.link" target="_blank" rel="noopener" class="underline decoration-dashed underline-offset-4" x-text="e.link"></a></div>
+              </template>
+              <template x-if="e.created_at">
+                <div class="mt-1.5 text-[11px] text-gray-500" x-text="new Date(e.created_at).toLocaleDateString()"></div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+
+    <script>
+      // Show a thank-you if Netlify redirects back with ?success=1
+      (function(){
+        try {
+          const params = new URLSearchParams(window.location.search);
+          if (params.get('success') === '1') {
+            const el = document.getElementById('thanks');
+            if (el) el.classList.remove('hidden');
+          }
+        } catch (_) {}
+      })();
+    </script>
   </div>
 </Layout>
 
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap');
+  .sig-card .sig-msg {
+    font-family: 'Caveat', cursive;
+    font-size: 1.15rem;
+    line-height: 1.3;
+    color: #0f172a;
+  }
+  @media (min-width: 768px) { .sig-card .sig-msg { font-size: 1.25rem; } }
+  .sig-sign {
+    margin-top: 10px;
+    text-align: right;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: #111827;
+  }
+  .sig-sign::before {
+    content: '';
+    display: block;
+    border-top: 1px dashed #cbd5e1;
+    margin: 10px 0 6px;
+  }
+  /* subtle paper texture */
+  .sig-card {
+    background-color: rgba(255,255,255,0.9);
+    background-image:
+      radial-gradient( circle at 20% 10%, rgba(0,0,0,0.02) 0, rgba(0,0,0,0.0) 60% ),
+      radial-gradient( circle at 80% 90%, rgba(0,0,0,0.02) 0, rgba(0,0,0,0.0) 55% ),
+      repeating-linear-gradient( 0deg, rgba(0,0,0,0.012), rgba(0,0,0,0.012) 1px, transparent 1px, transparent 6px );
+    background-blend-mode: multiply;
+  }
+  .sig-card:hover {
+    background-color: rgba(255,255,255,0.98);
+  }
+  /* scattered, smaller signature notes */
+  .sig-grid .sig-card { 
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    will-change: transform;
+    margin-left: -4px; margin-right: -4px; width: calc(100% + 8px); margin-bottom: .9rem;
+    break-inside: avoid; -webkit-column-break-inside: avoid; page-break-inside: avoid;
+    transform: scale(.98);
+  }
+  .sig-grid { column-count: 1; column-gap: .9rem; overflow: visible; }
+  @media (min-width: 768px) { .sig-grid { column-count: 2; } }
+  @media (min-width: 1024px) { .sig-grid { column-count: 3; column-gap: 1.1rem; } }
+  @media (min-width: 768px) {
+    .sig-grid .sig-card:nth-child(6n+1) { transform: rotate(-0.7deg) translateY(2px) scale(.98); }
+    .sig-grid .sig-card:nth-child(6n+2) { transform: rotate(0.9deg) translateY(0px) scale(.98); }
+    .sig-grid .sig-card:nth-child(6n+3) { transform: rotate(-1.1deg) translateY(3px) scale(.98); }
+    .sig-grid .sig-card:nth-child(6n+4) { transform: rotate(0.6deg) translateY(1px) scale(.98); }
+    .sig-grid .sig-card:nth-child(6n+5) { transform: rotate(-0.4deg) translateY(2px) scale(.98); }
+    .sig-grid .sig-card:nth-child(6n)   { transform: rotate(1deg) translateY(1px) scale(.98); }
+    .sig-grid .sig-card:hover { transform: rotate(0deg) translateY(-2px) scale(1); border-color: rgba(24,24,27,.25); box-shadow: 0 6px 18px rgba(0,0,0,.06); z-index: 2; }
+  }
+</style>
