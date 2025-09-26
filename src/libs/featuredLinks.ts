@@ -17,7 +17,7 @@ const featuredLinks = [
 		title: "MarketMate",
 		description:
 			"Data‑driven supply chain for Ghana’s local food — curated weekly boxes, COCO hub‑and‑spoke logistics, and farmer analytics.",
-		link: "https://getmarketmate.com",
+		link: "projects/marketmate",
 		footer: "Infrastructure, not delivery. Built for resilience.",
 		icon: "i-lucide-shopping-bag",
 		logo: marketmateLogo.src,

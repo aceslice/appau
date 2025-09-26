@@ -10,39 +10,78 @@ import marketmateLogo from "../../assets/marketmate_logo.png";
     <div class="text-xs text-gray-500 mb-2">
       <a href="/projects" class="underline decoration-dashed underline-offset-4">← Back to projects</a>
     </div>
-    <div class="mb-3">
+    <div class="relative mb-3">
       <img src={marketmateLogo.src} alt="MarketMate logo" class="h-10 md:h-12 object-contain" />
+      <span class="absolute top-0 right-0 px-2 py-0.5 rounded-full border text-[11px] border-amber-100 text-orange-600 bg-orange-50/60">Starting soon</span>
     </div>
     <h1 class="text-3xl md:text-4xl font-bold mb-2">MarketMate</h1>
+    <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 mb-3 md:w-4/5">
+      <div class="text-sm text-gray-800">
+        <div class="font-semibold mb-1">In one line</div>
+        Fresh food, every week, without the stress. Subscribe in the app, swap what you don’t want, pick up nearby.
+      </div>
+      <div class="mt-2 grid grid-cols-1 md:grid-cols-3 gap-2 text-[12px] text-gray-700">
+        <div class="rounded-lg border border-zinc-200 bg-white/70 p-2">We curate a balanced weekly box.</div>
+        <div class="rounded-lg border border-zinc-200 bg-white/70 p-2">Use swaps to make it yours.</div>
+        <div class="rounded-lg border border-zinc-200 bg-white/70 p-2">Pickup is quick and close.</div>
+      </div>
+    </div>
     <div class="flex flex-wrap items-center gap-2 text-[11px] mb-2">
-      <span class="px-2 py-0.5 rounded-full border border-amber-100 text-orange-600 bg-orange-50/60">Starting soon</span>
       <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Weekly boxes</span>
       <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">COCO hub‑and‑spoke</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Pickup points</span>
       <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Farmer analytics</span>
     </div>
     <p class="text-gray-700 md:w-3/4" style="line-height: 2">
-      MarketMate is a data‑driven, integrated supply chain company in Ghana’s agricultural sector. It is not a delivery app or a market aggregator; it formalizes a fragmented system into a predictable, efficient, and technology‑powered network.
+      MarketMate is a mobile app. It keeps the good parts of a farmers market (fresh, seasonal, local) and removes the hassle. We plan with farmers, you get a box that fits real life.
     </p>
+
+    <section class="mt-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-2">The app at a glance</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+          <ul class="list-disc ms-5 space-y-1">
+            <li>Subscribe to a Small, Standard, or Family box</li>
+            <li>See your weekly preview with recipe tips</li>
+            <li>Swap 1–2 items (we suggest smart alternatives)</li>
+            <li>Add pantry items (eggs, bread, milk, honey)</li>
+          </ul>
+          <ul class="list-disc ms-5 space-y-1">
+            <li>Pick your hub and pickup time window</li>
+            <li>Show your QR code and go — pickup takes seconds</li>
+            <li>Pause, skip, or cancel anytime in the app</li>
+            <li>Pay securely (Mobile Money, Card)</li>
+          </ul>
+        </div>
+        <div class="mt-3 text-sm text-gray-700">
+          Built for people who love local food. Every box comes with a personalized card, farmer stories, and the exact hub where your food was packed.
+        </div>
+        <div class="mt-3 flex items-center gap-2 text-[12px] text-gray-600">
+          <span class="px-2 py-0.5 rounded-full border border-emerald-100 text-emerald-700 bg-emerald-50/70">Support local farms</span>
+          <span class="px-2 py-0.5 rounded-full border border-indigo-100 text-indigo-700 bg-indigo-50/70">Know where it’s grown</span>
+          <span class="px-2 py-0.5 rounded-full border border-amber-100 text-amber-700 bg-amber-50/70">Personalized recipes</span>
+        </div>
+      </div>
+    </section>
 
     <section class="mt-6">
       <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
-        <h3 class="font-semibold mb-1">Core purpose</h3>
+        <h3 class="font-semibold mb-1">Why we exist</h3>
         <p class="text-sm text-gray-700 leading-relaxed">
-          Replace the chaotic, high‑waste informal food distribution with a predictable, efficient, and anti‑fragile supply chain tuned to local economic realities.
+          Grocery chaos wastes time and food. We make it calm: curated, seasonal, and on time for people and producers.
         </p>
       </div>
     </section>
 
     <section class="mt-4">
       <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
-        <h3 class="font-semibold mb-2">Strategic structure</h3>
+        <h3 class="font-semibold mb-2">How the system works</h3>
         <div class="text-sm text-gray-700">
-          <div class="font-semibold">The Supply Chain Model (The Engine)</div>
           <ul class="list-disc ms-5 mt-1 space-y-1">
-            <li>Subscription‑based, centralized COCO (Company‑Owned, Company‑Operated) hub‑and‑spoke model.</li>
-            <li>Bypasses expensive last‑mile by using neighborhood pickup points.</li>
-            <li>Replaces ad‑hoc shopping with scheduled, aggregated bulk orders.</li>
-            <li>Hybrid supply: guaranteed Anchor Farms + transparent MOUs with Network Farms.</li>
+            <li>Subscribe in the app — we curate your weekly box.</li>
+            <li>The platform aggregates everything into one hub order (super efficient).</li>
+            <li>Farmers harvest to plan — fewer surprises, less waste.</li>
+            <li>Pickup at a nearby hub. No last‑mile drama or delays.</li>
           </ul>
         </div>
       </div>
@@ -50,20 +89,33 @@ import marketmateLogo from "../../assets/marketmate_logo.png";
 
     <section class="mt-4">
       <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
-        <h3 class="font-semibold mb-2">Value proposition</h3>
+        <h3 class="font-semibold mb-2">Your weekly flow</h3>
+        <ol class="ms-5 list-decimal text-sm text-gray-700 space-y-1">
+          <li>Preview your box (with recipe tips) in the app.</li>
+          <li>Use swaps for items you don’t want. Add pantry items.</li>
+          <li>Pick up at your hub. Scan your QR code. Done.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-2">Who gets what</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
           <div class="rounded-lg border border-zinc-200 bg-white/70 p-3">
-            <div class="font-semibold">For consumers</div>
+            <div class="font-semibold">For people</div>
             <ul class="list-disc ms-5 mt-1 space-y-1">
-              <li>Convenience, curation, and trust via weekly curated subscription boxes.</li>
-              <li>Customize with simple “swap” options.</li>
+              <li>One subscription. Fresh food, weekly.</li>
+              <li>Swaps for picky days. Pantry add‑ons anytime.</li>
+              <li>Pickup is quick — no queues, no chaos.</li>
             </ul>
           </div>
           <div class="rounded-lg border border-zinc-200 bg-white/70 p-3">
-            <div class="font-semibold">For producers</div>
+            <div class="font-semibold">For farmers</div>
             <ul class="list-disc ms-5 mt-1 space-y-1">
-              <li>Predictable revenue through scheduled demand.</li>
-              <li>Actionable market intelligence (SMS/USSD) that guides planting decisions.</li>
+              <li>Clear orders. Predictable cashflow.</li>
+              <li>Simple SMS/USSD to confirm weekly quantities.</li>
+              <li>We forecast demand so you can plan planting.</li>
             </ul>
           </div>
         </div>
@@ -72,28 +124,74 @@ import marketmateLogo from "../../assets/marketmate_logo.png";
 
     <section class="mt-4">
       <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
-        <h3 class="font-semibold mb-2">Technology (the moat)</h3>
+        <h3 class="font-semibold mb-2">Tools we use</h3>
         <ul class="list-disc ms-5 text-sm text-gray-700 space-y-1">
-          <li>High‑tech: consumer app and operations dashboards.</li>
-          <li>Low‑tech: USSD/SMS for farmers for inclusivity and reach.</li>
-          <li>Analytics engine: turns sales data into forecasting and farmer market intelligence.</li>
+          <li>Customer mobile app: subscribe, swap, add pantry, QR pickup</li>
+          <li>Farmer USSD/SMS: confirm weekly orders, get paid</li>
+          <li>Hub dashboard: scan QR, assemble boxes, track handoffs</li>
+          <li>Admin: plan menus, forecast demand, pay farmers</li>
         </ul>
       </div>
     </section>
 
     <section class="mt-4">
       <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
-        <h3 class="font-semibold mb-1">Not a delivery app</h3>
+        <h3 class="font-semibold mb-1">What we are / What we’re not</h3>
         <p class="text-sm text-gray-700 leading-relaxed">
-          MarketMate is infrastructure. It monetizes efficiency and trust, avoiding the last‑mile traps that sank international delivery competitors in Ghana.
+          We’re a weekly hub system (fast pickup, lower costs), not door‑to‑door couriers (expensive, unreliable for fresh produce).
         </p>
       </div>
     </section>
 
-    <div class="mt-6 flex flex-wrap gap-2">
-      <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">Partner with us</a>
-      <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">Join the pilot</a>
-    </div>
+    <section class="mt-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-2">Who it’s for</h3>
+        <div class="flex flex-wrap gap-2 text-[12px]">
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/80">Households</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/80">Restaurants</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/80">Caterers</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/80">Schools</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/80">Corporate canteens</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <div class="flex flex-wrap gap-2">
+        <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">Partner with us</a>
+        <a href="mailto:gideonad.codez@gmail.com?subject=MarketMate%20pilot&body=Hi%20Gideon%2C%0D%0A%0D%0AWe%27re%20interested%20in%20the%20MarketMate%20pilot.%20Here%27s%20who%20we%20are%3A%0D%0A-%20%0D%0A-%20%0D%0A%0D%0AOur%20location%3A%0D%0AOur%20volume%20range%3A%0D%0A%0D%0AThanks!" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">Join the pilot</a>
+      </div>
+    </section>
+
+    
+
+    <section class="mt-6">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-2">FAQ</h3>
+        <div class="text-sm text-gray-700 space-y-3">
+          <div>
+            <div class="font-semibold">Is MarketMate a mobile app?</div>
+            <p>Yes. Download the app, subscribe to a box, manage swaps, and show your QR code at pickup.</p>
+          </div>
+          <div>
+            <div class="font-semibold">How do swaps work?</div>
+            <p>You get 1–2 swap credits per week. Don’t want okra? Swap for a suggested alternative (like green beans). Swaps close a few days before pickup so farmers can harvest on time.</p>
+          </div>
+          <div>
+            <div class="font-semibold">What if I’m traveling?</div>
+            <p>Pause or skip in the app anytime. No penalties.</p>
+          </div>
+          <div>
+            <div class="font-semibold">Can I get delivery?</div>
+            <p>We’re pickup‑first to keep food fresh and costs low. Hubs are nearby and fast. Delivery may come later for special cases.</p>
+          </div>
+          <div>
+            <div class="font-semibold">How do farmers use it?</div>
+            <p>Farmers don’t need smartphones. They get simple USSD/SMS orders each week to confirm quantities and get paid on time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </Layout>
 
