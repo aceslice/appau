@@ -27,7 +27,11 @@ const totalCount: number = (featuredLinks as any[]).length;
     <Header />
     <h1 class="text-3xl md:text-4xl font-bold mb-1">Projects</h1>
     <div class="text-[12px] text-gray-500 mb-3">{totalCount} total</div>
-    <p class="text-gray-600 md:w-3/4 mb-4" style="line-height: 1.9">Things I’m building — apps, startups, little experiments.</p>
+    <p class="text-gray-600 md:w-3/4 mb-3" style="line-height: 1.9">Things I’m building — apps, startups, little experiments.</p>
+    <div class="mb-4 flex flex-wrap gap-2 items-center">
+      <input id="proj-search" type="search" placeholder="Search projects…" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white/80 text-sm outline-none focus:ring-2 focus:ring-indigo-300/40" />
+      <div id="proj-search-count" class="text-[12px] text-gray-500"></div>
+    </div>
     <div class="mb-4 flex flex-wrap gap-2 text-[12px] sticky top-2 z-10">
       {groups.map(([cat]) => (
         <a href={`#cat-${String(cat).toLowerCase().replace(/[^a-z0-9]+/g,'-')}`} class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70 hover:bg-white">
@@ -41,14 +45,14 @@ const totalCount: number = (featuredLinks as any[]).length;
         <section class="mt-6 first:mt-0" id={`cat-${String(cat).toLowerCase().replace(/[^a-z0-9]+/g,'-')}`}>
           <div class="flex items-baseline justify-between mb-2">
             <div class="text-xs uppercase tracking-wide text-gray-500">{cat}</div>
-            <div class="text-[11px] text-gray-500">{(items as any[]).length} items</div>
+            <div class="text-[11px] text-gray-500" data-proj-cat-count>{(items as any[]).length} items</div>
           </div>
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 md:gap-3">
             {(items as any[]).map((p) => {
               const isExternal = /^https?:\/\//.test(p.link);
               const href = isExternal ? p.link : (p.link.startsWith('/') ? p.link : '/' + p.link);
               return (
-                <a aria-label={`Open ${p.title}`} href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener' : undefined} class="group relative rounded-xl border border-zinc-200 bg-white/70 p-3 md:p-4 hover:bg-white transition-colors overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300/40 will-change-transform">
+                <a aria-label={`Open ${p.title}`} href={href} target={isExternal ? '_blank' : undefined} rel={isExternal ? 'noopener' : undefined} class="group relative rounded-xl border border-zinc-200 bg-white/70 p-3 md:p-4 hover:bg-white transition-colors overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300/40 will-change-transform" data-proj-card data-proj-text={`${p.title} ${p.description}`}>
                   <div class="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition shadow-[0_8px_24px_rgba(0,0,0,0.06)] rounded-xl"></div>
                   <div class="relative min-w-0 flex items-start justify-between gap-2">
                     <div class="min-w-0">
@@ -70,6 +74,38 @@ const totalCount: number = (featuredLinks as any[]).length;
         </section>
       ))}
     </div>
+
+    <script>
+      (function(){
+        try {
+          const input = document.getElementById('proj-search');
+          const grid = document.getElementById('proj-grid');
+          const countEl = document.getElementById('proj-search-count');
+          if (!input || !grid) return;
+          const sections = Array.from(grid.querySelectorAll('section'));
+          const allCards = Array.from(grid.querySelectorAll('[data-proj-card]'));
+          const update = () => {
+            const q = String((input as HTMLInputElement).value || '').toLowerCase().trim();
+            let visible = 0;
+            allCards.forEach((el) => {
+              const t = (el.getAttribute('data-proj-text') || '').toLowerCase();
+              const show = !q || t.includes(q);
+              (show ? el.classList.remove('hidden') : el.classList.add('hidden'));
+              if (show) visible++;
+            });
+            sections.forEach((sec) => {
+              const cards = Array.from(sec.querySelectorAll('[data-proj-card]')) as HTMLElement[];
+              const shown = cards.filter((c) => !c.classList.contains('hidden')).length;
+              const count = sec.querySelector('[data-proj-cat-count]');
+              if (count) count.textContent = `${shown} item${shown===1?'':'s'}`;
+              (shown === 0 ? sec.classList.add('hidden') : sec.classList.remove('hidden'));
+            });
+            if (countEl) countEl.textContent = q ? `${visible} match${visible===1?'':'es'}` : '';
+          };
+          input.addEventListener('input', update);
+        } catch(_) {}
+      })();
+    </script>
 
     <div class="mt-8">
       <AdsLink

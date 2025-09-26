@@ -6,10 +6,35 @@ import Header from "../components/Header.astro";
 <Layout title="About">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
-    <h1 class="text-3xl md:text-4xl font-bold mb-4">About me</h1>
-    <p class="text-gray-600 md:w-3/4" style="line-height: 2">
-      I'm Gideon Appau — exploring chess, code, music, poetry, and writing. I build with curiosity and share with honesty.
-    </p>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">About me</h1>
+    <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 md:w-3/4">
+      <p class="text-gray-700" style="line-height: 1.9">
+        I’m Gideon Appau. I design and build products, write about the journey, and care about craft. Chess helps me think. Music and poetry keep things human.
+      </p>
+    </div>
+
+    <section class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-1">Now</h3>
+        <ul class="list-disc ms-5 text-sm text-gray-700 space-y-1">
+          <li>Shipping portfolio updates and writing more</li>
+          <li>Building Larry SMS Hub and MarketMate</li>
+          <li>Collecting messy ideas in public</li>
+        </ul>
+      </div>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-1">A few things I like</h3>
+        <div class="flex flex-wrap gap-2 text-[12px]">
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">TypeScript</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Astro</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Tailwind</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">React Native</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Postgres</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">MongoDB</span>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Figma</span>
+        </div>
+      </div>
+    </section>
   </div>
 </Layout>
 

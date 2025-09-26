@@ -6,15 +6,52 @@ import Header from "../components/Header.astro";
 <Layout title="Contact">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
-    <h1 class="text-3xl md:text-4xl font-bold mb-4">Contact</h1>
-    <p class="text-gray-600 md:w-3/4 mb-6" style="line-height: 2">
-      Say hello or share an idea. I read every message.
-    </p>
-    <ul class="space-y-3">
-      <li><a class="underline" href="mailto:gideonad.codez@gmail.com">gideonad.codez@gmail.com</a></li>
-      <li><a class="underline" href="https://x.com/theaceslice" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
-      <li><a class="underline" href="https://github.com/aceslice" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-    </ul>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Contact</h1>
+    <p class="text-gray-600 md:w-3/4 mb-1" style="line-height: 1.9">No forms — just fast ways to reach me.</p>
+    <div class="text-[12px] text-gray-500 mb-4">I’m usually online 9am–6pm GMT (Accra).</div>
+
+    <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+      <div class="flex flex-wrap gap-2">
+        <a aria-label="Email Gideon" href="mailto:gideonad.codez@gmail.com?subject=Hello%20from%20your%20site" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">Email</a>
+        <button id="copy-mail" aria-label="Copy email address" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80" type="button">Copy email</button>
+        <a aria-label="Open X (Twitter) profile" href="https://x.com/theaceslice" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">X (Twitter)</a>
+        <a aria-label="Open GitHub profile" href="https://github.com/aceslice" target="_blank" rel="noopener" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">GitHub</a>
+        <a aria-label="Go to Autograph page" href="/autograph" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">Sign the autograph</a>
+        <a aria-label="Go to Ideas page" href="/ideas" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white font-semibold hover:bg-white/80">Share an idea</a>
+      </div>
+      <div class="mt-3 text-sm text-gray-600">Prefer specifics? Quick presets below.</div>
+      <div class="mt-2 flex flex-wrap gap-2 text-[12px]">
+        <a href="mailto:gideonad.codez@gmail.com?subject=Collaboration%20idea&body=Hi%20Gideon%2C%0D%0A%0D%0AHere%27s%20a%20collaboration%20idea%3A%20%0D%0AScope%3A%20%0D%0ATimeline%3A%20%0D%0ABudget%2FConstraints%3A%20%0D%0A%0D%0AThanks%21" class="px-2.5 py-1 rounded-full border border-zinc-300 bg-white/80 hover:bg-white">Collab</a>
+        <a href="mailto:gideonad.codez@gmail.com?subject=Hiring%20inquiry&body=Hi%20Gideon%2C%0D%0A%0D%0AWe%27re%20looking%20for%3A%20%0D%0ATimeline%3A%20%0D%0ABudget%3A%20%0D%0AContext%2FLinks%3A%20%0D%0A%0D%0AThanks%21" class="px-2.5 py-1 rounded-full border border-zinc-300 bg-white/80 hover:bg-white">Hiring</a>
+        <a href="mailto:gideonad.codez@gmail.com?subject=Feedback&body=Hi%20Gideon%2C%0D%0A%0D%0AFeedback%3A%20%0D%0AWhy%20it%20helps%3A%20%0D%0AOptional%20links%3A%20%0D%0A%0D%0AThanks%21" class="px-2.5 py-1 rounded-full border border-zinc-300 bg-white/80 hover:bg-white">Feedback</a>
+      </div>
+      <div id="copy-status" class="mt-2 text-[12px] text-emerald-700" role="status" aria-live="polite"></div>
+    </div>
+
+    <script>
+      (function(){
+        try {
+          const btn = document.getElementById('copy-mail');
+          const status = document.getElementById('copy-status');
+          if (!btn) return;
+          btn.addEventListener('click', async () => {
+            try {
+              await navigator.clipboard.writeText('gideonad.codez@gmail.com');
+              const prev = btn.textContent;
+              btn.textContent = 'Copied ✓';
+              if (status) status.textContent = 'Email copied to clipboard';
+              setTimeout(()=>{ btn.textContent = prev || 'Copy email'; if (status) status.textContent = ''; }, 1400);
+            } catch(_) {}
+          });
+          // keyboard shortcut: press 'c' to open email link
+          document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'c' && !e.metaKey && !e.ctrlKey && !e.altKey) {
+              window.location.href = 'mailto:gideonad.codez@gmail.com?subject=Hello%20from%20your%20site';
+            }
+          });
+        } catch(_) {}
+      })();
+    </script>
   </div>
 </Layout>
 
