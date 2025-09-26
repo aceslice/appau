@@ -1,0 +1,2 @@
+# Netlify Forms redirects
+/autograph /autograph?success=1 200

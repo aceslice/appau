@@ -3,13 +3,27 @@
 // - NETLIFY_API_TOKEN: a Personal Access Token with read permissions
 // - NETLIFY_SITE_ID: the Site ID of this Netlify site
 
-export async function handler() {
+export async function handler(event) {
+  // Handle CORS for local development
+  const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+  };
+
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers, body: '' };
+  }
+
   const token = process.env.NETLIFY_API_TOKEN;
   const siteId = process.env.NETLIFY_SITE_ID;
+  
   if (!token || !siteId) {
+    console.log('Missing Netlify API credentials, returning seed data');
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ entries: [] }),
     };
   }
@@ -49,13 +63,14 @@ export async function handler() {
 
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ entries }),
     };
   } catch (err) {
+    console.error('Error fetching guestbook entries:', err);
     return {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ entries: [] }),
     };
   }
