@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import autograph from "../assets/autograph.svg";
+---
+
+<Layout title="Autograph">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Autograph</h1>
+    <img src={autograph.src} alt="Aceslice autograph" class="mt-6 w-64" />
+  </div>
+</Layout>
+

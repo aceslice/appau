@@ -24,7 +24,7 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
 
-    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-tight tracking-tight">
       <span class="text-xl sm:text-2xl text-[#333]">
         <style>
           #greeting {
@@ -36,8 +36,9 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
         </style>
         <span id="greeting">{randomGreeting}</span>
       </span>
-      <br /> I'm Gideon Appau.
+      <br /> I'm <span class="text-indigo-600" style=" padding: 0 0.1em;">Gideon Appau</span> — I craft products, write about the journey, and build with care.
     </h1>
+    <div class="text-sm text-gray-500 mb-4">God • Product engineering, writing, design</div>
     <p
       class="text-base md:text-sm font-medium mb-4 text-gray-500 md:w-3/4"
       style="line-height: 2"
@@ -90,7 +91,128 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
       — a name that inspires me to live boldly and embrace mastery in every endeavor.
     </p>
 
+
     <PG />
+
+    
+
+
+    <section class="mt-10">
+      <h2 class="mb-2 font-bold max-sm:mt-8">Featured</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+        {featuredLinks.map((item) => (
+          <a href={item.link} class="rounded-xl md:rounded-2xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-3 md:p-4 no-underline block relative transition-transform duration-200 hover:-translate-y-0.5 hover:border-zinc-300">
+            {item.tags && (() => {
+              const lowerTags = item.tags.map((t) => String(t).toLowerCase());
+              const isWip = lowerTags.includes("wip");
+              const isSoon = lowerTags.includes("starting soon") || lowerTags.includes("coming soon");
+              const isBeta = lowerTags.includes("beta");
+              const isPrivate = lowerTags.includes("private");
+              const label = isWip
+                ? "WIP"
+                : isSoon
+                ? (lowerTags.includes("starting soon") ? "Coming  soon" : "Coming soon")
+                : isBeta
+                ? "Beta"
+                : isPrivate
+                ? "Private"
+                : null;
+              if (!label) return null;
+              const cls = isWip
+                ? "border-indigo-100 text-indigo-600 bg-indigo-50/60"
+                : isSoon
+                ? "border-orange-100 text-orange-600 bg-orange-50/60"
+                : isBeta
+                ? "border-cyan-100 text-cyan-600 bg-cyan-50/60"
+                : "border-slate-100 text-slate-600 bg-slate-50/60";
+              return (
+                <div class={`absolute top-2 right-2 px-1.5 py-0.5 rounded-full border backdrop-blur-sm text-[10px] font-semibold ${cls}`}>
+                  {label}
+                </div>
+              );
+            })()}
+            <div class="text-center">
+              <div class="mb-2">
+                <div class="mx-auto flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-lg border border-zinc-200 bg-white/80">
+                  {item.logo ? (
+                    <img
+                      src={item.logo}
+                      alt={`${item.title} logo`}
+                      class="max-h-6 md:max-h-8 max-w-full object-contain opacity-90"
+                      loading="lazy"
+                    />
+                  ) : (
+                    item.icon && <div class={`${item.icon} text-lg md:text-xl opacity-80`} role="img" />
+                  )}
+                </div>
+              </div>
+              <h3 class="font-semibold leading-snug">{item.title}</h3>
+              <p class="text-sm text-gray-600 mt-1 leading-relaxed">{item.description}</p>
+              {item.tags && (
+                <div class="mt-2 flex flex-wrap justify-center gap-2 text-[11px]">
+                  {item.tags.map((t) => {
+                    const tl = String(t).toLowerCase();
+                    const isWip = tl === "wip";
+                    const isSoon = tl === "starting soon" || tl === "coming soon";
+                    const badgeClass = isWip
+                      ? "border-violet-300 text-violet-700 bg-violet-50"
+                      : isSoon
+                      ? "border-amber-300 text-amber-700 bg-amber-50"
+                      : "border-zinc-300 bg-white/70";
+                    return (
+                      <span class={`px-2 py-0.5 rounded-full border ${badgeClass}`}>{t}</span>
+                    );
+                  })}
+                </div>
+              )}
+              {item.footer && <div class="text-xs mt-2 opacity-70">{item.footer}</div>}
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <div class="mt-10">
+      <a href="/projects" class="inline-flex items-center gap-2 text-sm font-semibold underline decoration-dashed underline-offset-4">
+        View all projects →
+      </a>
+    </div>
+
+    <section class="mt-12">
+      <h2 class="mb-2 font-bold">Stack I use</h2>
+      <div class="flex flex-wrap gap-2 text-xs">
+        <span class="px-2 py-1 rounded-full border border-zinc-300 bg-white/60">MongoDB</span>
+        <span class="px-2 py-1 rounded-full border border-zinc-300 bg-white/60">React Native</span>
+        <span class="px-2 py-1 rounded-full border border-zinc-300 bg-white/60">Astro</span>
+        <span class="px-2 py-1 rounded-full border border-zinc-300 bg-white/60">Postgres</span>
+        <span class="px-2 py-1 rounded-full border border-zinc-300 bg-white/60">Node.js</span>
+        <span class="px-2 py-1 rounded-full border border-zinc-300 bg-white/60">Figma</span>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div class="md:w-4/5">
+          <div class="text-xs uppercase tracking-wide text-gray-500">Latest note</div>
+          <blockquote class="text-sm md:text-[15px] text-gray-700 mt-1">
+            “I build useful, human products with honesty and care — shipping small, learning fast, and telling the story along the way.”
+          </blockquote>
+        </div>
+        <a href="/blog" class="text-sm font-semibold underline decoration-dashed underline-offset-4">Read notes</a>
+      </div>
+    </section>
+
+    <section class="mt-10">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4 text-center">
+        <div class="text-xs uppercase tracking-wide text-gray-500 mb-2">As seen in</div>
+        <div class="flex flex-wrap items-center justify-center gap-3 text-xs">
+          <span class="px-2 py-1 rounded-md border border-zinc-200 bg-white/70">GitHub</span>
+          <span class="px-2 py-1 rounded-md border border-zinc-200 bg-white/70">Astro</span>
+          <span class="px-2 py-1 rounded-md border border-zinc-200 bg-white/70">Netlify</span>
+          <span class="px-2 py-1 rounded-md border border-zinc-200 bg-white/70">Dev Community</span>
+        </div>
+      </div>
+    </section>
 
     <AdsLink
       backgroundColor="#582FFF"
@@ -110,7 +232,7 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
     />
     <AdsLink
       backgroundColor="#2BCC5A90"
-      description="— MarketMate: local gateway to fresh produce & best deals."
+      description="— MarketMate: Data-driven, integrated supply chain for Ghana's local food system."
       icons={[
         "i-lucide-apple",
         "i-lucide-salad",
@@ -121,11 +243,16 @@ let randomGreeting = greetings[Math.floor(Math.random() * greetings.length)];
       url="https://getmarketmate.com"
       textColor="#364153"
     />
-    <!-- <h2
-    class="mb-4 flex items-center gap-2 font-bold max-sm:mt-8"
-    id="featured">
-    <div class="book-heart inline-block opacity-60"></div> Featured
-  </h2> -->
+
+    <section class="mt-12 mb-4">
+      <div class="rounded-2xl border border-zinc-200 bg-white/70 backdrop-blur-2xl p-5 flex items-center justify-between gap-4">
+        <div>
+          <h3 class="font-semibold">Let’s build or talk.</h3>
+          <p class="text-sm text-gray-600 mt-1">Have an idea or feedback? I’d love to hear it.</p>
+        </div>
+        <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">Contact</a>
+      </div>
+    </section>
   </div>
 </Layout>
 <Footer />

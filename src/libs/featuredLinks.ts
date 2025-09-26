@@ -1,25 +1,46 @@
-
+import marketmateLogo from "../assets/marketmate_logo.png";
+import whispurrLogo from "../assets/whispurr_logo.png";
+import larryLogo from "../assets/larrysmshub_logo.png";
 
 const featuredLinks = [
 	{
-		title: "Mangobase 🥭",
+		title: "Larry SMS Hub",
 		description:
-			"Low-code Javascript backend framework for Node and Bun runtimes.",
-		link: "degreat.co.uk/mangobase",
+			"Branded bulk SMS for businesses — send messages under your business name, simply and reliably.",
+		link: "/projects/larry-sms-hub",
+		footer: "Sender IDs • Bulk campaigns • Delivery reports",
+		icon: "i-lucide-message-circle",
+		logo: larryLogo.src,
+		tags: ["Sender ID", "Bulk campaigns", "Delivery reports", "Business messaging","Beta"],
 	},
 	{
-		title: "Adeton",
+		title: "MarketMate",
 		description:
-			"This is a SaaS project I founded; an e-commerce enabler. Think Shopify but tailored for the Ghanaian merchant.",
-		link: "adeton.io",
+			"Data‑driven supply chain for Ghana’s local food — curated weekly boxes, COCO hub‑and‑spoke logistics, and farmer analytics.",
+		link: "https://getmarketmate.com",
+		footer: "Infrastructure, not delivery. Built for resilience.",
+		icon: "i-lucide-shopping-bag",
+		logo: marketmateLogo.src,
+		tags: ["Weekly boxes", "COCO hub‑and‑spoke", "Farmer analytics", "Starting soon"],
 	},
 	{
 		title: "Devlog",
 		description:
-			"This is a Youtube channel I share progress on stuff I'm working on. You'll also find some tutorials on code, 3d, etc. It's fun, check it out!",
-		link: "youtube.com/@notgr",
+			"I share progress, small builds, and occasional tutorials — honest, scrappy, and fun.",
+		link: "https://youtube.com/@notgr",
 		footer: "Please subscribe",
-		icon: "i-lucide-youtube text-red-500 text-lg",
+		icon: "i-lucide-youtube text-red-500",
+		tags: ["Build in public", "Tutorials", "Subscribe", "Private"],
+	},
+	{
+		title: "Whispurr",
+		description:
+			"Ephemeral, playful private chats — privacy as performance, anonymity as armor.",
+		link: "https://whispurr.netlify.app",
+		footer: "Cultural artifact • Ephemeral • Playful privacy",
+		icon: "i-lucide-ghost",
+		logo: whispurrLogo.src,
+		tags: ["Ephemeral", "Anonymity", "Playful privacy", "WIP"],
 	},
 ];
 

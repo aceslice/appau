@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import AdsLink from "../components/AdsLink.astro";
+---
+
+<Layout title="Projects">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <h1 class="text-3xl md:text-4xl font-bold mb-6">Projects</h1>
+    <p class="text-gray-600 md:w-3/4 mb-8" style="line-height: 2">
+      Things I’m building and tinkering with.
+    </p>
+    <AdsLink
+      backgroundColor="#582FFF"
+      textColor="#fff"
+      url="https://whispurr.netlify.app"
+      description="— Whispurr - Secret chats, silly emojis, total privacy!"
+      icons={["i-lucide-party-popper","i-lucide-message-circle","i-lucide-key"]}
+    />
+  </div>
+</Layout>
+

@@ -1,0 +1,43 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import larryLogo from "../../assets/larrysmshub_logo.png";
+---
+
+<Layout title="Larry SMS Hub">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <div class="mb-3">
+      <img src={larryLogo.src} alt="Larry SMS Hub logo" class="h-10 md:h-12 object-contain" />
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Larry SMS Hub</h1>
+    <p class="text-gray-700 md:w-3/4" style="line-height: 2">
+      Branded bulk SMS for businesses — send messages under your business name.
+    </p>
+
+    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold">What you get</h3>
+        <ul class="list-disc ms-5 text-sm text-gray-700 space-y-1 mt-2">
+          <li>Sender IDs (messages appear from your business name)</li>
+          <li>Bulk campaigns and CSV uploads</li>
+          <li>Contact groups and simple segmentation</li>
+          <li>Scheduling and delivery reports</li>
+        </ul>
+      </div>
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold">Use cases</h3>
+        <ul class="list-disc ms-5 text-sm text-gray-700 space-y-1 mt-2">
+          <li>Promotions and announcements</li>
+          <li>Reminders and notifications</li>
+          <li>Community and event outreach</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">Get in touch</a>
+    </div>
+  </div>
+</Layout>
+
