@@ -38,35 +38,6 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
   <button type="button" class="ms-auto text-zinc-600 hover:text-zinc-800 text-sm" aria-label="Next" data-next>Next ▷</button>
 </div>
 
-<!-- Floating Music Bar -->
-<div class="fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4"
-     data-floating-bar>
-  <div class="rounded-full border border-indigo-200 bg-gradient-to-r from-indigo-50/95 to-purple-50/95 backdrop-blur-2xl px-4 py-3 flex items-center gap-3 shadow-lg shadow-indigo-200/30"
-       data-floating-content>
-    <div class="relative w-10 h-10" data-floating-circle>
-      <svg class="w-10 h-10 -rotate-90" viewBox="0 0 40 40">
-        <circle cx="20" cy="20" r="18" stroke="rgb(228 228 231)" stroke-width="2" fill="none"/>
-        <circle cx="20" cy="20" r="18" stroke="rgb(251 191 36)" stroke-width="2" fill="none" 
-                stroke-dasharray="113.1" stroke-dashoffset="113.1" data-floating-progress 
-                style="transition: stroke-dashoffset 0.1s ease"/>
-      </svg>
-      <button type="button" class="absolute inset-0 flex items-center justify-center text-zinc-700 hover:text-zinc-900 focus:outline-none"
-              aria-label="Play"
-              data-floating-toggle>
-        <span class="text-sm">▶</span>
-      </button>
-    </div>
-    <div class="min-w-0">
-      <div class="text-sm font-medium text-indigo-800 truncate" data-f-title>{tracks.length ? tracks[0].title : title}</div>
-      {(tracks.length ? tracks[0].artist : artist) && <div class="text-[11px] text-indigo-600 truncate" data-f-artist>{tracks.length ? tracks[0].artist : artist}</div>}
-    </div>
-    <button type="button" class="ml-2 text-zinc-500 hover:text-zinc-700 focus:outline-none"
-            aria-label="Close"
-            data-floating-close>
-      <span class="text-sm">×</span>
-    </button>
-  </div>
-</div>
 
 <script>
   const doc = document;
@@ -76,12 +47,7 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
     const circle = doc.querySelector('[data-audio-circle]') as HTMLDivElement | null;
     const nextBtn = doc.querySelector('[data-next]') as HTMLButtonElement | null;
     
-    // Floating bar elements
-    const floatingBar = doc.querySelector('[data-floating-bar]') as HTMLDivElement | null;
-    const floatingBtn = doc.querySelector('[data-floating-toggle]') as HTMLButtonElement | null;
-    const floatingProgress = doc.querySelector('[data-floating-progress]') as HTMLDivElement | null;
-    const floatingCircle = doc.querySelector('[data-floating-circle]') as HTMLDivElement | null;
-    const floatingClose = doc.querySelector('[data-floating-close]') as HTMLButtonElement | null;
+    // No floating bar elements - using global player from Layout.astro
     
     // Playlist from attribute
     const barEl = doc.querySelector('[data-audio-bar]') as HTMLDivElement | null;
@@ -91,8 +57,6 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
     
     const titleEl = doc.querySelector('[data-title]') as HTMLDivElement | null;
     const artistEl = doc.querySelector('[data-artist]') as HTMLDivElement | null;
-    const fTitleEl = doc.querySelector('[data-f-title]') as HTMLDivElement | null;
-    const fArtistEl = doc.querySelector('[data-f-artist]') as HTMLDivElement | null;
 
     let isPlaying = false;
 
@@ -113,21 +77,7 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
       }
     };
 
-    const showFloatingBar = () => {
-      if (floatingBar) {
-        floatingBar.style.opacity = '1';
-        floatingBar.style.pointerEvents = 'auto';
-        floatingBar.style.transform = 'translateY(0)';
-      }
-    };
-
-    const hideFloatingBar = () => {
-      if (floatingBar) {
-        floatingBar.style.opacity = '0';
-        floatingBar.style.pointerEvents = 'none';
-        floatingBar.style.transform = 'translateY(1rem)';
-      }
-    };
+    // Floating bar functions removed - using global player from Layout.astro
 
      const togglePlay = () => {
        // Always delegate to global player
@@ -155,17 +105,11 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
          // Update our local UI to match global state
          isPlaying = globalPlayer.isPlaying;
          updateBtn(btn, isPlaying);
-         updateBtn(floatingBtn, isPlaying);
-         
-         if (isPlaying) {
-           showFloatingBar();
-         }
        }
      };
 
-     // Connect both play buttons to the same toggle function
+     // Connect play button to toggle function
      btn?.addEventListener('click', togglePlay);
-     floatingBtn?.addEventListener('click', togglePlay);
 
     const circleSeek = (circleEl: HTMLDivElement | null, e: MouseEvent) => {
       if (!circleEl) return;
@@ -175,7 +119,6 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
       }
     };
     circle?.addEventListener('click', (e: MouseEvent) => circleSeek(circle, e));
-    floatingCircle?.addEventListener('click', (e: MouseEvent) => circleSeek(floatingCircle, e));
 
     const loadTrack = (index: number, autoplay = false) => {
       if (!playlist.length) return;
@@ -192,20 +135,9 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
           artistEl.style.display = 'none'; 
         } 
       }
-      if (fTitleEl) fTitleEl.textContent = track.title;
-      if (fArtistEl) { 
-        if (track.artist) { 
-          fArtistEl.textContent = track.artist; 
-          fArtistEl.style.display = ''; 
-        } else { 
-          fArtistEl.style.display = 'none'; 
-        } 
-      }
       
       updateProgress(progress, 87.96);
-      updateProgress(floatingProgress, 113.1);
       updateBtn(btn, isPlaying);
-      updateBtn(floatingBtn, isPlaying);
     };
 
      const nextTrack = () => {
@@ -224,34 +156,21 @@ const { src = "", title = "Now playing", artist = "", tracks = [] } = Astro.prop
          loadTrack(currentIndex, false); // Don't autoplay, global player handles it
          isPlaying = globalPlayer.isPlaying;
          updateBtn(btn, isPlaying);
-         updateBtn(floatingBtn, isPlaying);
        }
      };
 
     nextBtn?.addEventListener('click', nextTrack);
 
-    floatingClose?.addEventListener('click', () => {
-      // Delegate to global player
-      if ((window as any).GlobalMusicPlayer) {
-        (window as any).GlobalMusicPlayer.stop();
-        isPlaying = false;
-        updateBtn(btn, isPlaying);
-        updateBtn(floatingBtn, isPlaying);
-        hideFloatingBar();
-      }
-    });
+    // No floating close button - using global player from Layout.astro
 
     // Set up progress update interval to sync with global player
     const progressInterval = setInterval(() => {
       updateProgress(progress, 87.96);
-      updateProgress(floatingProgress, 113.1);
     }, 100);
 
     // Initialize
     updateBtn(btn, isPlaying);
-    updateBtn(floatingBtn, isPlaying);
     updateProgress(progress, 87.96);
-    updateProgress(floatingProgress, 113.1);
     if (playlist.length) loadTrack(0, false);
   }
 </script>

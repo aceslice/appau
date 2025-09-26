@@ -127,8 +127,7 @@ const canonicalUrl = `https://${SITE_HOST}${Astro.url?.pathname ?? "/"}`;
       this.audio.src = track.src;
       this.updateDisplay(track);
       this.audio.play().catch((error: any) => {
-        console.warn('Autoplay prevented:', error);
-        // Don't set isPlaying to true if autoplay fails
+        console.warn('Play failed:', error);
         this.isPlaying = false;
         this.updateButton();
       });
@@ -241,13 +240,13 @@ const canonicalUrl = `https://${SITE_HOST}${Astro.url?.pathname ?? "/"}`;
           if (state.playlist && state.currentIndex !== undefined) {
             this.playlist = state.playlist;
             this.currentIndex = state.currentIndex;
-            // Don't auto-play on page load - wait for user interaction
-            if (state.isPlaying && this.playlist.length > 0) {
+            // Load the track but don't auto-play - wait for user interaction
+            if (this.playlist.length > 0) {
               const track = this.playlist[this.currentIndex];
               this.audio.src = track.src;
               this.updateDisplay(track);
               this.showPlayer();
-              // Set isPlaying to false initially, user needs to click play
+              // Always set isPlaying to false on page load - user must click play
               this.isPlaying = false;
               this.updateButton();
             }
