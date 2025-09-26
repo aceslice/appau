@@ -5,6 +5,9 @@ import profileImg from "../assets/profile.jpeg?url";
 import about4 from "../assets/about-5.jpeg?url";
 import about2 from "../assets/about-2.jpg?url";
 import about3 from "../assets/about-3.jpeg?url";
+import AudioBar from "../components/AudioBar.astro";
+import trackLost from "../assets/music/Lost.mp3?url";
+import trackSketch from "../assets/music/Sketch - Intro.mp3?url";
 ---
 
 <Layout title="About">
@@ -85,6 +88,19 @@ import about3 from "../assets/about-3.jpeg?url";
           <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Videography</span>
         </div>
       </div>
+    </section>
+
+    <!-- Now playing -->
+    <section class="mt-6">
+      <div class="text-xs uppercase tracking-wide text-gray-500 mb-2">Now playing</div>
+      <AudioBar 
+        tracks={[
+          { src: trackLost, title: "Lost", artist: "Gideon Appau" },
+          { src: trackSketch, title: "Sketch - Intro", artist: "Gideon Appau" }
+        ]} 
+        title="Now playing" 
+        artist="Gideon Appau" 
+      />
     </section>
 
     <!-- CTA row -->

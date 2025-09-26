@@ -1,0 +1,230 @@
+---
+// Global music player that persists across pages
+---
+
+<!-- Global Floating Music Bar -->
+<div id="global-music-player" class="fixed bottom-6 right-6 z-50 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-4">
+  <div class="rounded-full border border-indigo-200 bg-gradient-to-r from-indigo-50/95 to-purple-50/95 backdrop-blur-2xl px-4 py-3 flex items-center gap-3 shadow-lg shadow-indigo-200/30">
+    <div class="relative w-10 h-10" id="global-circle">
+      <svg class="w-10 h-10 -rotate-90" viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="18" stroke="rgb(228 228 231)" stroke-width="2" fill="none"/>
+        <circle cx="20" cy="20" r="18" stroke="rgb(251 191 36)" stroke-width="2" fill="none" 
+                stroke-dasharray="113.1" stroke-dashoffset="113.1" id="global-progress" 
+                style="transition: stroke-dashoffset 0.1s ease"/>
+      </svg>
+      <button type="button" class="absolute inset-0 flex items-center justify-center text-zinc-700 hover:text-zinc-900 focus:outline-none"
+              aria-label="Play"
+              id="global-toggle">
+        <span class="text-sm">▶</span>
+      </button>
+    </div>
+    <div class="min-w-0">
+      <div class="text-sm font-medium text-indigo-800 truncate" id="global-title">Now playing</div>
+      <div class="text-[11px] text-indigo-600 truncate" id="global-artist" style="display: none;">Gideon Appau</div>
+    </div>
+    <button type="button" class="ml-2 text-zinc-500 hover:text-zinc-700 focus:outline-none"
+            aria-label="Close"
+            id="global-close">
+      <span class="text-sm">×</span>
+    </button>
+  </div>
+</div>
+
+<!-- Hidden audio element -->
+<audio id="global-audio" preload="none" hidden></audio>
+
+<script>
+  class GlobalMusicPlayer {
+    audio: HTMLAudioElement | null;
+    player: HTMLDivElement | null;
+    toggleBtn: HTMLButtonElement | null;
+    progress: HTMLDivElement | null;
+    circle: HTMLDivElement | null;
+    titleEl: HTMLDivElement | null;
+    artistEl: HTMLDivElement | null;
+    closeBtn: HTMLButtonElement | null;
+    isPlaying: boolean;
+    playlist: { src: string; title: string; artist?: string }[];
+    currentIndex: number;
+
+    constructor() {
+      this.audio = document.getElementById('global-audio') as HTMLAudioElement;
+      this.player = document.getElementById('global-music-player') as HTMLDivElement;
+      this.toggleBtn = document.getElementById('global-toggle') as HTMLButtonElement;
+      this.progress = document.getElementById('global-progress') as HTMLDivElement;
+      this.circle = document.getElementById('global-circle') as HTMLDivElement;
+      this.titleEl = document.getElementById('global-title') as HTMLDivElement;
+      this.artistEl = document.getElementById('global-artist') as HTMLDivElement;
+      this.closeBtn = document.getElementById('global-close') as HTMLButtonElement;
+      
+      this.isPlaying = false;
+      this.playlist = [];
+      this.currentIndex = 0;
+      
+      this.init();
+    }
+    
+    init() {
+      // Load saved state
+      this.loadState();
+      
+      // Set up event listeners
+      this.toggleBtn?.addEventListener('click', () => this.togglePlay());
+      this.closeBtn?.addEventListener('click', () => this.stop());
+      this.circle?.addEventListener('click', (e: MouseEvent) => this.seek(e));
+      
+      this.audio?.addEventListener('timeupdate', () => this.updateProgress());
+      this.audio?.addEventListener('loadedmetadata', () => this.updateProgress());
+      this.audio?.addEventListener('ended', () => this.nextTrack());
+      
+      // Listen for messages from page players
+      window.addEventListener('message', (e: MessageEvent) => {
+        if (e.data.type === 'PLAY_MUSIC') {
+          this.playTrack(e.data.track);
+        }
+      });
+    }
+    
+    loadState() {
+      const saved = localStorage.getItem('global-music-state');
+      if (saved) {
+        try {
+          const state = JSON.parse(saved);
+          this.playlist = state.playlist || [];
+          this.currentIndex = state.currentIndex || 0;
+          
+          if (state.isPlaying && this.playlist.length > 0) {
+            this.loadTrack(this.currentIndex, false);
+            setTimeout(() => this.play(), 100); // Small delay to ensure audio is ready
+          }
+        } catch (e) {
+          console.log('No saved music state');
+        }
+      }
+    }
+    
+    saveState() {
+      const state = {
+        isPlaying: this.isPlaying,
+        playlist: this.playlist,
+        currentIndex: this.currentIndex
+      };
+      localStorage.setItem('global-music-state', JSON.stringify(state));
+    }
+    
+    playTrack(track: { src: string; title: string; artist?: string }) {
+      this.playlist = [track];
+      this.currentIndex = 0;
+      this.loadTrack(0, true);
+    }
+    
+    loadTrack(index: number, autoplay = false) {
+      if (!this.audio || !this.playlist.length) return;
+      this.currentIndex = (index + this.playlist.length) % this.playlist.length;
+      const track = this.playlist[this.currentIndex];
+      
+      if (this.audio) this.audio.src = track.src;
+      if (this.titleEl) this.titleEl.textContent = track.title;
+      
+      if (track.artist && this.artistEl) {
+        this.artistEl.textContent = track.artist;
+        this.artistEl.style.display = '';
+      } else if (this.artistEl) {
+        this.artistEl.style.display = 'none';
+      }
+      
+      this.updateProgress();
+      this.saveState();
+      
+      if (autoplay) {
+        this.play();
+      }
+    }
+    
+    play() {
+      if (!this.audio) return;
+      this.audio.play().then(() => {
+        this.isPlaying = true;
+        this.updateButton();
+        this.show();
+        this.saveState();
+      }).catch(e => {
+        console.log('Playback failed:', e);
+      });
+    }
+    
+    pause() {
+      if (!this.audio) return;
+      this.audio.pause();
+      this.isPlaying = false;
+      this.updateButton();
+      this.saveState();
+    }
+    
+    stop() {
+      this.pause();
+      this.hide();
+      localStorage.removeItem('global-music-state');
+    }
+    
+    togglePlay() {
+      if (this.isPlaying) {
+        this.pause();
+      } else {
+        this.play();
+      }
+    }
+    
+    nextTrack() {
+      if (this.playlist.length > 1) {
+        this.loadTrack(this.currentIndex + 1, true);
+      } else {
+        this.stop();
+      }
+    }
+    
+    seek(e: MouseEvent) {
+      if (!this.audio || !this.circle) return;
+      const rect = this.circle.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX) + Math.PI / 2;
+      const normalizedAngle = (angle + Math.PI) / (2 * Math.PI);
+      if (this.audio.duration) {
+        this.audio.currentTime = normalizedAngle * this.audio.duration;
+      }
+    }
+    
+    updateProgress() {
+      if (!this.audio || !this.progress) return;
+      const p = this.audio.duration ? (this.audio.currentTime / this.audio.duration) : 0;
+      const offset = 113.1 * (1 - p);
+      this.progress.style.strokeDashoffset = String(offset);
+    }
+    
+    updateButton() {
+      if (!this.toggleBtn) return;
+      this.toggleBtn.textContent = this.isPlaying ? '❚❚' : '▶';
+      this.toggleBtn.setAttribute('aria-label', this.isPlaying ? 'Pause' : 'Play');
+    }
+    
+    show() {
+      if (!this.player) return;
+      this.player.style.opacity = '1';
+      this.player.style.pointerEvents = 'auto';
+      this.player.style.transform = 'translateY(0)';
+    }
+    
+    hide() {
+      if (!this.player) return;
+      this.player.style.opacity = '0';
+      this.player.style.pointerEvents = 'none';
+      this.player.style.transform = 'translateY(1rem)';
+    }
+  }
+  
+  // Initialize global player
+  document.addEventListener('DOMContentLoaded', () => {
+    (window as any).globalMusicPlayer = new GlobalMusicPlayer();
+  });
+</script>
