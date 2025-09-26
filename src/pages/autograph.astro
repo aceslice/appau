@@ -74,7 +74,7 @@ import seedEntries from "../libs/guestbook.json";
         copyPermalink(i){ try{ const url = window.location.origin + window.location.pathname + '#sig-' + i; navigator.clipboard && navigator.clipboard.writeText(url); } catch(_){} }
       })`} x-init="fetchEntries()" class="mt-2 messy-masonry messy-grid sig-grid">
         <template x-for="(e,i) in list" :key="i">
-          <div :id="'sig-'+i" :class="'relative inline-block align-top w-full overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-3 md:p-4 idea-card sig-card ' + variantFor(e.name)">
+          <div :id="'sig-'+i" :class="'relative inline-block align-top w-full overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-3 md:p-4 idea-card sig-card ' + variantFor(e.name)" @click="spawnHeart($event)" x-data="{ hearts: [], hid: 0, spawnHeart(ev){ try { const r = ev.currentTarget.getBoundingClientRect(); const x = ev.clientX - r.left; const y = ev.clientY - r.top; const id = this.hid++; this.hearts.push({ id, x, y }); setTimeout(()=>{ this.hearts = this.hearts.filter(h=>h.id!==id); }, 800); } catch(_){} } }">
             <div class="pointer-events-none absolute -top-10 -left-10 w-28 h-28 rounded-full bg-amber-100/25 blur-2xl"></div>
             <div class="pointer-events-none absolute -bottom-12 -right-12 w-32 h-32 rounded-full bg-indigo-100/25 blur-2xl"></div>
             <div class="relative">
@@ -87,26 +87,31 @@ import seedEntries from "../libs/guestbook.json";
               <span class="card-tape br" aria-hidden="true"></span>
               <p class="mt-2 text-sm text-gray-700 leading-relaxed">“<span x-text="e.message"></span>”</p>
               <template x-if="e.link">
-                <div class="mt-2 flex items-center gap-2">
-                  <a :href="e.link" target="_blank" rel="noopener" class="icon-btn" title="Open link" aria-label="Open link">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                      <path d="M12.293 2.293a1 1 0 011.414 0l4 4a1 1 0 01-1.414 1.414L14 5.414V11a1 1 0 11-2 0V5.414L9.707 7.707A1 1 0 018.293 6.293l4-4z" />
-                      <path d="M3 9a2 2 0 012-2h3a1 1 0 110 2H5v6h6v-3a1 1 0 112 0v3a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                    </svg>
-                  </a>
+                <div class="mt-2 flex items-center gap-2 text-[12px]">
+                  <a :href="e.link" target="_blank" rel="noopener" class="underline decoration-dashed underline-offset-4 break-all" x-text="e.link"></a>
                 </div>
               </template>
               <div class="mt-2 flex items-center justify-between">
                 <template x-if="e.created_at">
                   <div class="text-[11px] text-gray-500" x-text="new Date(e.created_at).toLocaleDateString()"></div>
                 </template>
-                <button class="icon-btn" @click="copyPermalink(i)" title="Copy link" aria-label="Copy link">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
-                    <path d="M8 4a3 3 0 013-3h3a3 3 0 013 3v3a3 3 0 01-3 3h-1a1 1 0 110-2h1a1 1 0 001-1V4a1 1 0 00-1-1h-3a1 1 0 00-1 1v1a1 1 0 11-2 0V4z" />
-                    <path d="M4 8a3 3 0 013-3h1a1 1 0 110 2H7a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1v-1a1 1 0 112 0v1a3 3 0 01-3 3H7a3 3 0 01-3-3V8z" />
-                  </svg>
-                </button>
+                <div class="flex items-center gap-2">
+                  <button class="icon-btn" @click.stop="spawnHeart($event)" title="Love" aria-label="Love">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-rose-500">
+                      <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 3 13.098 3 10.5 3 8.014 5.014 6 7.5 6c1.294 0 2.58.493 3.536 1.45L12 8.414l.964-.964A5 5 0 0116.5 6 4.5 4.5 0 0121 10.5c0 2.598-1.688 4.86-3.989 6.996a25.18 25.18 0 01-4.244 3.17 15.247 15.247 0 01-.383.218l-.022.012-.007.003a.75.75 0 01-.684 0z"/>
+                    </svg>
+                  </button>
+                  <button class="icon-btn" @click="copyPermalink(i)" title="Copy link" aria-label="Copy link">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                      <path d="M8 4a3 3 0 013-3h3a3 3 0 013 3v3a3 3 0 01-3 3h-1a1 1 0 110-2h1a1 1 0 001-1V4a1 1 0 00-1-1h-3a1 1 0 00-1 1v1a1 1 0 11-2 0V4z" />
+                      <path d="M4 8a3 3 0 013-3h1a1 1 0 110 2H7a1 1 0 00-1 1v6a1 1 0 001 1h6a1 1 0 001-1v-1a1 1 0 112 0v1a3 3 0 01-3 3H7a3 3 0 01-3-3V8z" />
+                    </svg>
+                  </button>
+                </div>
               </div>
+              <template x-for="h in hearts" :key="h.id">
+                <span class="heart-fx" :style="{ left: (h.x-8)+'px', top: (h.y-8)+'px' }">❤️</span>
+              </template>
             </div>
           </div>
         </template>
@@ -180,6 +185,8 @@ import seedEntries from "../libs/guestbook.json";
   .card-tape { position: absolute; width: 56px; height: 14px; background: rgba(253,253,253,.8); border: 1px dashed rgba(203,213,225,.7); box-shadow: 0 2px 6px rgba(0,0,0,.04); transform: rotate(-6deg); }
   .card-tape.tl { top: -10px; left: 18px; }
   .card-tape.br { bottom: -10px; right: 18px; transform: rotate(8deg); }
+  .heart-fx { position: absolute; pointer-events: none; animation: floatUp .8s ease-out forwards; font-size: 18px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.1)); }
+  @keyframes floatUp { 0% { transform: translateY(0) scale(.9); opacity: .9; } 60% { transform: translateY(-18px) scale(1.05); opacity: .95; } 100% { transform: translateY(-32px) scale(1); opacity: 0; } }
   /* scattered, smaller signature notes */
   .sig-grid .sig-card { 
     transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
