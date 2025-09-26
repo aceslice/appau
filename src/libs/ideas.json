@@ -2,6 +2,7 @@
   {
     "title": "Neighborhood Produce Kiosk (COCO micro‑hub)",
     "status": "Rough idea",
+    "source": "My notes",
     "memo": "A small, company‑operated kiosk inside busy neighborhoods that serves as a weekly pickup point for curated boxes. Run with a predictable schedule. Pilot with 1–2 kiosks, track footfall, box swaps, and waste reduction.",
     "implementation": [
       "Pick 2 high‑traffic neighborhoods; map market days",
@@ -14,6 +15,7 @@
   {
     "title": "SMS Swap Assistant",
     "status": "Draft spec",
+    "source": "My notes",
     "memo": "Let users reply to a pre‑delivery SMS to swap items (e.g., ‘swap tomatoes→carrots’). Simple rules, human‑readable confirmations, and cut‑off times.",
     "implementation": [
       "Whitelist swap keywords and aliases",
@@ -25,6 +27,7 @@
   {
     "title": "Larry SMS Hub: Voice Reminder Templates",
     "status": "WIP",
+    "source": "My notes",
     "memo": "Pre‑written, localized voice scripts (EN/Twi) for fee reminders and appointment follow‑ups. Text‑to‑speech + fallback SMS if missed call.",
     "implementation": [
       "Script library v1 (EN/Twi)",

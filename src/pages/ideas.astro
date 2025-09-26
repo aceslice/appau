@@ -10,7 +10,7 @@ import ideas from "../libs/ideas.json";
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Messy, rough ideas</h1>
     <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 md:w-3/4">
       <p class="text-sm text-gray-700 leading-relaxed">
-        Quick notes I don’t want to lose. They’re free for anyone to build. If you do, tell me — I’ll cheer you on.
+        A public scratchpad of ideas — mine and good ones I’ve found. Steal them. Remix them. If you build something, I’ll cheer you on and credit the source.
       </p>
     </div>
 
@@ -55,7 +55,7 @@ import ideas from "../libs/ideas.json";
         <span class="px-2 py-0.5 rounded-full border border-indigo-100 text-indigo-600 bg-indigo-50/60">WIP</span>
         <span class="px-2 py-0.5 rounded-full border border-amber-100 text-amber-700 bg-amber-50/60">Rough/Draft</span>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 messy-grid">
        {ideas.map((idea, idx) => {
         const status = String(idea.status || '').toLowerCase();
         const badge = status === 'wip'
@@ -65,16 +65,19 @@ import ideas from "../libs/ideas.json";
           : 'border-slate-100 text-slate-600 bg-slate-50/60';
         const mail = `mailto:gideonad.codez@gmail.com?subject=I%20want%20to%20build%3A%20${encodeURIComponent(idea.title)}&body=Hi%20Gideon%2C%0D%0A%0D%0AI%27m%20interested%20in%20building%20this%20idea%3A%20${encodeURIComponent(idea.title)}.%0D%0AHere%27s%20my%20plan%20and%20what%20I%27ll%20try%20first%3A%20%0D%0A%0D%0A-%20%0D%0A-%20%0D%0A-%20%0D%0A%0D%0AWill%20share%20progress%20soon.`;
         return (
-           <div id={`idea-${idx}`} class="relative overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+           <div id={`idea-${idx}`} class="relative overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 idea-card">
             <div class="pointer-events-none absolute -top-10 -left-10 w-28 h-28 rounded-full bg-amber-100/25 blur-2xl"></div>
             <div class="pointer-events-none absolute -bottom-12 -right-12 w-32 h-32 rounded-full bg-indigo-100/25 blur-2xl"></div>
             <div class="relative flex items-start justify-between gap-3">
-              <div class="min-w-0">
+               <div class="min-w-0">
                 <h2 class="font-semibold leading-snug">{idea.title}</h2>
                 <p class="mt-2 text-sm text-gray-700 leading-relaxed line-clamp-3">{idea.memo}</p>
                 {idea.updated && (
                   <div class="mt-1 text-[11px] text-gray-500">Updated: {idea.updated}</div>
                 )}
+                 {idea.source && (
+                   <div class="mt-0.5 text-[11px] text-gray-500">Source: {idea.source}</div>
+                 )}
               </div>
               <span class={`shrink-0 px-2 py-0.5 rounded-full border text-[11px] ${badge}`}>{idea.status}</span>
             </div>
@@ -139,3 +142,29 @@ import ideas from "../libs/ideas.json";
 </Layout>
 
 
+<style>
+  /* playful scatter with restraint; hover recenters for readability */
+  .messy-grid .idea-card {
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    will-change: transform;
+    margin-left: -2px;
+    margin-right: -2px;
+    width: calc(100% + 4px);
+  }
+  @media (min-width: 768px) {
+    .messy-grid .idea-card:nth-child(6n+1) { transform: rotate(-0.6deg) translateY(2px); }
+    .messy-grid .idea-card:nth-child(6n+2) { transform: rotate(0.8deg) translateY(1px); }
+    .messy-grid .idea-card:nth-child(6n+3) { transform: rotate(-1deg) translateY(3px); }
+    .messy-grid .idea-card:nth-child(6n+4) { transform: rotate(0.5deg) translateY(0px); }
+    .messy-grid .idea-card:nth-child(6n+5) { transform: rotate(-0.3deg) translateY(2px); }
+    .messy-grid .idea-card:nth-child(6n)   { transform: rotate(1deg) translateY(1px); }
+    .messy-grid .idea-card:hover {
+      transform: rotate(0deg) translateY(-2px) scale(1.008);
+      border-color: rgba(24,24,27,.25);
+      box-shadow: 0 6px 18px rgba(0,0,0,.06);
+      z-index: 2;
+    }
+    .messy-grid { overflow: visible; }
+    .messy-grid .idea-card { margin-left: -6px; margin-right: -6px; width: calc(100% + 12px); }
+  }
+</style>
