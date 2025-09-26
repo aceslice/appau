@@ -1,0 +1,100 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import marketmateLogo from "../../assets/marketmate_logo.png";
+---
+
+<Layout title="MarketMate">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <div class="text-xs text-gray-500 mb-2">
+      <a href="/projects" class="underline decoration-dashed underline-offset-4">← Back to projects</a>
+    </div>
+    <div class="mb-3">
+      <img src={marketmateLogo.src} alt="MarketMate logo" class="h-10 md:h-12 object-contain" />
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">MarketMate</h1>
+    <div class="flex flex-wrap items-center gap-2 text-[11px] mb-2">
+      <span class="px-2 py-0.5 rounded-full border border-amber-100 text-orange-600 bg-orange-50/60">Starting soon</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Weekly boxes</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">COCO hub‑and‑spoke</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Farmer analytics</span>
+    </div>
+    <p class="text-gray-700 md:w-3/4" style="line-height: 2">
+      MarketMate is a data‑driven, integrated supply chain company in Ghana’s agricultural sector. It is not a delivery app or a market aggregator; it formalizes a fragmented system into a predictable, efficient, and technology‑powered network.
+    </p>
+
+    <section class="mt-6">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-1">Core purpose</h3>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          Replace the chaotic, high‑waste informal food distribution with a predictable, efficient, and anti‑fragile supply chain tuned to local economic realities.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-2">Strategic structure</h3>
+        <div class="text-sm text-gray-700">
+          <div class="font-semibold">The Supply Chain Model (The Engine)</div>
+          <ul class="list-disc ms-5 mt-1 space-y-1">
+            <li>Subscription‑based, centralized COCO (Company‑Owned, Company‑Operated) hub‑and‑spoke model.</li>
+            <li>Bypasses expensive last‑mile by using neighborhood pickup points.</li>
+            <li>Replaces ad‑hoc shopping with scheduled, aggregated bulk orders.</li>
+            <li>Hybrid supply: guaranteed Anchor Farms + transparent MOUs with Network Farms.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-2">Value proposition</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+          <div class="rounded-lg border border-zinc-200 bg-white/70 p-3">
+            <div class="font-semibold">For consumers</div>
+            <ul class="list-disc ms-5 mt-1 space-y-1">
+              <li>Convenience, curation, and trust via weekly curated subscription boxes.</li>
+              <li>Customize with simple “swap” options.</li>
+            </ul>
+          </div>
+          <div class="rounded-lg border border-zinc-200 bg-white/70 p-3">
+            <div class="font-semibold">For producers</div>
+            <ul class="list-disc ms-5 mt-1 space-y-1">
+              <li>Predictable revenue through scheduled demand.</li>
+              <li>Actionable market intelligence (SMS/USSD) that guides planting decisions.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-2">Technology (the moat)</h3>
+        <ul class="list-disc ms-5 text-sm text-gray-700 space-y-1">
+          <li>High‑tech: consumer app and operations dashboards.</li>
+          <li>Low‑tech: USSD/SMS for farmers for inclusivity and reach.</li>
+          <li>Analytics engine: turns sales data into forecasting and farmer market intelligence.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <h3 class="font-semibold mb-1">Not a delivery app</h3>
+        <p class="text-sm text-gray-700 leading-relaxed">
+          MarketMate is infrastructure. It monetizes efficiency and trust, avoiding the last‑mile traps that sank international delivery competitors in Ghana.
+        </p>
+      </div>
+    </section>
+
+    <div class="mt-6 flex flex-wrap gap-2">
+      <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">Partner with us</a>
+      <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">Join the pilot</a>
+    </div>
+  </div>
+</Layout>
+
+

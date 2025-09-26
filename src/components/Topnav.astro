@@ -17,15 +17,15 @@ const links = [
 <div x-data="{ open: false, scrolled: false }" x-init="scrolled = window.scrollY > 8" @scroll.window="scrolled = window.scrollY > 8">
   <!-- Horizontal nav for md and up -->
   <nav
-    :class="scrolled ? 'shadow-md border-zinc-300 bg-white/60' : 'border-zinc-200 bg-white/30'"
-    class="hidden md:flex fixed top-4 transform w-full max-w-md px-4 py-2 rounded-full mx-auto border backdrop-blur-md transition-all duration-300 hover:scale-102 z-50"
+    :class="scrolled ? 'border-zinc-300 bg-white/70' : 'border-zinc-200 bg-white/40'"
+    class="hidden md:flex fixed top-4 transform w-full max-w-lg px-2 py-2 rounded-2xl mx-auto border backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] z-50"
   >
     {
       links.map((link, index) => (
         <a
           href={link.href}
           aria-current={currentPath === link.href ? 'page' : undefined}
-          class={`flex items-center justify-center gap-2 px-4 py-2 font-medium text-xs rounded-2xl transition-colors ${currentPath === link.href ? 'text-gray-900 bg-white/70' : 'text-gray-600 hover:text-gray-900'} ${index === links.length - 1 ? "border-l border-gray-300" : ""}`}
+          class={`flex items-center justify-center gap-2 px-3 py-2 font-medium text-xs rounded-xl transition-colors ${currentPath === link.href ? 'text-gray-900 bg-white' : 'text-gray-600 hover:text-gray-900'}`}
         >
           {link.name === "Autograph" && (
             <span class="i-lucide-signature" title="My mail" role="img" />
@@ -40,7 +40,7 @@ const links = [
   <div class="md:hidden fixed top-4 right-4 z-50">
     <button
       @click="open = !open"
-      class="p-2 rounded-md bg-white/70 border border-gray-200"
+      class="p-2 rounded-xl bg-white/80 border border-gray-200 backdrop-blur-md"
     >
       <template x-if="!open">
         <svg
@@ -83,14 +83,14 @@ const links = [
     x-transition:leave-start="translate-y-0 opacity-100"
     x-transition:leave-end="translate-y-full opacity-0"
     @click.away="open = false"
-    class="fixed bottom-0 left-0 right-0 bg-white/90 flex flex-col items-center justify-center space-y-2 z-40 md:hidden p-4 rounded-t-3xl shadow-lg backdrop-blur-md border-t border-zinc-200"
+    class="fixed bottom-0 left-0 right-0 bg-white/95 flex flex-col items-center justify-center space-y-2 z-40 md:hidden p-4 rounded-t-3xl backdrop-blur-xl border-t border-zinc-200"
   >
     {
       links.map((link) => (
         <a
           href={link.href}
           @click="open = false"
-          class="w-full max-w-sm px-4 py-3 text-gray-800 font-semibold text-base rounded-xl hover:bg-white/70 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          class="w-full max-w-sm px-4 py-3 text-gray-800 font-semibold text-base rounded-xl hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
         >
           <div class="flex items-center gap-4">
             <div class={link.icon} />

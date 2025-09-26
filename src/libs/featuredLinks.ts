@@ -23,15 +23,15 @@ const featuredLinks = [
 		logo: marketmateLogo.src,
 		tags: ["Weekly boxes", "COCO hub‑and‑spoke", "Farmer analytics", "Starting soon"],
 	},
-	{
-		title: "Devlog",
-		description:
-			"I share progress, small builds, and occasional tutorials — honest, scrappy, and fun.",
-		link: "https://youtube.com/@notgr",
-		footer: "Please subscribe",
-		icon: "i-lucide-youtube text-red-500",
-		tags: ["Build in public", "Tutorials", "Subscribe", "Private"],
-	},
+	// {
+	// 	title: "Devlog",
+	// 	description:
+	// 		"I share progress, small builds, and occasional tutorials — honest, scrappy, and fun.",
+	// 	link: "https://youtube.com/@notgr",
+	// 	footer: "Please subscribe",
+	// 	icon: "i-lucide-youtube text-red-500",
+	// 	tags: ["Build in public", "Tutorials", "Subscribe", "Private"],
+	// },
 	{
 		title: "Whispurr",
 		description:

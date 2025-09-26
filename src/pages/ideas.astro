@@ -1,0 +1,104 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import ideas from "../libs/ideas.json";
+---
+
+<Layout title="Messy ideas">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Messy, rough ideas</h1>
+    <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 md:w-3/4">
+      <p class="text-sm text-gray-700 leading-relaxed">
+        Quick notes I don’t want to lose. They’re free for anyone to build. If you do, tell me — I’ll cheer you on.
+      </p>
+    </div>
+
+    <!-- Alpine for lightweight modal UX -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <div
+      x-data='{"open":false,"current":0,"ideas":JSON.parse(`${JSON.stringify(ideas)}`)}'
+      class="mt-6"
+    >
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4" x-init="$nextTick(() => { /* ensure alpine is ready */ })">
+      {ideas.map((idea, idx) => {
+        const status = String(idea.status || '').toLowerCase();
+        const badge = status === 'wip'
+          ? 'border-indigo-100 text-indigo-600 bg-indigo-50/60'
+          : status.includes('rough') || status.includes('draft')
+          ? 'border-amber-100 text-amber-700 bg-amber-50/60'
+          : 'border-slate-100 text-slate-600 bg-slate-50/60';
+        const mail = `mailto:gideonad.codez@gmail.com?subject=I%20want%20to%20build%3A%20${encodeURIComponent(idea.title)}&body=Hi%20Gideon%2C%0D%0A%0D%0AI%27m%20interested%20in%20building%20this%20idea%3A%20${encodeURIComponent(idea.title)}.%0D%0AHere%27s%20my%20plan%20and%20what%20I%27ll%20try%20first%3A%20%0D%0A%0D%0A-%20%0D%0A-%20%0D%0A-%20%0D%0A%0D%0AWill%20share%20progress%20soon.`;
+        return (
+          <div class="relative overflow-hidden rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+            <div class="pointer-events-none absolute -top-10 -left-10 w-28 h-28 rounded-full bg-amber-100/25 blur-2xl"></div>
+            <div class="pointer-events-none absolute -bottom-12 -right-12 w-32 h-32 rounded-full bg-indigo-100/25 blur-2xl"></div>
+            <div class="relative flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <h2 class="font-semibold leading-snug">{idea.title}</h2>
+                <p class="mt-2 text-sm text-gray-700 leading-relaxed line-clamp-3">{idea.memo}</p>
+                {idea.updated && (
+                  <div class="mt-1 text-[11px] text-gray-500">Updated: {idea.updated}</div>
+                )}
+              </div>
+              <span class={`shrink-0 px-2 py-0.5 rounded-full border text-[11px] ${badge}`}>{idea.status}</span>
+            </div>
+            <div class="mt-4 flex items-center gap-3 text-[11px]">
+              <button @click={`open = true; current = ${idx}`} class="px-2.5 py-1 rounded-full border border-zinc-300 bg-white/80 font-semibold hover:bg-white">Open</button>
+              <a href={mail} class="underline decoration-dashed underline-offset-4">Build this</a>
+              <a href="/contact" class="underline decoration-dashed underline-offset-4">Say hi</a>
+            </div>
+          </div>
+        );
+      })}
+      </div>
+
+      <!-- Modal -->
+      <div
+        x-show="open"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        @keydown.escape.window="open=false"
+        class="fixed inset-0 z-50 flex items-center justify-center p-4"
+        style="display: none;"
+      >
+        <div class="absolute inset-0 bg-black/30 backdrop-blur-sm" @click="open=false"></div>
+        <div class="relative w-full max-w-2xl rounded-2xl border border-zinc-200 bg-white/95 p-5 shadow-xl">
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="font-semibold text-lg" x-text="ideas[current].title"></h3>
+            <button @click="open=false" class="px-2 py-1 text-sm rounded-full border border-zinc-300 bg-white/80 hover:bg-white">Close</button>
+          </div>
+          <div class="mt-2 text-sm text-gray-700 leading-relaxed" x-text="ideas[current].memo"></div>
+          <template x-if="ideas[current].implementation && ideas[current].implementation.length">
+            <div class="mt-4">
+              <div class="text-xs uppercase tracking-wide text-gray-500 mb-1">How I’d do it</div>
+              <ul class="list-disc ms-5 text-sm text-gray-700 space-y-1">
+                <template x-for="step in ideas[current].implementation" :key="step">
+                  <li x-text="step"></li>
+                </template>
+              </ul>
+            </div>
+          </template>
+          <div class="mt-4 flex items-center justify-between">
+            <div class="flex items-center gap-1">
+              <template x-for="(it, i) in ideas" :key="i">
+                <button @click="current=i" :class="i === current ? 'bg-zinc-800' : 'bg-zinc-300'" class="w-1.5 h-1.5 rounded-full"></button>
+              </template>
+            </div>
+            <div class="flex items-center gap-2 text-sm">
+              <button @click="current = (current - 1 + ideas.length) % ideas.length" class="px-2 py-1 rounded-full border border-zinc-300 bg-white/80 hover:bg-white">Prev</button>
+              <button @click="current = (current + 1) % ideas.length" class="px-2 py-1 rounded-full border border-zinc-300 bg-white/80 hover:bg-white">Next</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+
