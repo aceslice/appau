@@ -17,31 +17,36 @@ import seedEntries from "../libs/guestbook.json";
         <span x-show="openForm" x-transition>Close</span>
       </button>
       <!-- Modal form, inspired by ideas modal UX -->
-      <div x-show="openForm" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display:none;">
+      <div x-show="openForm" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 flex items-center justify-center p-4" style="display:none;" @keydown.escape.window="openForm=false">
         <div class="absolute inset-0 bg-black/30 backdrop-blur-sm" @click="openForm=false"></div>
-        <div class="relative w-full max-w-md rounded-2xl border border-zinc-200 bg-white/95 p-5 shadow-xl" x-data="{ name:'', msg:'', min:10 }">
+        <div class="relative w-full max-w-md rounded-2xl border border-zinc-200 bg-white/95 p-5 shadow-xl" x-data="{ name:'', msg:'', min: 10, max: 240, get remaining(){ return Math.max(0, this.max - this.msg.length); }, get valid(){ return this.name.trim().length>0 && this.msg.trim().length>=this.min; } }">
           <div class="flex items-start justify-between gap-3">
-            <h3 class="font-semibold text-lg">Sign the wall</h3>
+            <div>
+              <h3 class="font-semibold text-lg">Sign the wall</h3>
+              <p class="mt-0.5 text-[12px] text-gray-600">Short and kind. Max 240 characters.</p>
+            </div>
             <button @click="openForm=false" class="btn">Close</button>
           </div>
-          <p class="mt-1 text-sm text-gray-700">Leave your name and a short note. Keep it kind.</p>
-          <form name="autograph" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="mt-3 space-y-3">
+          <form name="autograph" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="mt-3 space-y-3" @submit="if(!valid) $event.preventDefault()">
             <input type="hidden" name="form-name" value="autograph" />
             <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
             <div>
-              <label class="block text-xs text-gray-600 mb-1">Name</label>
-              <input name="name" x-model="name" required class="w-full rounded-lg border border-zinc-300 bg-white/80 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-300/40" />
+              <label class="block text-xs text-gray-600 mb-1" for="auto-name">Name</label>
+              <input id="auto-name" name="name" x-model="name" required placeholder="Your name" class="w-full rounded-lg border border-zinc-300 bg-white/80 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-300/40" autofocus />
             </div>
             <div>
-              <label class="block text-xs text-gray-600 mb-1">Message</label>
-              <textarea name="message" x-model="msg" required rows="3" minlength="10" class="w-full rounded-lg border border-zinc-300 bg-white/80 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-300/40"></textarea>
-              <div class="mt-1 text-[11px] text-gray-500" x-text="msg.length < min ? `${min - msg.length} more chars…` : 'Looks good'"></div>
+              <label class="block text-xs text-gray-600 mb-1" for="auto-msg">Message</label>
+              <textarea id="auto-msg" name="message" x-model="msg" required rows="3" minlength="10" :maxlength="max" placeholder="Write a short note…" class="w-full rounded-lg border border-zinc-300 bg-white/80 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-300/40"></textarea>
+              <div class="mt-1 flex items-center justify-between text-[11px]">
+                <span :class="msg.length < min ? 'text-amber-700' : 'text-emerald-700'" x-text="msg.length < min ? (min - msg.length) + ' more chars…' : 'Looks good'"/>
+                <span class="text-gray-500" x-text="remaining + ' left'"/>
+              </div>
             </div>
             <div>
-              <label class="block text-xs text-gray-600 mb-1">Link (optional)</label>
-              <input name="link" placeholder="https://" class="w-full rounded-lg border border-zinc-300 bg-white/80 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-300/40" />
+              <label class="block text-xs text-gray-600 mb-1" for="auto-link">Link (optional)</label>
+              <input id="auto-link" name="link" placeholder="https://" class="w-full rounded-lg border border-zinc-300 bg-white/80 px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-300/40" />
             </div>
-            <button type="submit" :disabled="msg.length < min || !name" class="btn disabled:opacity-50 disabled:cursor-not-allowed">Sign</button>
+            <button type="submit" :disabled="!valid" class="btn disabled:opacity-50 disabled:cursor-not-allowed" :aria-disabled="!valid">Sign</button>
           </form>
           <div id="thanks" class="hidden mt-3 text-sm text-green-700">Thanks for signing! I’ll pin it soon.</div>
         </div>
@@ -64,7 +69,7 @@ import seedEntries from "../libs/guestbook.json";
           'border-sky-100 text-sky-700 bg-sky-50/70',
           'border-violet-100 text-violet-700 bg-violet-50/70',
           'border-slate-200 text-slate-700 bg-slate-50/80'
-        ], stickers: ['✨','💌','🖋️','⭐','🌿','🎟️','📎','📮','🔖'],
+        ], stickers: ['✨','💌','🖋️','✍️','📝','📜','🗒️','📌','📎','📮','🔖','⭐','🌿','🎟️','🧷','🧵','🧠','🪄','🗂️','📯'],
         hashName(n){ let h=0; const s=(n||'guest'); for(let i=0;i<s.length;i++){ h=(h*31 + s.charCodeAt(i))>>>0; } return h; },
         pillColor(n){ const idx=this.hashName(n)%this.colors.length; return this.colors[idx]; },
         stickerFor(n){ const idx=this.hashName(n)%this.stickers.length; return this.stickers[idx]; },
