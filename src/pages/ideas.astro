@@ -162,16 +162,17 @@ import ideas from "../libs/ideas.json";
   }
   @media (min-width: 768px) {
     .messy-masonry { column-count: 2; column-gap: 1rem; }
-    .messy-grid .idea-card:nth-child(6n+1) { transform: rotate(-0.6deg) translateY(2px); }
-    .messy-grid .idea-card:nth-child(6n+2) { transform: rotate(0.8deg) translateY(1px); }
-    .messy-grid .idea-card:nth-child(6n+3) { transform: rotate(-1deg) translateY(3px); }
-    .messy-grid .idea-card:nth-child(6n+4) { transform: rotate(0.5deg) translateY(0px); }
-    .messy-grid .idea-card:nth-child(6n+5) { transform: rotate(-0.3deg) translateY(2px); }
-    .messy-grid .idea-card:nth-child(6n)   { transform: rotate(1deg) translateY(1px); }
+    .messy-grid .idea-card:nth-child(7n+1) { transform: rotate(-0.9deg) translate(2px,2px) scale(.995); }
+    .messy-grid .idea-card:nth-child(7n+2) { transform: rotate(0.8deg) translate(-2px,0) scale(.995); }
+    .messy-grid .idea-card:nth-child(7n+3) { transform: rotate(-1.2deg) translate(3px,3px) scale(.995); }
+    .messy-grid .idea-card:nth-child(7n+4) { transform: rotate(0.6deg) translate(-1px,1px) scale(.995); }
+    .messy-grid .idea-card:nth-child(7n+5) { transform: rotate(-0.5deg) translate(2px,-1px) scale(.995); }
+    .messy-grid .idea-card:nth-child(7n+6) { transform: rotate(1deg) translate(-2px,1px) scale(.995); }
+    .messy-grid .idea-card:nth-child(7n)   { transform: rotate(0.2deg) translate(1px,0) scale(.995); }
     .messy-grid .idea-card:hover {
-      transform: rotate(0deg) translateY(-2px) scale(1.008);
+      transform: rotate(0deg) translateY(-2px) scale(1.01);
       border-color: rgba(24,24,27,.25);
-      box-shadow: 0 6px 18px rgba(0,0,0,.06);
+      box-shadow: 0 6px 18px var(--tint, rgba(0,0,0,.06));
       z-index: 2;
     }
     .messy-grid { overflow: visible; }
@@ -180,4 +181,13 @@ import ideas from "../libs/ideas.json";
   @media (min-width: 1024px) {
     .messy-masonry { column-count: 3; column-gap: 1.25rem; }
   }
+  /* size/paper/dogear to match autograph */
+  .ideas-grid .idea-card.s-a { padding: .8rem 1rem; }
+  .ideas-grid .idea-card.s-b { padding: 1rem 1.15rem; }
+  .ideas-grid .idea-card.s-c { padding: 1.15rem 1.25rem; }
+  .ideas-grid .idea-card.paper-1 { background-color: rgba(255,255,255,0.90); }
+  .ideas-grid .idea-card.paper-2 { background-color: rgba(250,252,255,0.90); }
+  .ideas-grid .idea-card.paper-3 { background-color: rgba(255,252,245,0.92); }
+  .ideas-grid .idea-card.paper-4 { background-color: rgba(248,255,248,0.92); }
+  .ideas-grid .idea-card.dogear:after { content: ""; position: absolute; right: 0; top: 0; width: 0; height: 0; border-top: 14px solid rgba(0,0,0,0.06); border-left: 14px solid transparent; filter: blur(.2px); }
 </style>

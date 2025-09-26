@@ -5,10 +5,11 @@ import seedEntries from "../libs/guestbook.json";
 ---
 
 <Layout title="Autograph">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 relative">
     <Header />
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Autograph</h1>
-    <p class="text-sm text-gray-600">I wanna grow up to be like you. Can you sign my autograph?</p>
+    <p class="text-sm text-gray-600">I wanna be like you when I grow up. Can I get your autograph? </p>
+    <span class="big-eye" aria-hidden="true">🥺</span>
 
     <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6" x-data="{ openForm:false, init(){ try{ const p=new URLSearchParams(window.location.search); if(p.get('success')==='1'){ this.openForm=false; const t=document.getElementById('thanks'); t && t.classList.remove('hidden'); } else { const seen = sessionStorage.getItem('autographSeen'); if(!seen){ this.openForm = true; sessionStorage.setItem('autographSeen','1'); } } }catch(_){} } }" x-init="init()">
       <!-- Floating toggle button (shows on all breakpoints) -->
@@ -171,7 +172,7 @@ import seedEntries from "../libs/guestbook.json";
   .icon-btn { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 9999px; border: 1px solid rgba(203,213,225,1); background: rgba(255,255,255,.85); }
   .icon-btn:hover { background: rgba(255,255,255,.95); }
   .pill { display: inline-block; border-width: 1px; border-style: solid; padding: 2px 6px; border-radius: 9999px; font-size: 11px; font-weight: 600; }
-  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Satisfy&display=swap');
   .sig-card .sig-msg {
     font-family: 'Caveat', cursive;
     font-size: 1.15rem;
@@ -204,6 +205,9 @@ import seedEntries from "../libs/guestbook.json";
   .sig-card:hover {
     background-color: rgba(255,255,255,0.98);
   }
+  /* handwritten name pill (Satisfy) */
+  .sig-card .pill { font-family: 'Satisfy', cursive; font-weight: 400; font-size: 1.05rem; line-height: 1; }
+  @media (min-width: 768px) { .sig-card .pill { font-size: 1.05rem; } }
   /* playful variants */
   .sig-card.v-a { transform: rotate(-0.4deg) scale(.985); }
   .sig-card.v-b { transform: rotate(0.4deg)  scale(.985); }
