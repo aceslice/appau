@@ -6,59 +6,114 @@ import Header from "../components/Header.astro";
 <Layout title="Tools I Use">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">Tools I Use</h1>
-    <p class="text-gray-600 md:w-3/4 mb-6" style="line-height: 2">
-      The tools that help me build things. Not sponsored, just what actually works for me.
-    </p>
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">Tools I Use</h1>
+      <p class="text-gray-600 md:w-3/4 mb-4" style="line-height: 2">
+        The tools that help me build things. Not sponsored, just what actually works for me.
+      </p>
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <span class="i-lucide-wrench w-4 h-4"></span>
+        <span>Updated regularly as I discover new tools</span>
+      </div>
+    </div>
 
     <section class="mt-6">
-      <h2 class="text-xl font-semibold mb-4">Development</h2>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="i-lucide-code w-5 h-5 text-blue-600"></span>
+        <h2 class="text-xl font-semibold">Development</h2>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
-          <h3 class="font-semibold mb-2">Code Editor</h3>
-          <p class="text-sm text-gray-700 mb-2">VS Code with a bunch of extensions</p>
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="i-lucide-terminal w-4 h-4 text-blue-600"></span>
+            <h3 class="font-semibold">Code Editor</h3>
+          </div>
+          <p class="text-sm text-gray-700 mb-3">Cursor with AI assistance</p>
           <div class="flex flex-wrap gap-1 text-[11px]">
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">VS Code</span>
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Tailwind CSS IntelliSense</span>
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Astro</span>
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">GitLens</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-blue-50 transition-colors">Cursor</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-blue-50 transition-colors">AI Code Assistant</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-blue-50 transition-colors">Tailwind CSS</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-blue-50 transition-colors">GitLens</span>
           </div>
         </div>
 
-        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
-          <h3 class="font-semibold mb-2">Terminal</h3>
-          <p class="text-sm text-gray-700 mb-2">Windows Terminal with PowerShell</p>
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="i-lucide-terminal w-4 h-4 text-green-600"></span>
+            <h3 class="font-semibold">Terminal</h3>
+          </div>
+          <p class="text-sm text-gray-700 mb-3">Windows Terminal with PowerShell</p>
           <div class="flex flex-wrap gap-1 text-[11px]">
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">PowerShell</span>
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Git</span>
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Node.js</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-green-50 transition-colors">PowerShell</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-green-50 transition-colors">Git</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-green-50 transition-colors">Node.js</span>
           </div>
         </div>
 
-        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
-          <h3 class="font-semibold mb-2">Design</h3>
-          <p class="text-sm text-gray-700 mb-2">Figma for mockups, Tailwind for styling</p>
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="i-lucide-palette w-4 h-4 text-pink-600"></span>
+            <h3 class="font-semibold">Design</h3>
+          </div>
+          <p class="text-sm text-gray-700 mb-3">Figma for mockups, Tailwind for styling</p>
           <div class="flex flex-wrap gap-1 text-[11px]">
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Figma</span>
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Tailwind CSS</span>
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">UnoCSS</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-pink-50 transition-colors">Figma</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-pink-50 transition-colors">Tailwind CSS</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-pink-50 transition-colors">UnoCSS</span>
           </div>
         </div>
 
-        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
-          <h3 class="font-semibold mb-2">Deployment</h3>
-          <p class="text-sm text-gray-700 mb-2">Netlify for static sites, simple and reliable</p>
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="i-lucide-rocket w-4 h-4 text-orange-600"></span>
+            <h3 class="font-semibold">Deployment</h3>
+          </div>
+          <p class="text-sm text-gray-700 mb-3">Netlify, Render, and Heroku for different needs</p>
           <div class="flex flex-wrap gap-1 text-[11px]">
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Netlify</span>
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">GitHub</span>
-            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Netlify Forms</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-orange-50 transition-colors">Netlify</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-orange-50 transition-colors">Render</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-orange-50 transition-colors">Heroku</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70 hover:bg-orange-50 transition-colors">GitHub</span>
           </div>
         </div>
       </div>
     </section>
 
     <section class="mt-8">
-      <h2 class="text-xl font-semibold mb-4">Daily Apps</h2>
+      <div class="flex items-center gap-2 mb-4">
+        <span class="i-lucide-brain w-5 h-5 text-purple-600"></span>
+        <h2 class="text-xl font-semibold">Learning & AI</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">AI & Machine Learning</h3>
+          <p class="text-sm text-gray-700 mb-2">Exploring AI development and applications</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Python</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">TensorFlow</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">OpenAI API</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">AI Integration</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">New Languages</h3>
+          <p class="text-sm text-gray-700 mb-2">Currently learning Go and expanding my toolkit</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Go</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">EJS</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Angular</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Backend Systems</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="i-lucide-smartphone w-5 h-5 text-green-600"></span>
+        <h2 class="text-xl font-semibold">Daily Apps</h2>
+      </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
           <h3 class="font-semibold mb-2">Communication</h3>
@@ -90,7 +145,7 @@ import Header from "../components/Header.astro";
         <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
           <h3 class="font-semibold mb-2">Hardware</h3>
           <div class="space-y-2 text-sm text-gray-700">
-            <p><strong>Laptop:</strong> HP Pavilion, gets the job done.</p>
+            <p><strong>Laptop:</strong> Dell Latitude, reliable and portable.</p>
             <p><strong>Phone:</strong> Android, because I like the flexibility.</p>
             <p><strong>Headphones:</strong> Basic ones, but they work fine.</p>
           </div>
@@ -117,6 +172,8 @@ import Header from "../components/Header.astro";
       <div class="flex flex-wrap gap-2">
         <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">Ask about my setup</a>
         <a href="/projects" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">See what I built</a>
+        <a href="/reading" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">What I'm reading</a>
+        <a href="/resume" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">My resume</a>
       </div>
     </section>
   </div>

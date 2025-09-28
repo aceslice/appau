@@ -1,0 +1,156 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+---
+
+<Layout title="Reading List">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">Reading List</h1>
+      <p class="text-gray-600 md:w-3/4 mb-4" style="line-height: 2">
+        Books, articles, and resources that shaped how I think about building things. Not a curated list, just what actually helped me.
+      </p>
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <span class="i-lucide-book-open w-4 h-4"></span>
+        <span>Books that actually changed how I think</span>
+      </div>
+    </div>
+
+    <section class="mt-6">
+      <h2 class="text-xl font-semibold mb-4">Books that changed my mind</h2>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <h3 class="font-semibold mb-2">The Lean Startup - Eric Ries</h3>
+          <p class="text-sm text-gray-700 mb-2">
+            Taught me that building things people actually want is more important than building things perfectly. 
+            The whole "build, measure, learn" cycle is how I approach every project now.
+          </p>
+          <div class="text-[12px] text-gray-500">Why it matters: Made me focus on solving real problems, not just building cool tech.</div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <h3 class="font-semibold mb-2">Atomic Habits - James Clear</h3>
+          <p class="text-sm text-gray-700 mb-2">
+            Small changes compound. This book helped me understand why consistency beats intensity every time. 
+            I apply this to coding, learning, and building habits that actually stick.
+          </p>
+          <div class="text-[12px] text-gray-500">Why it matters: Changed how I think about progress and building skills over time.</div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <h3 class="font-semibold mb-2">The Mom Test - Rob Fitzpatrick</h3>
+          <p class="text-sm text-gray-700 mb-2">
+            How to talk to customers without getting fake answers. This book saved me from building things nobody wanted. 
+            The questions you ask matter more than the features you build.
+          </p>
+          <div class="text-[12px] text-gray-500">Why it matters: Taught me to validate ideas before building them.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Articles that stuck with me</h2>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">"The Web's Grain" - Frank Chimero</h3>
+          <p class="text-sm text-gray-700 mb-2">
+            About working with the web instead of against it. Made me think differently about how to build for the web.
+          </p>
+          <a href="https://frankchimero.com/blog/2015/the-webs-grain/" target="_blank" rel="noopener" class="text-[12px] text-blue-600 hover:text-blue-800">Read it →</a>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">"Good Design is as Little Design as Possible" - Dieter Rams</h3>
+          <p class="text-sm text-gray-700 mb-2">
+            Less is more. This principle guides every design decision I make. If it doesn't serve a purpose, it shouldn't be there.
+          </p>
+          <a href="https://www.vitsoe.com/us/about/good-design" target="_blank" rel="noopener" class="text-[12px] text-blue-600 hover:text-blue-800">Read it →</a>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">"The Paradox of Choice" - Barry Schwartz</h3>
+          <p class="text-sm text-gray-700 mb-2">
+            Too many options paralyze people. This is why I keep my apps simple and focused. 
+            Better to do one thing really well than many things poorly.
+          </p>
+          <a href="https://www.ted.com/talks/barry_schwartz_the_paradox_of_choice" target="_blank" rel="noopener" class="text-[12px] text-blue-600 hover:text-blue-800">Watch it →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Resources I keep coming back to</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Technical</h3>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>MDN Web Docs:</strong> The only web reference I trust.</p>
+            <p><strong>Tailwind CSS Docs:</strong> For styling without the headache.</p>
+            <p><strong>Astro Docs:</strong> For building fast, simple websites.</p>
+            <p><strong>GitHub:</strong> For exploring how others solve problems.</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Business & Product</h3>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>Indie Hackers:</strong> Real stories from real builders.</p>
+            <p><strong>Product Hunt:</strong> For discovering new tools and ideas.</p>
+            <p><strong>Stripe Atlas:</strong> For understanding business basics.</p>
+            <p><strong>YC Startup Library:</strong> Free resources for founders.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Currently Reading</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <h3 class="font-semibold mb-2">The Design of Everyday Things</h3>
+          <p class="text-sm text-gray-600 mb-2">Don Norman</p>
+          <p class="text-sm text-gray-700">
+            Making me think differently about how people interact with the things I build. 
+            Great insights on user experience and design psychology.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <h3 class="font-semibold mb-2">Atomic Habits (Re-read)</h3>
+          <p class="text-sm text-gray-600 mb-2">James Clear</p>
+          <p class="text-sm text-gray-700">
+            Reading it again because I forgot most of it the first time. 
+            Good books deserve multiple reads, and this one keeps teaching me new things.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">My reading philosophy</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3">
+          I don't read to impress people or to say I've read something. I read to learn and to change how I think.
+        </p>
+        <p class="text-gray-700 mb-3">
+          If a book doesn't change something about how I approach problems, it wasn't worth my time. 
+          I'd rather re-read a good book than read a mediocre one.
+        </p>
+        <p class="text-gray-700">
+          The best books are the ones that make you see your own work differently. 
+          They plant seeds that grow into better decisions later.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <div class="flex flex-wrap gap-2">
+        <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">Recommend something</a>
+        <a href="/tools" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">See my tools</a>
+        <a href="/speaking" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">Speaking topics</a>
+        <a href="/projects" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">My projects</a>
+      </div>
+    </section>
+  </div>
+</Layout>

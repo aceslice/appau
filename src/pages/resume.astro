@@ -1,0 +1,201 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+---
+
+<Layout title="Resume">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <div class="mb-8">
+      <h1 class="text-3xl md:text-4xl font-bold mb-2">Resume</h1>
+      <p class="text-gray-600 md:w-3/4 mb-4" style="line-height: 2">
+        My professional journey so far. Not just a list of jobs, but what I learned and how I grew.
+      </p>
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <span class="i-lucide-file-text w-4 h-4"></span>
+        <span>CS student building real products while learning</span>
+      </div>
+    </div>
+
+    <section class="mt-6">
+      <h2 class="text-xl font-semibold mb-4">What I do</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3">
+          I build digital products that solve real problems. Mostly web apps, mobile apps, and the systems that make them work.
+        </p>
+        <p class="text-gray-700">
+          I focus on making things simple, fast, and actually useful. No fancy buzzwords, just good software that people want to use.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Experience</h2>
+      <div class="space-y-6">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <div class="flex items-start gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="i-lucide-rocket w-6 h-6 text-blue-600"></span>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                <h3 class="font-semibold">Founder & Developer</h3>
+                <span class="text-sm text-gray-500">2022 - Present</span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">Building Larry SMS Hub & MarketMate (pivoted)</p>
+              <div class="text-sm text-gray-700 space-y-1">
+                <p>• Built Larry SMS Hub in 2025 - SMS automation platform for businesses in Ghana</p>
+                <p>• MarketMate: Initially a direct-to-consumer food platform, pivoted to new concept</p>
+                <p>• Learning Go and AI development to expand technical capabilities</p>
+                <p>• Handled everything: coding, design, customer support, business development</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <div class="flex items-start gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-green-100 to-green-200 rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="i-lucide-code w-6 h-6 text-green-600"></span>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                <h3 class="font-semibold">Freelance Developer</h3>
+                <span class="text-sm text-gray-500">2021 - 2022</span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">Various web development projects</p>
+              <div class="text-sm text-gray-700 space-y-1">
+                <p>• Built websites and web applications for local businesses</p>
+                <p>• Learned to work with different clients and requirements</p>
+                <p>• Discovered I prefer building products over client work</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 hover:bg-white/70 transition-colors duration-200">
+          <div class="flex items-start gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center flex-shrink-0">
+              <span class="i-lucide-graduation-cap w-6 h-6 text-purple-600"></span>
+            </div>
+            <div class="flex-1">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                <h3 class="font-semibold">Self-Taught Journey</h3>
+                <span class="text-sm text-gray-500">2020 - 2021</span>
+              </div>
+              <p class="text-sm text-gray-600 mb-3">Learning to code and build things</p>
+              <div class="text-sm text-gray-700 space-y-1">
+                <p>• Started with HTML, CSS, JavaScript</p>
+                <p>• Moved to React, Node.js, and full-stack development</p>
+                <p>• Built small projects to practice and learn</p>
+                <p>• Realized I love the problem-solving aspect of coding</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Skills & Technologies</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Frontend</h3>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">HTML/CSS</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">JavaScript</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">React</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Astro</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Tailwind CSS</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Backend & Tools</h3>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Node.js</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Go</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">EJS</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Angular</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">MongoDB</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">APIs</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Product & Business</h3>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">User Research</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Product Design</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Customer Support</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Business Development</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Learning</h3>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Go Language</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">AI Development</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Machine Learning</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">System Design</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">What I'm looking for</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3">
+          I'm open to opportunities where I can build meaningful products and work with people who care about solving real problems.
+        </p>
+        <p class="text-gray-700 mb-3">
+          I prefer smaller teams where I can have real impact, learn from experienced people, and contribute to something bigger than myself.
+        </p>
+        <p class="text-gray-700">
+          Remote work is ideal, but I'm open to hybrid arrangements. I'm based in Takoradi, Ghana, and I'm willing to travel for the right opportunity.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Education & Learning</h2>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+            <h3 class="font-semibold">Computer Science Degree</h3>
+            <span class="text-sm text-gray-500">Expected 2026</span>
+          </div>
+          <p class="text-sm text-gray-600 mb-2">Currently completing my CS degree while building real products</p>
+          <div class="text-sm text-gray-700">
+            <p>Balancing formal education with hands-on experience. Learning theory in class, applying it in real projects.</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Self-Directed Learning</h3>
+          <p class="text-gray-700 mb-3">
+            I started coding before university. Learned through online resources, building projects, and making mistakes.
+          </p>
+          <p class="text-gray-700 mb-3">
+            I believe in learning by doing. Every project teaches me something new, and I'm always looking for the next thing to learn.
+          </p>
+          <p class="text-gray-700">
+            The combination of formal education and real-world experience gives me a unique perspective on building software.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <div class="flex flex-wrap gap-2">
+        <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">Let's talk</a>
+        <a href="/projects" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">See my work</a>
+        <a href="/tools" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">My tools</a>
+        <a href="/speaking" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">Speaking</a>
+        <a href="mailto:gideonad.codez@gmail.com?subject=Resume%20Download&body=Hi%20Gideon%2C%0D%0A%0D%0ACould%20you%20send%20me%20a%20PDF%20version%20of%20your%20resume%3F%0D%0A%0D%0AThanks!" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">Request PDF</a>
+      </div>
+    </section>
+  </div>
+</Layout>

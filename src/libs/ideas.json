@@ -1,40 +1,66 @@
 [
   {
-    "title": "Neighborhood Produce Kiosk (COCO micro‑hub)",
+    "title": "Neighborhood Produce Kiosk",
     "status": "Rough idea",
     "source": "My notes",
-    "memo": "A small, company‑operated kiosk inside busy neighborhoods that serves as a weekly pickup point for curated boxes. Run with a predictable schedule. Pilot with 1–2 kiosks, track footfall, box swaps, and waste reduction.",
+    "memo": "I keep thinking about how people in busy neighborhoods need easier access to fresh food. What if we had small kiosks in high-traffic areas where people could pick up their weekly produce boxes? Like a mini farmers market that's always there when you need it.",
     "implementation": [
-      "Pick 2 high‑traffic neighborhoods; map market days",
-      "Staff 1 person, 4‑hour windows Thu–Sat",
-      "MVP: SMS preorders + printed manifests; swaps tracked on paper then digitize",
-      "Metrics: on‑time pickups, swaps per box, leftovers"
+      "Start with 2 busy neighborhoods and see what happens",
+      "One person running it, maybe 4 hours a day Thursday to Saturday",
+      "Keep it simple: SMS orders, paper lists, then figure out the tech later",
+      "Just track the basics: did people show up, what did they swap, what's left over"
     ],
-    "updated": "2025-09-26"
+    "updated": "2025-01-15"
   },
   {
     "title": "SMS Swap Assistant",
     "status": "Draft spec",
     "source": "My notes",
-    "memo": "Let users reply to a pre‑delivery SMS to swap items (e.g., ‘swap tomatoes→carrots’). Simple rules, human‑readable confirmations, and cut‑off times.",
+    "memo": "People always want to change things in their boxes. What if they could just text back 'swap tomatoes for carrots' and it actually worked? No app downloads, no complicated forms, just simple text messages.",
     "implementation": [
-      "Whitelist swap keywords and aliases",
-      "Cut‑off T‑24h; generate picklist deltas for hubs",
-      "Notify ops dashboard for manual exceptions"
+      "Make a list of all the ways people might say 'swap'",
+      "Give them 24 hours before delivery to make changes",
+      "Show the changes on a simple dashboard so we can handle weird requests"
     ],
-    "updated": "2025-09-25"
+    "updated": "2025-01-14"
   },
   {
-    "title": "Larry SMS Hub: Voice Reminder Templates",
+    "title": "Voice Reminders for Larry SMS Hub",
     "status": "WIP",
     "source": "My notes",
-    "memo": "Pre‑written, localized voice scripts (EN/Twi) for fee reminders and appointment follow‑ups. Text‑to‑speech + fallback SMS if missed call.",
+    "memo": "Sometimes people don't read their SMS messages, but they usually answer their phones. What if we could call them with a friendly voice reminder about their fees or appointments? In English and Twi so it feels natural.",
     "implementation": [
-      "Script library v1 (EN/Twi)",
-      "TTS voice selection + pacing",
-      "Missed‑call fallback to SMS template"
+      "Write simple scripts that sound like a real person",
+      "Find a good voice that doesn't sound like a robot",
+      "If they don't answer, send the SMS as backup"
     ],
-    "updated": "2025-09-24"
+    "updated": "2025-01-13"
+  },
+  {
+    "title": "Local Food Stories App",
+    "status": "Rough idea",
+    "source": "Found online",
+    "memo": "I saw this idea somewhere and it stuck with me. What if we could tell the story of where our food comes from? Not just 'organic' labels, but actual stories about the farmers, their families, and why they grow what they grow.",
+    "implementation": [
+      "Start by visiting a few local farms and taking photos",
+      "Write simple stories about the farmers and their methods",
+      "Put QR codes on produce boxes that link to the stories",
+      "Maybe add a simple way for customers to send messages to farmers"
+    ],
+    "updated": "2025-01-12"
+  },
+  {
+    "title": "Community Recipe Sharing",
+    "status": "Rough idea",
+    "source": "My notes",
+    "memo": "People get the same vegetables every week and sometimes don't know what to do with them. What if we could share simple recipes that actually work with what's in season? Not fancy cooking, just good food that's easy to make.",
+    "implementation": [
+      "Collect recipes from local cooks and families",
+      "Test them with the actual vegetables we're selling",
+      "Share one recipe per week via SMS or simple website",
+      "Let people submit their own recipes and tips"
+    ],
+    "updated": "2025-01-11"
   }
 ]
 
