@@ -38,7 +38,7 @@ const featuredLinks = [
 		title: "Whispurr",
 		description:
 			"Ephemeral, playful private chats — privacy as performance, anonymity as armor.",
-		link: "https://whispurr.netlify.app",
+		link: "/projects/whispurr",
 		footer: "Cultural artifact • Ephemeral • Playful privacy",
 		icon: "i-lucide-ghost",
 		logo: whispurrLogo.src,
