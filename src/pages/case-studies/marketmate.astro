@@ -1,0 +1,164 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<Layout title="MarketMate Case Study">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <div class="text-xs text-gray-500 mb-2">
+      <a href="/case-studies" class="underline decoration-dashed underline-offset-4">← Back to case studies</a>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-1">Building MarketMate</h1>
+    <div class="text-[12px] text-gray-500 mb-3">Case Study • 2024-2025</div>
+    <p class="text-gray-600 md:w-3/4 mb-3" style="line-height: 1.9">How I built a food subscription platform that connects local farmers with consumers in Ghana.</p>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">The Problem</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3">
+          I noticed that people in Ghana were struggling to get fresh, local produce consistently. 
+          Farmers had great food but limited reach, and consumers wanted fresh vegetables but didn't know where to find them.
+        </p>
+        <p class="text-gray-700">
+          The existing solutions were either too expensive, didn't focus on local farmers, or were too complicated for everyday use.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">The Solution</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3">
+          I decided to build a subscription-based platform that would:
+        </p>
+        <ul class="text-gray-700 space-y-2 list-disc ml-5">
+          <li>Connect local farmers directly with consumers</li>
+          <li>Offer weekly curated boxes of fresh produce</li>
+          <li>Allow customers to swap items they don't want</li>
+          <li>Provide pickup points in convenient locations</li>
+          <li>Share stories about the farmers and their methods</li>
+        </ul>
+    </div>
+  </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Technical Approach</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Frontend</h3>
+          <p class="text-sm text-gray-700 mb-2">React Native for cross-platform mobile app</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">React Native</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Expo</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Backend</h3>
+          <p class="text-sm text-gray-700 mb-2">Node.js API with MongoDB for data storage</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Node.js</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Express</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">MongoDB</span>
+          </div>
+        </div>
+        
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Payments</h3>
+          <p class="text-sm text-gray-700 mb-2">Mobile Money integration for Ghana</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Mobile Money</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Paystack</span>
+          </div>
+        </div>
+        
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Deployment</h3>
+          <p class="text-sm text-gray-700 mb-2">Netlify for web, Expo for mobile</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Netlify</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Expo</span>
+          </div>
+        </div>
+      </div>
+    </section>
+      
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Key Features Built</h2>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Subscription Management</h3>
+          <p class="text-sm text-gray-700">
+            Users can subscribe to weekly boxes, choose sizes (Small, Standard, Family), and manage their subscriptions easily.
+          </p>
+          </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Swap System</h3>
+          <p class="text-sm text-gray-700">
+            Customers can swap items they don't want for alternatives. Built with simple SMS integration for easy use.
+          </p>
+        </div>
+        
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Farmer Stories</h3>
+          <p class="text-sm text-gray-700">
+            QR codes on boxes link to stories about the farmers, their methods, and why they grow what they grow.
+          </p>
+        </div>
+        
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Pickup Points</h3>
+          <p class="text-sm text-gray-700">
+            Strategic pickup locations in busy neighborhoods with QR code check-in system.
+          </p>
+      </div>
+    </div>
+  </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Challenges & Learnings</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3">
+          <strong>Logistics Complexity:</strong> Managing inventory, farmer coordination, and delivery schedules was more complex than expected.
+        </p>
+        <p class="text-gray-700 mb-3">
+          <strong>User Education:</strong> People needed to understand the subscription model and how the swap system worked.
+        </p>
+        <p class="text-gray-700 mb-3">
+          <strong>Farmer Onboarding:</strong> Getting farmers comfortable with the technology and process took time.
+        </p>
+        <p class="text-gray-700">
+          <strong>Key Learning:</strong> Building the technology was the easy part. The real challenge was building trust and changing behavior.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Current Status</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3">
+          MarketMate is currently in development. I've built the core features and am working on:
+        </p>
+        <ul class="text-gray-700 space-y-1 list-disc ml-5">
+          <li>Finalizing the farmer onboarding process</li>
+          <li>Testing the pickup point system</li>
+          <li>Refining the user experience based on feedback</li>
+          <li>Building partnerships with local farmers</li>
+        </ul>
+    </div>
+  </section>
+
+    <section class="mt-6">
+      <div class="flex flex-wrap gap-2">
+        <a href="/projects/marketmate" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">View Project</a>
+        <a href="/projects" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">All Projects</a>
+        <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">Ask Questions</a>
+    </div>
+  </section>
+</div>
+</Layout>
+<Footer />

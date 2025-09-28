@@ -1,0 +1,174 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+---
+
+<Layout title="Larry SMS Hub Case Study">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <div class="text-xs text-gray-500 mb-2">
+      <a href="/case-studies" class="underline decoration-dashed underline-offset-4">← Back to case studies</a>
+    </div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-1">Building Larry SMS Hub</h1>
+    <div class="text-[12px] text-gray-500 mb-3">Case Study • 2025</div>
+    <p class="text-gray-600 md:w-3/4 mb-3" style="line-height: 1.9">How I built an SMS automation platform that helps Ghanaian businesses communicate with their customers effectively.</p>
+
+    <section class="mt-6">
+      <h2 class="text-lg font-semibold mb-3">The Problem</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3" style="line-height: 1.8">
+          Small businesses in Ghana were struggling to communicate with their customers effectively. 
+          They needed to send promotional messages, appointment reminders, and updates, but existing solutions were either too expensive or too complex.
+        </p>
+        <p class="text-gray-700" style="line-height: 1.8">
+          Most businesses were manually sending SMS messages or using expensive enterprise solutions that didn't fit their needs or budget.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h2 class="text-lg font-semibold mb-3">The Solution</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3" style="line-height: 1.8">
+          I built Larry SMS Hub as a simple, affordable SMS automation platform that allows businesses to:
+        </p>
+        <ul class="text-gray-700 space-y-2 list-disc ml-5" style="line-height: 1.8">
+          <li>Send bulk SMS messages to their customers</li>
+          <li>Schedule messages for specific times</li>
+          <li>Use pre-built templates for common messages</li>
+          <li>Import contacts from CSV files</li>
+          <li>Track delivery status and responses</li>
+          <li>Pay only for what they use (pay-as-you-go)</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h2 class="text-lg font-semibold mb-3">Technical Approach</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Backend</h3>
+          <p class="text-sm text-gray-700 mb-2">Node.js API with Express framework</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Node.js</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Express</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">MongoDB</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">SMS Integration</h3>
+          <p class="text-sm text-gray-700 mb-2">Multiple SMS providers for reliability</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">SMS API</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Webhook</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Queue System</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Frontend</h3>
+          <p class="text-sm text-gray-700 mb-2">Simple web interface for easy use</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">HTML/CSS</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">JavaScript</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Bootstrap</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Deployment</h3>
+          <p class="text-sm text-gray-700 mb-2">Heroku for hosting and reliability</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Heroku</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">MongoDB Atlas</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h2 class="text-lg font-semibold mb-3">Key Features Built</h2>
+      <div class="space-y-3">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Pay-as-You-Go Pricing</h3>
+          <p class="text-sm text-gray-700">
+            No monthly fees. Users only pay for SMS messages they send, starting from as low as 2 cedis.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Message Templates</h3>
+          <p class="text-sm text-gray-700">
+            Pre-built templates for common business messages like promotions, reminders, and announcements.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">CSV Import</h3>
+          <p class="text-sm text-gray-700">
+            Easy contact management by importing customer lists from CSV files.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Scheduled Messages</h3>
+          <p class="text-sm text-gray-700">
+            Schedule messages to be sent at specific times, perfect for marketing campaigns and reminders.
+          </p>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Delivery Tracking</h3>
+          <p class="text-sm text-gray-700">
+            Track message delivery status and get reports on successful sends and failures.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h2 class="text-lg font-semibold mb-3">Challenges & Learnings</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3" style="line-height: 1.8">
+          <strong>SMS Provider Reliability:</strong> Different SMS providers have different delivery rates and costs. I had to integrate multiple providers for better reliability.
+        </p>
+        <p class="text-gray-700 mb-3" style="line-height: 1.8">
+          <strong>User Education:</strong> Many users weren't familiar with SMS automation concepts. I had to build a simple, intuitive interface.
+        </p>
+        <p class="text-gray-700 mb-3" style="line-height: 1.8">
+          <strong>Cost Management:</strong> SMS costs can add up quickly. I implemented a pay-as-you-go model to make it affordable for small businesses.
+        </p>
+        <p class="text-gray-700" style="line-height: 1.8">
+          <strong>Key Learning:</strong> Simplicity is key. The most successful features were the ones that required the least explanation.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h2 class="text-lg font-semibold mb-3">Current Status</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3" style="line-height: 1.8">
+          Larry SMS Hub is live and serving customers. Current features include:
+        </p>
+        <ul class="text-gray-700 space-y-1 list-disc ml-5" style="line-height: 1.8">
+          <li>Bulk SMS sending with delivery tracking</li>
+          <li>Message templates and scheduling</li>
+          <li>CSV contact import</li>
+          <li>Pay-as-you-go pricing starting from 2 cedis</li>
+          <li>Simple web interface for easy use</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <div class="flex flex-wrap gap-2">
+        <a href="/projects/larry-sms-hub" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">View Project</a>
+        <a href="/projects" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">All Projects</a>
+        <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">Ask Questions</a>
+      </div>
+    </section>
+  </div>
+</Layout>
+<Footer />

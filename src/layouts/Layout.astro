@@ -25,8 +25,55 @@ const canonicalUrl = `https://${SITE_HOST}${Astro.url?.pathname ?? "/"}`;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={`${title} | ${SITE_TITLE}`} />
     <meta name="twitter:description" content={SITE_DESCRIPTION} />
+    
+    <!-- Performance optimizations -->
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet" />
+    
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Gideon Appau",
+        "url": "https://appau.netlify.app",
+        "description": "CS student and developer building real products",
+        "jobTitle": "Software Developer & Student",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Self-employed"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Takoradi Technical University"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Takoradi",
+          "addressCountry": "Ghana"
+        },
+        "sameAs": [
+          "https://github.com/aceslice",
+          "https://x.com/theaceslice"
+        ]
+      }
+    </script>
+    
     <ClientRouter />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-6DR42NTNSP"></script>
+    <script>
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      function gtag(...args: any[]){((window as any).dataLayer as any[]).push(args);}
+      gtag('js', new Date());
+      gtag('config', 'G-6DR42NTNSP', {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+    </script>
   </head>
 
 <body
@@ -34,7 +81,7 @@ const canonicalUrl = `https://${SITE_HOST}${Astro.url?.pathname ?? "/"}`;
   class="max-w-7xl md:max-w-6xl w-full border-l border-dashed border-r border-gray-200 p-2 md:p-12 lg:p-16"
   style="margin: 0 auto;"
 >
-  <img id="background" src={background.src} alt="" fetchpriority="high" aria-hidden="true" role="presentation" />
+  <img id="background" src={background.src} alt="" fetchpriority="high" aria-hidden="true" role="presentation" loading="eager" />
 
   <Topnav />
   <main id="main" role="main">
