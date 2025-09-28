@@ -1,0 +1,123 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+---
+
+<Layout title="Tools I Use">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Tools I Use</h1>
+    <p class="text-gray-600 md:w-3/4 mb-6" style="line-height: 2">
+      The tools that help me build things. Not sponsored, just what actually works for me.
+    </p>
+
+    <section class="mt-6">
+      <h2 class="text-xl font-semibold mb-4">Development</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Code Editor</h3>
+          <p class="text-sm text-gray-700 mb-2">VS Code with a bunch of extensions</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">VS Code</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Tailwind CSS IntelliSense</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Astro</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">GitLens</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Terminal</h3>
+          <p class="text-sm text-gray-700 mb-2">Windows Terminal with PowerShell</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">PowerShell</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Git</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Node.js</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Design</h3>
+          <p class="text-sm text-gray-700 mb-2">Figma for mockups, Tailwind for styling</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Figma</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Tailwind CSS</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">UnoCSS</span>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Deployment</h3>
+          <p class="text-sm text-gray-700 mb-2">Netlify for static sites, simple and reliable</p>
+          <div class="flex flex-wrap gap-1 text-[11px]">
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Netlify</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">GitHub</span>
+            <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Netlify Forms</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Daily Apps</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Communication</h3>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>WhatsApp:</strong> For everything. Family, friends, work.</p>
+            <p><strong>Telegram:</strong> For tech communities and groups.</p>
+            <p><strong>Email:</strong> Gmail, but I'm trying to use it less.</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Productivity</h3>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>Notion:</strong> For notes, planning, and keeping track of ideas.</p>
+            <p><strong>Google Calendar:</strong> Because I forget things otherwise.</p>
+            <p><strong>Spotify:</strong> For focus music and discovering new sounds.</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Learning</h3>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>YouTube:</strong> For tutorials and tech talks.</p>
+            <p><strong>Twitter/X:</strong> For following developers and staying updated.</p>
+            <p><strong>GitHub:</strong> For exploring code and finding inspiration.</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+          <h3 class="font-semibold mb-2">Hardware</h3>
+          <div class="space-y-2 text-sm text-gray-700">
+            <p><strong>Laptop:</strong> HP Pavilion, gets the job done.</p>
+            <p><strong>Phone:</strong> Android, because I like the flexibility.</p>
+            <p><strong>Headphones:</strong> Basic ones, but they work fine.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8">
+      <h2 class="text-xl font-semibold mb-4">Why these tools?</h2>
+      <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+        <p class="text-gray-700 mb-3">
+          I don't chase the latest shiny tools. I use what works and what I can afford. Most of these are free or cheap, and they do exactly what I need them to do.
+        </p>
+        <p class="text-gray-700 mb-3">
+          The best tool is the one you actually use. I've tried fancier setups, but I always come back to simple, reliable tools that don't get in my way.
+        </p>
+        <p class="text-gray-700">
+          If you're starting out, don't worry about having the perfect setup. Start with what you have, build things, and upgrade when you actually need to.
+        </p>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <div class="flex flex-wrap gap-2">
+        <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white text-sm font-semibold hover:bg-white/80">Ask about my setup</a>
+        <a href="/projects" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">See what I built</a>
+      </div>
+    </section>
+  </div>
+</Layout>
