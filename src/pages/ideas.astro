@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import ideas from "../libs/ideas.json";
 ---
 
@@ -191,3 +192,4 @@ import ideas from "../libs/ideas.json";
   .ideas-grid .idea-card.paper-4 { background-color: rgba(248,255,248,0.92); }
   .ideas-grid .idea-card.dogear:after { content: ""; position: absolute; right: 0; top: 0; width: 0; height: 0; border-top: 14px solid rgba(0,0,0,0.06); border-left: 14px solid transparent; filter: blur(.2px); }
 </style>
+<Footer />

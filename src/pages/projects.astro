@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import AdsLink from "../components/AdsLink.astro";
 import featuredLinks from "../libs/featuredLinks";
 // group projects by category on the server side for clean templates
@@ -118,4 +119,5 @@ const totalCount: number = (featuredLinks as any[]).length;
     </div>
   </div>
 </Layout>
+<Footer />
 

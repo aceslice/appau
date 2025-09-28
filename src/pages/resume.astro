@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout title="Resume">
@@ -11,10 +12,7 @@ import Header from "../components/Header.astro";
       <p class="text-gray-600 md:w-3/4 mb-4" style="line-height: 2">
         My professional journey so far. Not just a list of jobs, but what I learned and how I grew.
       </p>
-      <div class="flex items-center gap-2 text-sm text-gray-500">
-        <span class="i-lucide-file-text w-4 h-4"></span>
-        <span>CS student building real products while learning</span>
-      </div>
+    
     </div>
 
     <section class="mt-6">
@@ -178,3 +176,4 @@ import Header from "../components/Header.astro";
     </section>
   </div>
 </Layout>
+<Footer />
