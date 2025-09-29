@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import IconifyLink from "../components/IconifyLink.astro";
 import ideas from "../libs/ideas.json";
 ---
 
@@ -11,7 +12,7 @@ import ideas from "../libs/ideas.json";
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Messy, rough ideas</h1>
     <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 md:w-3/4">
       <p class="text-sm text-gray-700 leading-relaxed">
-        A public scratchpad of ideas — mine and good ones I’ve found. Steal them. Remix them. If you build something, I’ll cheer you on and credit the source.
+        A public scratchpad of ideas — mine and good ones I've found. Steal them. Remix them. If you build something, I'll cheer you on and credit the source. These aren't polished concepts, just messy thoughts that might spark something better.
       </p>
     </div>
 
@@ -49,12 +50,14 @@ import ideas from "../libs/ideas.json";
       x-init="openFromHash()"
       class="mt-6"
     >
-      <div class="mb-4 flex flex-wrap items-center gap-2 text-[11px]">
-        <button @click="randomOpen()" class="px-2.5 py-1 rounded-full border border-zinc-300 bg-white/80 font-semibold hover:bg-white">Random idea</button>
-        <a href="mailto:gideonad.codez@gmail.com?subject=New%20idea%20submission&body=Title%3A%20%0D%0AMemo%3A%20%0D%0AWhy%20it%20matters%3A%20%0D%0AHow%20I%27d%20build%20it%3A%20%0D%0A" class="px-2.5 py-1 rounded-full border border-zinc-300 bg-white/70 font-semibold hover:bg-white">Submit your idea</a>
+      <div class="mb-6 flex flex-wrap items-center gap-3 text-[11px]">
+        <button @click="randomOpen()" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white/80 font-semibold hover:bg-white transition-colors">Random idea</button>
+        <a href="mailto:gideonad.codez@gmail.com?subject=New%20idea%20submission&body=Title%3A%20%0D%0AMemo%3A%20%0D%0AWhy%20it%20matters%3A%20%0D%0AHow%20I%27d%20build%20it%3A%20%0D%0A" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white/70 font-semibold hover:bg-white transition-colors">Submit your idea</a>
         <span class="opacity-50">/</span>
-        <span class="px-2 py-0.5 rounded-full border border-indigo-100 text-indigo-600 bg-indigo-50/60">WIP</span>
-        <span class="px-2 py-0.5 rounded-full border border-amber-100 text-amber-700 bg-amber-50/60">Rough/Draft</span>
+        <span class="px-2 py-0.5 rounded-full border border-indigo-100 text-indigo-600 bg-indigo-50/60 text-[10px]">Work in progress</span>
+        <span class="px-2 py-0.5 rounded-full border border-amber-100 text-amber-700 bg-amber-50/60 text-[10px]">Rough draft</span>
+        <span class="opacity-50">/</span>
+        <IconifyLink href="https://github.com/aceslice" />
       </div>
       <div class="messy-masonry messy-grid ideas-grid" x-data="{ v(i){ const arr=['v-a','v-b','v-c','v-d']; return arr[i%arr.length]; }, s(i){ const arr=['s-a','s-b','s-c']; return arr[i%arr.length]; }, p(i){ const arr=['paper-1','paper-2','paper-3','paper-4']; return arr[i%arr.length]; }, tint(i){ const arr=['rgba(79,70,229,.16)','rgba(16,185,129,.16)','rgba(244,63,94,.16)','rgba(245,158,11,.18)','rgba(14,165,233,.16)','rgba(124,58,237,.16)','rgba(71,85,105,.16)']; return arr[i%arr.length]; } }">
        {ideas.map((idea, idx) => {
@@ -77,15 +80,15 @@ import ideas from "../libs/ideas.json";
                   <div class="mt-1 text-[11px] text-gray-500">Updated: {idea.updated}</div>
                 )}
                  {idea.source && (
-                   <div class="mt-0.5 text-[11px] text-gray-500">Source: {idea.source}</div>
+                   <div class="mt-1 text-[11px] text-gray-500">Source: {idea.source}</div>
                  )}
               </div>
               <span class={`shrink-0 px-2 py-0.5 rounded-full border text-[11px] ${badge}`}>{idea.status}</span>
             </div>
              <div class="mt-4 flex items-center gap-3 text-[11px]">
-               <button @click={`setCurrent(${idx})`} class="px-2.5 py-1 rounded-full border border-zinc-300 bg-white/80 font-semibold hover:bg-white">Open</button>
-              <a href={mail} class="underline decoration-dashed underline-offset-4">Build this</a>
-              <a href="/contact" class="underline decoration-dashed underline-offset-4">Say hi</a>
+               <button @click={`setCurrent(${idx})`} class="px-2.5 py-1 rounded-full border border-zinc-300 bg-white/80 font-semibold hover:bg-white transition-colors">Read more</button>
+              <a href={mail} class="underline decoration-dashed underline-offset-4 hover:text-indigo-600 transition-colors">Build this</a>
+              <a href="/contact" class="underline decoration-dashed underline-offset-4 hover:text-indigo-600 transition-colors">Chat about it</a>
             </div>
           </div>
         );
@@ -125,25 +128,26 @@ import ideas from "../libs/ideas.json";
           
           <!-- Scrollable Content -->
           <div class="flex-1 overflow-y-auto p-6">
-            <div class="text-gray-700 leading-relaxed space-y-4">
+            <div class="text-gray-700 leading-relaxed space-y-6">
               <div>
-                <div class="text-sm font-medium text-gray-900 mb-2">The idea</div>
+                <div class="text-xs uppercase tracking-wide text-gray-500 mb-3">The messy thought</div>
                 <div class="text-sm leading-relaxed" x-text="ideas[current].memo"></div>
               </div>
               
               <template x-if="ideas[current].implementation && ideas[current].implementation.length">
                 <div>
-                  <div class="text-sm font-medium text-gray-900 mb-2">How I'd build it</div>
-                  <ul class="space-y-2 text-sm text-gray-700">
+                  <div class="text-xs uppercase tracking-wide text-gray-500 mb-3">How I'd actually build it</div>
+                  <ul class="space-y-3 text-sm text-gray-700">
                     <template x-for="step in ideas[current].implementation" :key="step">
                       <li class="flex items-start gap-2">
-                        <span class="text-gray-400 mt-1.5 flex-shrink-0">•</span>
+                        <span class="text-gray-400 mt-1.5 flex-shrink-0 text-xs">•</span>
                         <span x-text="step"></span>
                       </li>
                     </template>
                   </ul>
                 </div>
               </template>
+              
             </div>
           </div>
           
