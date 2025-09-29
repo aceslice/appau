@@ -3,13 +3,18 @@
     "title": "Vex - Anonymous Video Answers",
     "status": "Rough idea",
     "source": "Found online",
-    "memo": "I keep thinking about how people are scared to ask real questions online. What if we could get honest answers from real people without anyone knowing who's asking? Like a therapist explaining what anxiety actually feels like, or a firefighter talking about their first call. Just real people sharing real experiences.",
+    "memo": "I keep thinking about how people are scared to ask real questions online. What if we could get honest answers from real people without anyone knowing who's asking? Like a therapist explaining what anxiety actually feels like, or a firefighter talking about their first call. Just real people sharing real experiences. The problem is that social media rewards performance, not honesty. People post what gets likes, not what they actually think. And when you ask something real, you either get trolled or ignored. I want to build something where the quality of the answer matters more than who's giving it. Think about it - you could ask 'What does depression actually feel like?' and get real answers from people who've been there, not just generic advice. Or 'What's the hardest part of being a parent?' and hear from actual parents, not influencers. The key is making it anonymous so people feel safe to be vulnerable, but also making sure the answers are actually helpful. Maybe we verify some experts so you know when a therapist is really a therapist, but most answers would come from regular people with real experience.",
     "implementation": [
-      "Start simple - just let people upload short video answers",
-      "Keep it anonymous so people feel safe to be honest",
-      "Maybe verify some experts so we know the advice is good",
-      "Focus on quality answers, not how many followers someone has",
-      "Let the community decide what's worth watching"
+      "Backend: Node.js with Express, PostgreSQL for structured data, Redis for caching, AWS S3 for video storage",
+      "Video processing: FFmpeg for compression, multiple quality levels, thumbnail generation, AWS CloudFront CDN",
+      "Authentication: JWT tokens with refresh rotation, optional anonymous mode with device fingerprinting",
+      "Content moderation: AI-powered content filtering (AWS Rekognition), human review queue, community reporting system",
+      "Expert verification: LinkedIn API integration, professional license verification, manual review process",
+      "Recommendation engine: Collaborative filtering with user behavior data, content-based filtering by question categories",
+      "Mobile apps: React Native for cross-platform, native video recording with compression, offline question caching",
+      "Web platform: Next.js with server-side rendering, progressive web app features, responsive video player",
+      "Analytics: User engagement tracking, content performance metrics, A/B testing for question formats",
+      "Monetization: Premium features (unlimited questions, expert access), sponsored questions from brands, expert consultation fees"
     ],
     "updated": "2025-01-16"
   },
@@ -17,13 +22,18 @@
     "title": "Whispurr - Ephemeral Messenger",
     "status": "Rough idea",
     "source": "My notes",
-    "memo": "What if we had a messenger where conversations don't stick around forever? Like for when you want to talk about something sensitive but don't want it saved in a permanent record. All chats disappear after 24 hours unless you want them to stay.",
+    "memo": "What if we had a messenger where conversations don't stick around forever? I'm thinking about all the times I've sent a message and immediately regretted it, or had a conversation that I wish would just disappear. Most messaging apps are built around permanence - everything gets saved, backed up, synced across devices. But what if we built something around the opposite? Like for when you want to talk about something sensitive but don't want it saved in a permanent record. All chats disappear after 24 hours unless you want them to stay. The idea is to make messaging feel more like real conversation - temporary, in the moment, without the pressure of creating a permanent record. I'm thinking about teens who are constantly worried about their digital footprint, or people in early relationships who want to be vulnerable without creating evidence that could come back to haunt them. Or professionals who need to share sensitive information temporarily. The key is making it feel safe and intentional, not like you're trying to hide something bad. It's about digital lightness - being able to have real conversations without the weight of permanent digital baggage.",
     "implementation": [
-      "Start with simple 1-on-1 chats that auto-delete",
-      "Add a 'burner message' feature for read-once messages",
-      "Maybe add emoji masks so people can't see what you're typing if they look over your shoulder",
-      "Keep it simple - no cloud backup, everything stays on your phone",
-      "Focus on teens and young adults who want digital lightness"
+      "Backend: Go with Gin framework, PostgreSQL with TTL indexes for auto-deletion, Redis for real-time messaging",
+      "Real-time messaging: WebSocket connections with message queuing, end-to-end encryption using Signal Protocol",
+      "Mobile apps: Flutter for cross-platform, native biometric authentication, custom emoji rendering engine",
+      "Security: Signal Protocol for E2EE, perfect forward secrecy, device key management, message metadata protection",
+      "Ephemeral system: Database triggers for auto-deletion, client-side timers, server-side cleanup jobs",
+      "Privacy features: Screen overlay system for emoji masks, biometric locks using device APIs, stealth mode implementation",
+      "Message types: Text, images, voice notes, video messages, all with read-once and time-based expiration",
+      "Cloud infrastructure: AWS with auto-scaling, message delivery guarantees, global CDN for media",
+      "Analytics: Privacy-preserving usage metrics, message delivery rates, user engagement without content tracking",
+      "Monetization: Freemium model with premium features, one-time purchases for emoji packs, enterprise security features"
     ],
     "updated": "2025-01-16"
   },
@@ -31,13 +41,19 @@
     "title": "Circles - Community Platform",
     "status": "Rough idea",
     "source": "My notes",
-    "memo": "I keep seeing people struggle to manage their communities online. What if we had a platform where organizers could control exactly how their groups work? Like setting rules about what people can share, when conversations expire, and who can join.",
+    "memo": "I keep seeing people struggle to manage their communities online. Whether it's a study group that keeps getting derailed by off-topic posts, or a professional community where people are afraid to ask real questions, or a hobby club where the conversation just dies because there's no structure. What if we had a platform where organizers could control exactly how their groups work? Like setting rules about what people can share, when conversations expire, and who can join. The problem with most community platforms is they're either too rigid (like corporate Slack) or too chaotic (like Facebook groups). I want to build something in between - flexible enough to work for different types of communities, but structured enough to actually help people have better conversations. Think about a study group where only the teacher can post assignments, or a support group where conversations automatically expire after a week to protect privacy, or a professional network where you can only join if you're verified in your field. The key is giving organizers the tools they need to create the kind of community they want, without making it complicated for regular members to participate.",
     "implementation": [
-      "Start with basic group management - who can join, what they can post",
-      "Add features for community managers to control the conversation",
-      "Maybe let groups have different rules for different times",
-      "Focus on people who run study groups, clubs, or professional communities",
-      "Keep it simple but powerful for organizers who need control"
+      "Backend: Node.js with Express, PostgreSQL with hierarchical data structure, Redis for real-time features",
+      "Database design: Nested sets model for group hierarchies, role-based access control tables, content lifecycle management",
+      "Real-time features: WebSocket connections for live updates, message broadcasting, presence indicators",
+      "Permission system: Granular RBAC with inheritance, custom permission sets, dynamic role assignment",
+      "Content management: Automated expiration triggers, content moderation pipeline, file upload with virus scanning",
+      "Mobile apps: React Native with native modules, push notifications, offline content caching",
+      "Web platform: Next.js with server-side rendering, real-time updates, responsive design",
+      "Integrations: Calendar APIs (Google, Outlook), video conferencing (Zoom, Teams), file storage (AWS S3)",
+      "Analytics: User engagement metrics, content performance tracking, community health indicators",
+      "Enterprise features: SSO integration, audit logs, compliance reporting, custom branding",
+      "Monetization: SaaS pricing tiers, enterprise contracts, marketplace for community templates"
     ],
     "updated": "2025-01-16"
   }
