@@ -1,5 +1,4 @@
 import marketmateLogo from "../assets/marketmate_logo.png";
-import whispurrLogo from "../assets/whispurr_logo.png";
 import larryLogo from "../assets/larrysmshub_logo.png";
 
 const featuredLinks = [
@@ -34,17 +33,6 @@ const featuredLinks = [
 	// 	icon: "i-lucide-youtube text-red-500",
 	// 	tags: ["Build in public", "Tutorials", "Subscribe", "Private"],
 	// },
-	{
-		title: "Whispurr",
-		description:
-			"Ephemeral, playful private chats — privacy as performance, anonymity as armor.",
-		link: "/projects/whispurr",
-		footer: "Cultural artifact • Ephemeral • Playful privacy",
-		icon: "i-lucide-ghost",
-		logo: whispurrLogo.src,
-		tags: ["Ephemeral", "Anonymity", "Playful privacy", "WIP"],
-		category: "Apps",
-	},
 ];
 
 export default featuredLinks;
