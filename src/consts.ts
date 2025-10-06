@@ -11,3 +11,7 @@ export const SITE_HOST = "appau.netlify.app";
 export const BIRTHDAY_MONTH = 10; // Change to your birth month
 // Show the Wishlist link during birthday month and this many months before
 export const WISHLIST_NAV_WINDOW_MONTHS = 1;
+
+// Payments
+// Public key for Paystack Inline; replace with your real public key (pk_test_... or pk_live_...)
+export const PAYSTACK_PUBLIC_KEY = "pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxx";
