@@ -1,6 +1,7 @@
 ---
+import { BIRTHDAY_MONTH, WISHLIST_NAV_WINDOW_MONTHS } from "../consts";
 const currentPath = Astro.url.pathname || "/";
-const links = [
+const baseLinks = [
   { name: "Home", icon: "i-lucide-home", href: "/" },
   { name: "About", icon: "i-lucide-user", href: "/about" },
   { name: "Projects", icon: "i-lucide-code", href: "/projects" },
@@ -8,6 +9,18 @@ const links = [
   { name: "Contact", icon: "i-lucide-mail", href: "/contact" },
   { name: "Autograph", icon: "i-lucide-signature", href: "/autograph" },
 ];
+
+// Compute if Wishlist should show (server-rendered time)
+const now = new Date();
+const currentMonth = now.getMonth() + 1; // 1-12
+const monthsBefore = ((BIRTHDAY_MONTH - currentMonth + 12) % 12);
+const withinWindow = monthsBefore <= WISHLIST_NAV_WINDOW_MONTHS || currentMonth === BIRTHDAY_MONTH;
+const links = withinWindow
+  ? [
+      ...baseLinks,
+      { name: "Wishlist 🎉", icon: "i-lucide-gift", href: "/wishlist" },
+    ]
+  : baseLinks;
 ---
 
 <!-- Include Alpine.js -->
@@ -18,7 +31,7 @@ const links = [
   <!-- Horizontal nav for md and up -->
   <nav
     :class="scrolled ? 'border-zinc-300 bg-white/70' : 'border-zinc-200 bg-white/40'"
-    class="hidden md:flex fixed top-4 transform w-full max-w-lg px-2 py-2 rounded-2xl mx-auto border backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] z-50"
+    class="hidden md:flex flex-wrap justify-center gap-1 fixed top-4 transform w-full max-w-2xl px-2 py-2 rounded-2xl mx-auto border backdrop-blur-xl transition-all duration-300 hover:scale-[1.01] z-50"
   >
     {
       links.map((link, index) => (

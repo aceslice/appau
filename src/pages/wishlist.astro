@@ -1,0 +1,76 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout title="Wishlist">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Birthday Wishlist</h1>
+    <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
+      <p class="text-sm text-gray-700 leading-relaxed">
+        A simple place for friends and family to make my birthday easier (and more thoughtful).
+        If you want to get me something, here are a few ideas. No pressure—messages and small moments count too.
+      </p>
+    </div>
+
+    <div class="mt-6 grid gap-4">
+      <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
+        <h2 class="font-semibold">How it works</h2>
+        <ul class="mt-2 text-sm text-gray-700 space-y-2">
+          <li class="flex gap-2"><span class="text-gray-400">•</span><span>Pick something you like from the list</span></li>
+          <li class="flex gap-2"><span class="text-gray-400">•</span><span>Contribute to a group gift or choose a small item</span></li>
+          <li class="flex gap-2"><span class="text-gray-400">•</span><span>Or pledge a support gift (meal, help, a note)</span></li>
+        </ul>
+      </div>
+
+      <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
+        <h2 class="font-semibold">Group gifts</h2>
+        <p class="mt-2 text-sm text-gray-600">Bigger items friends can contribute to together.</p>
+        <div class="mt-3 space-y-3">
+          <div class="rounded-lg border border-zinc-200 p-3 bg-white/80">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="font-medium">Example: Noise-cancelling headphones</div>
+                <div class="text-xs text-gray-500">Goal: GHS 2,500</div>
+              </div>
+              <div class="text-xs text-gray-600">0% funded</div>
+            </div>
+            <div class="mt-2 h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
+              <div class="h-full w-0 bg-indigo-500"></div>
+            </div>
+            <div class="mt-2 text-xs text-gray-500">Contribute any amount. Notes welcome.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
+        <h2 class="font-semibold">Items</h2>
+        <p class="mt-2 text-sm text-gray-600">Thoughtful, simple picks. Mark as purchased to avoid duplicates.</p>
+        <ul class="mt-3 text-sm text-gray-700 space-y-2">
+          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Example: A good desk lamp</span></li>
+          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Example: A cozy hoodie (M)</span></li>
+        </ul>
+      </div>
+
+      <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
+        <h2 class="font-semibold">Support gifts</h2>
+        <p class="mt-2 text-sm text-gray-600">Non-material gifts that matter just as much.</p>
+        <ul class="mt-3 text-sm text-gray-700 space-y-2">
+          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Home-cooked meal night</span></li>
+          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Help with a weekend errand</span></li>
+          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>A short note or card</span></li>
+        </ul>
+      </div>
+
+      <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
+        <h2 class="font-semibold">Cash fund</h2>
+        <p class="mt-2 text-sm text-gray-600">If you'd rather, a small general contribution is always appreciated.</p>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Layout>
+
+
