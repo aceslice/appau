@@ -1,2 +1,3 @@
 # Netlify Forms redirects
 /autograph /autograph?success=1 200
+/wishlist /wishlist?success=1 200
