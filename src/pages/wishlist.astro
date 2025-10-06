@@ -32,12 +32,12 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
     <Header />
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Birthday Wishlist</h1>
     <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
-      <div class="flex items-center justify-between gap-3">
-        <p class="text-sm text-gray-700 leading-relaxed">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <p class="text-sm text-gray-700 leading-relaxed min-w-0">
           A simple, no-pressure list for friends and family. If you plan to get me something,
           this keeps it easy and avoids duplicates. Notes and small gestures count too.
         </p>
-        <div class="shrink-0 rounded-lg border border-indigo-100 bg-indigo-50/60 px-3 py-2 text-center" aria-label="Birthday countdown">
+        <div id="countdown-card" class="shrink-0 self-start sm:self-auto rounded-lg border border-indigo-100 bg-indigo-50/60 px-3 py-2 text-center max-w-[160px]" aria-label="Birthday countdown">
           <div id="countdown-days" class="text-xl font-bold text-indigo-700">{initialDays === 0 ? 'Today' : initialDays}</div>
           <div id="countdown-label" class="text-[11px] text-indigo-700/80">{initialDays === 0 ? '' : 'days to go'}</div>
         </div>
@@ -58,7 +58,6 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
       <div class="mt-3 flex items-center gap-3 text-[11px] text-gray-600">
         <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Friends & family only</span>
         <a href="/contact" class="underline decoration-dashed underline-offset-4">Questions? Reach me</a>
-        <a href="/wishlist/guide" class="underline decoration-dashed underline-offset-4">For builders</a>
       </div>
     </div>
 
@@ -93,11 +92,18 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
                 <div class="mt-2 h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
                   <div class="h-full bg-indigo-500" style={`width: ${pct}%`}></div>
                 </div>
-                <div class="mt-2 grid gap-2 text-xs text-gray-500 md:grid-cols-[1fr_auto_auto] grid-cols-1 items-center" data-groupgift data-title={g.title}>
+                 <div class="mt-2 grid gap-2 text-xs text-gray-500 grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] items-center" data-groupgift data-title={g.title}>
                   <span class="order-1 md:order-none">{g.notes || "Contribute any amount. Notes welcome."}</span>
-                  <input type="number" min="1" placeholder="Amount (GHS)" class="order-3 md:order-none px-2 py-1 rounded-md border border-zinc-200 bg-white/90 text-sm w-36" />
-                  <input type="email" placeholder="Your email" class="order-2 md:order-none px-2 py-1 rounded-md border border-zinc-200 bg-white/90 text-sm w-48" />
-                  <button class="order-4 md:order-none px-2 py-1 rounded-md border border-zinc-200 bg-white/70 text-gray-700">Contribute</button>
+                  <div class="order-2 flex items-center gap-1">
+                    <button type="button" class="preset px-2 py-0.5 rounded border border-zinc-200 bg-white/80 text-gray-700" data-amount="20">GHS 20</button>
+                    <button type="button" class="preset px-2 py-0.5 rounded border border-zinc-200 bg-white/80 text-gray-700" data-amount="50">GHS 50</button>
+                    <button type="button" class="preset px-2 py-0.5 rounded border border-zinc-200 bg-white/80 text-gray-700" data-amount="100">GHS 100</button>
+                  </div>
+                  <input type="number" min="1" placeholder="Amount (GHS)" class="order-3 md:order-none amount px-2 py-1 rounded-md border border-zinc-200 bg-white/90 text-sm w-full md:w-36" />
+                  <div class="order-4 flex items-center gap-2 flex-wrap">
+                    <input type="email" placeholder="Your email" class="email px-2 py-1 rounded-md border border-zinc-200 bg-white/90 text-sm w-full md:w-48" />
+                    <button class="px-2 py-1 rounded-md border border-zinc-200 bg-white/70 text-gray-700 w-full md:w-auto">Contribute</button>
+                  </div>
                 </div>
               </div>
             );
@@ -117,13 +123,16 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
               : 'border-zinc-200 text-zinc-700 bg-white';
             const label = it.status === 'purchased' ? 'Purchased' : it.status === 'reserved' ? 'Reserved' : 'Available';
             return (
-              <div class={`rounded-lg border border-zinc-200 p-3 ${it.status === 'purchased' ? 'bg-white/60' : 'bg-white/80'}`}>
+              <div class={`wishlist-item rounded-lg border border-zinc-200 p-3 ${it.status === 'purchased' ? 'bg-white/60' : 'bg-white/80'}`} data-item-name={it.name}>
                 <div class="flex items-center justify-between">
                   <div>
                     <div class="font-medium">{it.name}</div>
                     {it.description && <div class="text-xs text-gray-500">{it.description}</div>}
                   </div>
-                  <span class={`px-2 py-0.5 rounded-full border text-[11px] ${badge}`}>{label}</span>
+                  <div class="flex items-center gap-2">
+                    <span class={`item-badge px-2 py-0.5 rounded-full border text-[11px] ${badge}`}>{label}</span>
+                    <button type="button" class="toggle-purchased text-[11px] px-2 py-0.5 rounded-md border border-zinc-200 bg-white/70 text-gray-700">{label === 'Purchased' ? 'Undo' : 'Mark purchased'}</button>
+                  </div>
                 </div>
               </div>
             );
@@ -136,7 +145,10 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
         <p class="mt-2 text-sm text-gray-600">Non‑material gifts that matter just as much.</p>
         <ul class="mt-3 text-sm text-gray-700 space-y-2">
           {wishlistData.supportGifts.map((s) => (
-            <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>{s.label}</span></li>
+            <li class="support-item flex items-center justify-between gap-2" data-support-label={s.label}>
+              <div class="flex items-start gap-2"><span class="text-gray-400">•</span><span class="support-text">{s.label}</span></div>
+              <button type="button" class="pledge-btn text-[11px] px-2 py-0.5 rounded-md border border-zinc-200 bg-white/70 text-gray-700">I’ll do this</button>
+            </li>
           ))}
         </ul>
       </div>
@@ -287,6 +299,79 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
 
   // Hook up buttons once DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
+    // Add subtle pulse/gradient for final week
+    (function(){
+      var card = document.getElementById('countdown-card');
+      var daysText = document.getElementById('countdown-days')?.textContent || '';
+      var daysNum = daysText === 'Today' ? 0 : parseInt(daysText, 10);
+      if (card && !isNaN(daysNum) && daysNum <= 7) {
+        card.style.background = 'linear-gradient(135deg, rgba(238,242,255,0.9), rgba(238,242,255,0.6))';
+        card.style.boxShadow = '0 0 0 0 rgba(79,70,229,0.35)';
+        var s = 0;
+        setInterval(() => {
+          s = (s + 1) % 40;
+          var r = 40 + Math.abs(20 - s);
+          card.style.boxShadow = '0 0 ' + r + 'px 0 rgba(79,70,229,0.18)';
+        }, 180);
+      }
+    })();
+
+    // Group gift presets
+    Array.from(document.querySelectorAll('[data-groupgift]')).forEach((rootEl) => {
+      Array.from(rootEl.querySelectorAll('.preset')).forEach((btnEl) => {
+        btnEl.addEventListener('click', () => {
+          var amt = btnEl.getAttribute('data-amount');
+          var input = rootEl.querySelector('input.amount');
+          if (input && amt) input.value = amt;
+        });
+      });
+    });
+
+    // Local mark-as-purchased toggles
+    const storeKey = 'wishlist:purchased';
+    const purchasedSet = new Set<string>(JSON.parse(localStorage.getItem(storeKey) || '[]'));
+    Array.from(document.querySelectorAll('.wishlist-item')).forEach((item) => {
+      const name = item.getAttribute('data-item-name') || '';
+      const badge = item.querySelector('.item-badge');
+      const btn = item.querySelector('.toggle-purchased');
+      function renderPurchasedState(){
+        const purchased = purchasedSet.has(name);
+        if (badge) {
+          badge.textContent = purchased ? 'Purchased' : 'Available';
+          badge.className = 'item-badge px-2 py-0.5 rounded-full border text-[11px] ' + (purchased ? 'border-emerald-100 text-emerald-700 bg-emerald-50' : 'border-zinc-200 text-zinc-700 bg-white');
+        }
+        if (btn) btn.textContent = purchased ? 'Undo' : 'Mark purchased';
+        item.style.backgroundColor = purchased ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.8)';
+      }
+      renderPurchasedState();
+      if (btn) btn.addEventListener('click', () => {
+        if (!name) return;
+        if (purchasedSet.has(name)) purchasedSet.delete(name); else purchasedSet.add(name);
+        localStorage.setItem(storeKey, JSON.stringify(Array.from(purchasedSet)));
+        renderPurchasedState();
+      });
+    });
+
+    // Support pledges (local only)
+    const pledgeKey = 'wishlist:pledges';
+    const pledgeSet = new Set<string>(JSON.parse(localStorage.getItem(pledgeKey) || '[]'));
+    Array.from(document.querySelectorAll('.support-item')).forEach((row) => {
+      const label = row.getAttribute('data-support-label') || '';
+      const text = row.querySelector('.support-text');
+      const btn = row.querySelector('.pledge-btn');
+      function renderPledge(){
+        const on = pledgeSet.has(label);
+        if (text) text.style.opacity = on ? '0.75' : '1';
+        if (btn) btn.textContent = on ? 'Pledged' : 'I’ll do this';
+      }
+      renderPledge();
+      if (btn) btn.addEventListener('click', () => {
+        if (!label) return;
+        if (pledgeSet.has(label)) pledgeSet.delete(label); else pledgeSet.add(label);
+        localStorage.setItem(pledgeKey, JSON.stringify(Array.from(pledgeSet)));
+        renderPledge();
+      });
+    });
     // Cash fund
     const cashAmt = document.querySelector('#cash-amount');
     const cashEmail = document.querySelector('#cash-email');
