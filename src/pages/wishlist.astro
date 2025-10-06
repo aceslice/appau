@@ -2,17 +2,64 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { wishlistData } from "../libs/wishlist";
+import { BIRTHDAY_MONTH, BIRTHDAY_DAY } from "../consts";
+
+// Compute an initial server-side days-to-go to avoid "--" on first paint
+function computeDaysToBirthdaySSR(now: Date): number {
+  const isBirthdayToday = (now.getMonth() === (BIRTHDAY_MONTH - 1)) && (now.getDate() === BIRTHDAY_DAY);
+  if (isBirthdayToday) return 0;
+  const thisYearTarget = new Date(now.getFullYear(), BIRTHDAY_MONTH - 1, BIRTHDAY_DAY, 0, 0, 0, 0);
+  const target = (thisYearTarget.getTime() >= now.getTime()) ? thisYearTarget : new Date(now.getFullYear() + 1, BIRTHDAY_MONTH - 1, BIRTHDAY_DAY, 0, 0, 0, 0);
+  return Math.max(0, Math.ceil((+target - +now) / (1000*60*60*24)));
+}
+const initialDays = computeDaysToBirthdaySSR(new Date());
+function computeInitialMsg(days: number): string {
+  if (days >= 30) return 'A month of small joys begins.';
+  if (days >= 14) return 'Two weeks out — slow build, no pressure.';
+  if (days >= 7) return 'One week — almost there.';
+  if (days >= 3) return 'Final few days — thanks for thinking of me.';
+  if (days === 1) return 'Tomorrow.';
+  if (days === 0) return 'Today.';
+  return `${days} days to go`;
+}
+const initialMsg = computeInitialMsg(initialDays);
+const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | undefined;
 ---
 
 <Layout title="Wishlist">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+  <div id="wishlist-root" data-paystack-key={PAYSTACK_PUBLIC_KEY || ""} class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Birthday Wishlist</h1>
     <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
-      <p class="text-sm text-gray-700 leading-relaxed">
-        A simple place for friends and family to make my birthday easier (and more thoughtful).
-        If you want to get me something, here are a few ideas. No pressure—messages and small moments count too.
-      </p>
+      <div class="flex items-center justify-between gap-3">
+        <p class="text-sm text-gray-700 leading-relaxed">
+          A simple, no-pressure list for friends and family. If you plan to get me something,
+          this keeps it easy and avoids duplicates. Notes and small gestures count too.
+        </p>
+        <div class="shrink-0 rounded-lg border border-indigo-100 bg-indigo-50/60 px-3 py-2 text-center" aria-label="Birthday countdown">
+          <div id="countdown-days" class="text-xl font-bold text-indigo-700">{initialDays === 0 ? 'Today' : initialDays}</div>
+          <div id="countdown-label" class="text-[11px] text-indigo-700/80">{initialDays === 0 ? '' : 'days to go'}</div>
+        </div>
+      </div>
+      <div id="countdown-line" class="mt-3 text-sm text-indigo-700">
+        {initialDays === 0 ? (
+          <span class="inline-flex items-center gap-1 text-emerald-700">
+            <span class="i-lucide-party-popper" aria-hidden="true"></span>
+            <span>It’s today. Thanks for thinking of me.</span>
+          </span>
+        ) : (
+          initialMsg
+        )}
+      </div>
+      <div class="mt-3 text-[11px] text-gray-500">
+        Privacy note: shipping details are never shown publicly. If needed, I’ll share directly.
+      </div>
+      <div class="mt-3 flex items-center gap-3 text-[11px] text-gray-600">
+        <span class="px-2 py-0.5 rounded-full border border-zinc-200 bg-white/70">Friends & family only</span>
+        <a href="/contact" class="underline decoration-dashed underline-offset-4">Questions? Reach me</a>
+        <a href="/wishlist/guide" class="underline decoration-dashed underline-offset-4">For builders</a>
+      </div>
     </div>
 
     <div class="mt-6 grid gap-4">
@@ -26,51 +73,250 @@ import Footer from "../components/Footer.astro";
       </div>
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
-        <h2 class="font-semibold">Group gifts</h2>
-        <p class="mt-2 text-sm text-gray-600">Bigger items friends can contribute to together.</p>
+        <div class="flex items-center justify-between">
+          <h2 class="font-semibold">Group gifts</h2>
+          <span class="px-2 py-0.5 rounded-full border border-indigo-100 text-indigo-700 bg-indigo-50 text-[11px]">Collaborative</span>
+        </div>
+        <p class="mt-2 text-sm text-gray-600">Bigger items friends can chip in on together.</p>
         <div class="mt-3 space-y-3">
-          <div class="rounded-lg border border-zinc-200 p-3 bg-white/80">
-            <div class="flex items-center justify-between">
-              <div>
-                <div class="font-medium">Example: Noise-cancelling headphones</div>
-                <div class="text-xs text-gray-500">Goal: GHS 2,500</div>
+          {wishlistData.groupGifts.map((g) => {
+            const pct = Math.min(100, Math.floor((g.raisedAmountGhs / g.goalAmountGhs) * 100) || 0);
+            return (
+              <div class="rounded-lg border border-zinc-200 p-3 bg-white/80">
+                <div class="flex items-center justify-between gap-3">
+                  <div class="min-w-0">
+                    <div class="font-medium truncate">{g.title}</div>
+                    <div class="text-xs text-gray-500">Goal: GHS {g.goalAmountGhs.toLocaleString()}</div>
+                  </div>
+                  <div class="text-xs text-gray-600 whitespace-nowrap">{pct}% funded</div>
+                </div>
+                <div class="mt-2 h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-indigo-500" style={`width: ${pct}%`}></div>
+                </div>
+                <div class="mt-2 grid gap-2 text-xs text-gray-500 md:grid-cols-[1fr_auto_auto] grid-cols-1 items-center" data-groupgift data-title={g.title}>
+                  <span class="order-1 md:order-none">{g.notes || "Contribute any amount. Notes welcome."}</span>
+                  <input type="number" min="1" placeholder="Amount (GHS)" class="order-3 md:order-none px-2 py-1 rounded-md border border-zinc-200 bg-white/90 text-sm w-36" />
+                  <input type="email" placeholder="Your email" class="order-2 md:order-none px-2 py-1 rounded-md border border-zinc-200 bg-white/90 text-sm w-48" />
+                  <button class="order-4 md:order-none px-2 py-1 rounded-md border border-zinc-200 bg-white/70 text-gray-700">Contribute</button>
+                </div>
               </div>
-              <div class="text-xs text-gray-600">0% funded</div>
-            </div>
-            <div class="mt-2 h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
-              <div class="h-full w-0 bg-indigo-500"></div>
-            </div>
-            <div class="mt-2 text-xs text-gray-500">Contribute any amount. Notes welcome.</div>
-          </div>
+            );
+          })}
         </div>
       </div>
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
         <h2 class="font-semibold">Items</h2>
-        <p class="mt-2 text-sm text-gray-600">Thoughtful, simple picks. Mark as purchased to avoid duplicates.</p>
-        <ul class="mt-3 text-sm text-gray-700 space-y-2">
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Example: A good desk lamp</span></li>
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Example: A cozy hoodie (M)</span></li>
-        </ul>
+        <p class="mt-2 text-sm text-gray-600">Simple picks. Mark as purchased to avoid duplicates.</p>
+        <div class="mt-3 grid gap-3">
+          {wishlistData.items.map((it) => {
+            const badge = it.status === 'purchased'
+              ? 'border-emerald-100 text-emerald-700 bg-emerald-50'
+              : it.status === 'reserved'
+              ? 'border-amber-100 text-amber-700 bg-amber-50'
+              : 'border-zinc-200 text-zinc-700 bg-white';
+            const label = it.status === 'purchased' ? 'Purchased' : it.status === 'reserved' ? 'Reserved' : 'Available';
+            return (
+              <div class={`rounded-lg border border-zinc-200 p-3 ${it.status === 'purchased' ? 'bg-white/60' : 'bg-white/80'}`}>
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="font-medium">{it.name}</div>
+                    {it.description && <div class="text-xs text-gray-500">{it.description}</div>}
+                  </div>
+                  <span class={`px-2 py-0.5 rounded-full border text-[11px] ${badge}`}>{label}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
         <h2 class="font-semibold">Support gifts</h2>
-        <p class="mt-2 text-sm text-gray-600">Non-material gifts that matter just as much.</p>
+        <p class="mt-2 text-sm text-gray-600">Non‑material gifts that matter just as much.</p>
         <ul class="mt-3 text-sm text-gray-700 space-y-2">
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Home-cooked meal night</span></li>
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Help with a weekend errand</span></li>
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>A short note or card</span></li>
+          {wishlistData.supportGifts.map((s) => (
+            <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>{s.label}</span></li>
+          ))}
         </ul>
       </div>
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
-        <h2 class="font-semibold">Cash fund</h2>
-        <p class="mt-2 text-sm text-gray-600">If you'd rather, a small general contribution is always appreciated.</p>
+        <h2 class="font-semibold">A quick personal note</h2>
+        <p class="mt-2 text-sm text-gray-600">
+          This page is just for my birthday. No pressure at all. If you prefer a message or a small gesture, that’s perfect.
+          Thanks for thinking of me.
+        </p>
+      </div>
+
+      <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
+        <div class="flex items-center justify-between">
+          <h2 class="font-semibold">Cash fund</h2>
+          <span class="px-2 py-0.5 rounded-full border border-zinc-200 text-zinc-700 bg-white text-[11px]">Optional</span>
+        </div>
+        <p class="mt-2 text-sm text-gray-600">{wishlistData.cashFund?.notes || "If you'd rather, a small general contribution is always appreciated."}</p>
+        <div class="mt-3 grid gap-2 md:grid-cols-[auto_auto_auto] grid-cols-1 items-center">
+          <input id="cash-amount" type="number" min="1" placeholder="Amount (GHS)" class="px-3 py-1.5 rounded-lg border border-zinc-200 bg-white/90 text-sm w-40" />
+          <input id="cash-email" type="email" placeholder="Your email" class="px-3 py-1.5 rounded-lg border border-zinc-200 bg-white/90 text-sm w-56" />
+          <button id="cash-contribute" class="px-3 py-1.5 rounded-lg border border-zinc-200 bg-white/70 text-gray-700">Contribute</button>
+        </div>
+      </div>
+
+      <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
+        <h2 class="font-semibold">FAQ</h2>
+        <ul class="mt-2 text-sm text-gray-700 space-y-2">
+          <li class="flex gap-2"><span class="text-gray-400">•</span><span>Can I stay anonymous? Yes—just use a nickname or a note.</span></li>
+          <li class="flex gap-2"><span class="text-gray-400">•</span><span>What about delivery? If needed, I’ll share details privately.</span></li>
+          <li class="flex gap-2"><span class="text-gray-400">•</span><span>Prefer not to buy? A message or a call is more than enough.</span></li>
+        </ul>
       </div>
     </div>
   </div>
   <Footer />
 </Layout>
+
+<!-- Paystack inline script + lightweight handlers -->
+<script is:inline>
+  // Simple birthday countdown (client-side only)
+  (function(){
+    try {
+      var month = {BIRTHDAY_MONTH} - 1; // JS months 0-11
+      var day = {BIRTHDAY_DAY};
+      function getTargetDate(base){
+        var t = new Date(base.getFullYear(), month, day, 0, 0, 0, 0);
+        if (t.getTime() < base.getTime()) {
+          t = new Date(base.getFullYear() + 1, month, day, 0, 0, 0, 0);
+        }
+        return t;
+      }
+
+      var target = getTargetDate(new Date());
+      function updateCountdown(){
+        var now = new Date();
+        // If today is birthday, pin to 0
+        var isToday = (now.getMonth() === month) && (now.getDate() === day);
+        var days = 0;
+        if (!isToday) {
+          var ms = getTargetDate(now) - now;
+          days = Math.max(0, Math.ceil(ms / (1000*60*60*24)));
+        }
+        var el = document.getElementById('countdown-days');
+        var lbl = document.getElementById('countdown-label');
+        if (el) el.textContent = (days === 0 ? 'Today' : String(days));
+        if (lbl) lbl.textContent = (days === 0 ? '' : 'days to go');
+        var lineEl = document.getElementById('countdown-line');
+        var msg = '';
+        if (days === 0) msg = '';
+        else if (days >= 30) msg = 'A month of small joys begins.';
+        else if (days >= 14) msg = 'Two weeks out — slow build, no pressure.';
+        else if (days >= 7) msg = 'One week — almost there.';
+        else if (days >= 3) msg = 'Final few days — thanks for thinking of me.';
+        else if (days === 1) msg = 'Tomorrow.';
+        else msg = days + ' days to go';
+        if (lineEl) lineEl.textContent = msg;
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', updateCountdown);
+      } else {
+        updateCountdown();
+      }
+      setInterval(updateCountdown, 60 * 60 * 1000);
+    } catch (e) {
+      // no-op
+    }
+  })();
+
+  // Load Paystack inline if key is available
+  var rootEl = document.getElementById('wishlist-root');
+  var paystackKey = (rootEl && rootEl.getAttribute('data-paystack-key')) || '';
+  if (paystackKey && paystackKey !== "undefined") {
+    if (!document.getElementById('paystack-inline-js')) {
+      const s = document.createElement('script');
+      s.id = 'paystack-inline-js';
+      s.src = 'https://js.paystack.co/v1/inline.js';
+      s.onload = () => { window.__paystackReady = true; };
+      document.head.appendChild(s);
+    }
+  } else {
+    console.warn('[Wishlist] PUBLIC_PAYSTACK_KEY is missing. Disable payments.');
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('#cash-contribute, [data-groupgift] button').forEach((b) => {
+        b.setAttribute('disabled', 'true');
+        b.classList.add('opacity-60');
+      });
+    });
+  }
+
+  function paystackPay(amountGhs, email, referenceNote, tries) {
+    try {
+      // Convert to kobo equivalent for NGN? Here we keep GHS smallest as 100x for demo
+      // If using Paystack GHS, amount is in pesewas (x100)
+      const amount = Math.round(Number(amountGhs) * 100);
+      if (!paystackKey) {
+        alert('Payments are temporarily unavailable. Please try again later.');
+        return;
+      }
+      if (!window.PaystackPop || !window.PaystackPop.setup) {
+        const attempt = (typeof tries === 'number' ? tries : 0) + 1;
+        if (attempt <= 15) {
+          return setTimeout(() => paystackPay(amountGhs, email, referenceNote, attempt), 300);
+        }
+        alert('Payment library not loaded yet. Please try again in a moment.');
+        return;
+      }
+      const handler = window.PaystackPop.setup({
+        key: paystackKey,
+        email: email || 'friend@example.com',
+        amount,
+        currency: 'GHS',
+        ref: 'wish-' + Date.now(),
+        metadata: { custom_fields: [{ display_name: 'Note', variable_name: 'note', value: referenceNote || 'Wishlist contribution' }]},
+        callback: function(resp) {
+          alert('Thanks! Payment complete: ' + resp.reference);
+        },
+        onClose: function() {
+          // silently ignore for now
+        }
+      });
+      handler.openIframe();
+    } catch (e) {
+      console.error(e);
+      alert('Sorry, something went wrong.');
+    }
+  }
+
+  // Hook up buttons once DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    // Cash fund
+    const cashAmt = document.querySelector('#cash-amount');
+    const cashEmail = document.querySelector('#cash-email');
+    const cashBtn = document.querySelector('#cash-contribute');
+    if (cashBtn) {
+      cashBtn.addEventListener('click', () => {
+        const amt = (cashAmt && cashAmt.value) || '';
+        const mail = (cashEmail && cashEmail.value) || '';
+        if (!amt || Number(amt) <= 0) { alert('Enter an amount'); return; }
+        if (!mail || !mail.includes('@')) { alert('Enter a valid email'); return; }
+        paystackPay(amt, mail, 'Cash fund');
+      });
+    }
+
+    // Group gifts (supports multiple)
+    Array.from(document.querySelectorAll('[data-groupgift]')).forEach((el) => {
+      const root = el;
+      const input = root.querySelector('input[type="number"]');
+      const email = root.querySelector('input[type="email"]');
+      const btn = root.querySelector('button');
+      const title = root.getAttribute('data-title') || 'Group gift';
+      if (btn) btn.addEventListener('click', () => {
+        const amt = (input && input.value) || '';
+        const mail = (email && email.value) || '';
+        if (!amt || Number(amt) <= 0) { alert('Enter an amount'); return; }
+        if (!mail || !mail.includes('@')) { alert('Enter a valid email'); return; }
+        paystackPay(amt, mail, title);
+      });
+    });
+  });
+</script>
 
 
