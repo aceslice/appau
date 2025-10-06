@@ -6,6 +6,7 @@ import Footer from "../components/Footer.astro";
 
 <Layout title="Wishlist">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <Header />
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Birthday Wishlist</h1>
     <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
@@ -13,6 +14,16 @@ import Footer from "../components/Footer.astro";
         A simple place for friends and family to make my birthday easier (and more thoughtful).
         If you want to get me something, here are a few ideas. No pressure—messages and small moments count too.
       </p>
+    </div>
+
+    <div class="mt-4 flex items-center justify-between text-[13px]">
+      <div class="text-gray-600">Thanks for even checking this out. Small gestures count too.</div>
+      <div x-data="{ copied: false, copy(){ navigator.clipboard && navigator.clipboard.writeText(window.location.href).then(()=>{ this.copied=true; setTimeout(()=>this.copied=false, 1400); }); } }">
+        <button @click="copy()" class="px-3 py-1.5 rounded-full border border-zinc-300 bg-white/80 font-semibold hover:bg-white transition-colors">
+          <span x-show="!copied">Copy wishlist link</span>
+          <span x-show="copied">Link copied ✓</span>
+        </button>
+      </div>
     </div>
 
     <div class="mt-6 grid gap-4">
@@ -32,7 +43,7 @@ import Footer from "../components/Footer.astro";
           <div class="rounded-lg border border-zinc-200 p-3 bg-white/80">
             <div class="flex items-center justify-between">
               <div>
-                <div class="font-medium">Example: Noise-cancelling headphones</div>
+                <div class="font-medium">Example: Noise‑cancelling headphones</div>
                 <div class="text-xs text-gray-500">Goal: GHS 2,500</div>
               </div>
               <div class="text-xs text-gray-600">0% funded</div>
@@ -40,7 +51,11 @@ import Footer from "../components/Footer.astro";
             <div class="mt-2 h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
               <div class="h-full w-0 bg-indigo-500"></div>
             </div>
-            <div class="mt-2 text-xs text-gray-500">Contribute any amount. Notes welcome.</div>
+            <div class="mt-2 flex items-center gap-3 text-sm">
+              <a href="mailto:gideonad.codez@gmail.com?subject=Contribute%3A%20Headphones&body=Hi%2C%20I%27d%20like%20to%20contribute%20GHS%20____%20to%20the%20headphones.%20Note%3A%20" class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Contribute</a>
+              <span class="text-gray-300">•</span>
+              <a href="mailto:gideonad.codez@gmail.com?subject=Question%20about%20wishlist&body=Hi%2C%20I%20had%20a%20quick%20question%20about%20the%20group%20gift%3A%20" class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Ask a question</a>
+            </div>
           </div>
         </div>
       </div>
@@ -48,10 +63,30 @@ import Footer from "../components/Footer.astro";
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
         <h2 class="font-semibold">Items</h2>
         <p class="mt-2 text-sm text-gray-600">Thoughtful, simple picks. Mark as purchased to avoid duplicates.</p>
-        <ul class="mt-3 text-sm text-gray-700 space-y-2">
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Example: A good desk lamp</span></li>
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Example: A cozy hoodie (M)</span></li>
-        </ul>
+        <div class="mt-3 space-y-2 text-sm">
+          <div class="flex items-start justify-between gap-3 rounded-lg border border-zinc-200 p-3 bg-white/80">
+            <div>
+              <div class="font-medium">Example: A good desk lamp</div>
+              <div class="text-xs text-gray-500">Warm light, adjustable arm</div>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="mailto:gideonad.codez@gmail.com?subject=Reserve%3A%20Desk%20lamp&body=I%27ll%20grab%20this.%20Planning%20to%20order%20by%20____." class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Reserve</a>
+              <span class="text-gray-300">•</span>
+              <a href="mailto:gideonad.codez@gmail.com?subject=Purchased%3A%20Desk%20lamp&body=Got%20it.%20Arrives%20around%20____." class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Mark purchased</a>
+            </div>
+          </div>
+          <div class="flex items-start justify-between gap-3 rounded-lg border border-zinc-200 p-3 bg-white/80">
+            <div>
+              <div class="font-medium">Example: A cozy hoodie (M)</div>
+              <div class="text-xs text-gray-500">Neutral color</div>
+            </div>
+            <div class="flex items-center gap-3">
+              <a href="mailto:gideonad.codez@gmail.com?subject=Reserve%3A%20Hoodie&body=I%27ll%20grab%20this.%20Planning%20to%20order%20by%20____." class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Reserve</a>
+              <span class="text-gray-300">•</span>
+              <a href="mailto:gideonad.codez@gmail.com?subject=Purchased%3A%20Hoodie&body=Got%20it.%20Arrives%20around%20____." class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Mark purchased</a>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
@@ -62,11 +97,17 @@ import Footer from "../components/Footer.astro";
           <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Help with a weekend errand</span></li>
           <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>A short note or card</span></li>
         </ul>
+        <div class="mt-3 text-sm">
+          <a href="mailto:gideonad.codez@gmail.com?subject=Support%20gift%20pledge&body=I%27d%20love%20to%20help%20with%20___%20around%20____." class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Pledge a support gift</a>
+        </div>
       </div>
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
         <h2 class="font-semibold">Cash fund</h2>
         <p class="mt-2 text-sm text-gray-600">If you'd rather, a small general contribution is always appreciated.</p>
+        <div class="mt-3 text-sm">
+          <a href="mailto=gideonad.codez@gmail.com?subject=Cash%20fund%20contribution&body=I%27d%20like%20to%20contribute%20GHS%20____.%20Note%3A%20" class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Contribute</a>
+        </div>
       </div>
     </div>
   </div>
