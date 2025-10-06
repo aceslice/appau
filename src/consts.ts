@@ -11,5 +11,3 @@ export const SITE_HOST = "appau.netlify.app";
 export const BIRTHDAY_MONTH = 10; // Change to your birth month
 // Show the Wishlist link during birthday month and this many months before
 export const WISHLIST_NAV_WINDOW_MONTHS = 1;
-// Day of month for birthday (1-31)
-export const BIRTHDAY_DAY = 10; // Change to your birthday day
