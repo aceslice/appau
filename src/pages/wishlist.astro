@@ -8,7 +8,8 @@ import Footer from "../components/Footer.astro";
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <Header />
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">Birthday Wishlist</h1>
+    <h1 class="text-3xl md:text-4xl font-bold mb-1">Birthday Wishlist</h1>
+    <div class="text-sm text-gray-500 mb-3">A few simple ideas — no pressure <span aria-hidden="true">🎁</span></div>
     <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
       <p class="text-sm text-gray-700 leading-relaxed">
         A simple place for friends and family to make my birthday easier (and more thoughtful).
@@ -18,8 +19,8 @@ import Footer from "../components/Footer.astro";
 
     <div class="mt-4 flex items-center justify-between text-[13px]">
       <div class="text-gray-600">If you're here — thank you. Small gestures mean a lot.</div>
-      <div x-data="{ copied: false, copy(){ navigator.clipboard && navigator.clipboard.writeText(window.location.href).then(()=>{ this.copied=true; setTimeout(()=>this.copied=false, 1400); }); } }">
-        <button @click="copy()" class="px-3 py-1.5 rounded-lg border border-zinc-300 bg-white/80 font-semibold hover:bg-white transition-colors w-full sm:w-auto">
+      <div x-data="{ copied: false, copy(){ navigator.clipboard && navigator.clipboard.writeText(window.location.href).then(()=>{ this.copied=true; setTimeout(()=>this.copied=false, 1400); }); } }" class="w-full sm:w-auto sm:flex sm:justify-end">
+        <button @click="copy()" class="w-full sm:w-auto px-4 py-2 rounded-md border border-zinc-300 bg-white/90 font-semibold hover:bg-white transition-colors">
           <span x-show="!copied">Copy wishlist link</span>
           <span x-show="copied">Link copied ✓</span>
         </button>
@@ -27,7 +28,7 @@ import Footer from "../components/Footer.astro";
     </div>
 
     <div class="mt-6 grid gap-4">
-      <div class="rounded-xl border border-zinc-200 bg-white/50 p-3" x-data="{ open: false }">
+      <div class="rounded-xl border border-zinc-50 bg-white/30 backdrop-blur-2xl p-3" x-data="{ open: false }">
         <div class="flex items-center justify-between gap-2">
           <div class="text-[13px] text-gray-700">Would you use something like this?</div>
           <button @click="open = !open" class="text-[13px] underline decoration-dashed underline-offset-4 hover:text-indigo-600">I'm interested</button>
@@ -54,6 +55,8 @@ import Footer from "../components/Footer.astro";
         </ul>
       </div>
 
+      <div class="h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent"></div>
+
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
         <h2 class="font-semibold">Group gifts</h2>
         <p class="mt-2 text-sm text-gray-600">Bigger things we can chip in on together. A short note about why you picked it would make my day.</p>
@@ -67,7 +70,7 @@ import Footer from "../components/Footer.astro";
               <div class="text-xs text-gray-600">0% funded</div>
             </div>
             <div class="mt-2 h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
-              <div class="h-full w-0 bg-indigo-500"></div>
+              <div class="h-full w-0 bg-indigo-500 transition-all"></div>
             </div>
             <div class="mt-2 flex items-center gap-3 text-sm">
               <a href="mailto:gideonad.codez@gmail.com?subject=Contribute%3A%20Headphones&body=Hey%20Gideon%2C%0D%0A%0D%0AI%27d%20love%20to%20chip%20in%20GHS%20____%20for%20the%20headphones.%0D%0AWhy%20I%20picked%20this%3A%20___%0D%0A(Optional)%20Note%20for%20you%3A%20___" class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Contribute</a>
@@ -77,6 +80,8 @@ import Footer from "../components/Footer.astro";
           </div>
         </div>
       </div>
+
+      <div class="h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent"></div>
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
         <h2 class="font-semibold">Items</h2>
@@ -106,6 +111,8 @@ import Footer from "../components/Footer.astro";
           </div>
         </div>
       </div>
+
+      <div class="h-px bg-gradient-to-r from-transparent via-zinc-200 to-transparent"></div>
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
         <h2 class="font-semibold">Support gifts</h2>
