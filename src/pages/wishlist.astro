@@ -32,7 +32,7 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
     <Header />
     <h1 class="text-3xl md:text-4xl font-bold mb-2">Birthday Wishlist</h1>
     <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4">
-      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
         <p class="text-sm text-gray-700 leading-relaxed min-w-0">
           A simple, no-pressure list for friends and family. If you plan to get me something,
           this keeps it easy and avoids duplicates. Notes and small gestures count too.
@@ -90,8 +90,9 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
                   <div class="text-xs text-gray-600 whitespace-nowrap">{pct}% funded</div>
                 </div>
                 <div class="mt-2 h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
-                  <div class="h-full bg-indigo-500" style={`width: ${pct}%`}></div>
+                  <div class="h-full bg-gradient-to-r from-indigo-500 to-blue-400" style={`width: ${pct}%`}></div>
                 </div>
+                <div class="mt-1 text-[11px] text-gray-500">Raised: GHS {(g.raisedAmountGhs || 0).toLocaleString()} / {g.goalAmountGhs.toLocaleString()}</div>
                  <div class="mt-2 grid gap-2 text-xs text-gray-500 grid-cols-1 md:grid-cols-[1fr_auto_auto_auto] items-center" data-groupgift data-title={g.title}>
                   <span class="order-1 md:order-none">{g.notes || "Contribute any amount. Notes welcome."}</span>
                   <div class="order-2 flex items-center gap-1">
@@ -123,7 +124,7 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
               : 'border-zinc-200 text-zinc-700 bg-white';
             const label = it.status === 'purchased' ? 'Purchased' : it.status === 'reserved' ? 'Reserved' : 'Available';
             return (
-              <div class={`wishlist-item rounded-lg border border-zinc-200 p-3 ${it.status === 'purchased' ? 'bg-white/60' : 'bg-white/80'}`} data-item-name={it.name}>
+              <div class={`wishlist-item rounded-lg border border-zinc-200 p-3 transition-shadow ${it.status === 'purchased' ? 'bg-white/60' : 'bg-white/80'}`} data-item-name={it.name}>
                 <div class="flex items-center justify-between">
                   <div>
                     <div class="font-medium">{it.name}</div>
@@ -131,7 +132,7 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
                   </div>
                   <div class="flex items-center gap-2">
                     <span class={`item-badge px-2 py-0.5 rounded-full border text-[11px] ${badge}`}>{label}</span>
-                    <button type="button" class="toggle-purchased text-[11px] px-2 py-0.5 rounded-md border border-zinc-200 bg-white/70 text-gray-700">{label === 'Purchased' ? 'Undo' : 'Mark purchased'}</button>
+                    <button type="button" class="toggle-purchased text-[11px] px-2 py-0.5 rounded-md border border-zinc-200 bg-white/70 text-gray-700 hover:bg-white">{label === 'Purchased' ? 'Undo' : 'Mark purchased'}</button>
                   </div>
                 </div>
               </div>
@@ -299,22 +300,7 @@ const PAYSTACK_PUBLIC_KEY = import.meta.env.PUBLIC_PAYSTACK_KEY as string | unde
 
   // Hook up buttons once DOM is ready
   document.addEventListener('DOMContentLoaded', () => {
-    // Add subtle pulse/gradient for final week
-    (function(){
-      var card = document.getElementById('countdown-card');
-      var daysText = document.getElementById('countdown-days')?.textContent || '';
-      var daysNum = daysText === 'Today' ? 0 : parseInt(daysText, 10);
-      if (card && !isNaN(daysNum) && daysNum <= 7) {
-        card.style.background = 'linear-gradient(135deg, rgba(238,242,255,0.9), rgba(238,242,255,0.6))';
-        card.style.boxShadow = '0 0 0 0 rgba(79,70,229,0.35)';
-        var s = 0;
-        setInterval(() => {
-          s = (s + 1) % 40;
-          var r = 40 + Math.abs(20 - s);
-          card.style.boxShadow = '0 0 ' + r + 'px 0 rgba(79,70,229,0.18)';
-        }, 180);
-      }
-    })();
+    // Removed gradient glow/pulse on countdown card per request
 
     // Group gift presets
     Array.from(document.querySelectorAll('[data-groupgift]')).forEach((rootEl) => {
