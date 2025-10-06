@@ -4,40 +4,13 @@
     "status": "Rough idea",
     "source": "My notes",
     "memo": "People are scared to ask real questions online. What if we could get honest answers from real people without anyone knowing who's asking? Like a therapist explaining what anxiety actually feels like, or a firefighter talking about their first call. Social media rewards performance, not honesty. People post what gets likes, not what they actually think. When you ask something real, you either get trolled or ignored. I want to build something where the quality of the answer matters more than who's giving it. You could ask 'What does depression actually feel like?' and get real answers from people who've been there, not just generic advice. The key is making it anonymous so people feel safe to be vulnerable, but also making sure the answers are actually helpful.",
-    "implementation": [
-      "Video upload system where people record short answers to questions",
-      "Anonymous posting so people feel safe sharing real experiences",
-      "Expert verification system to identify professionals (therapists, firefighters, etc.)",
-      "Content moderation to filter out harmful or low-quality responses",
-      "Question categories like Mental Health, Career, Relationships, Life Experiences",
-      "Upvoting system where good answers rise to the top",
-      "Search and discovery to find questions you want to answer",
-      "Mobile app with easy video recording and playback",
-      "Web platform for browsing and watching answers",
-      "Premium features like unlimited questions and expert consultations",
-      "Community guidelines that encourage authenticity over performance"
-    ],
     "updated": "2025-01-16"
   },
   {
     "title": "Whispurr - Ephemeral Messenger",
     "status": "Rough idea",
     "source": "My notes",
-    "memo": "What if we had a messenger where conversations don't stick around forever? I keep thinking about all the times I've sent a message and immediately regretted it, or had a conversation that I wish would just disappear. Most messaging apps are built around permanence - everything gets saved, backed up, synced across devices. But what if we built something around the opposite? All chats disappear after 24 hours unless you want them to stay. The idea is to make messaging feel more like real conversation - temporary, in the moment, without the pressure of creating a permanent record. Teens are constantly worried about their digital footprint, or people in early relationships who want to be vulnerable without creating evidence that could come back to haunt them. The key is making it feel safe and intentional, not like you're trying to hide something bad.",
-    "implementation": [
-      "Auto-deleting chats that disappear after 24 hours (or custom time)",
-      "Read-once messages that vanish after being viewed",
-      "Emoji masks that cover your screen when someone looks over your shoulder",
-      "Biometric locks so only you can open the app",
-      "Stealth mode that disables read receipts and typing indicators",
-      "Scheduled deletion for specific times (like weekends)",
-      "Different message types: text, images, voice notes, video",
-      "Custom emoji packs and themes for personalization",
-      "Decoy mode with fake password for when you have to share your phone",
-      "Message recall feature to delete any message within 5 minutes",
-      "Archive important conversations before they auto-delete",
-      "Cross-platform sync that works on all your devices"
-    ],
+    "memo": "A messenger where messages are sent and received as emoji strings only you and the recipient can understand. To everyone else, it's harmless emoji gibberish. Simple privacy in plain sight—playful, low-pressure, and optional ephemerality (chats can disappear, nothing backed up by default). The goal is say-it-freely without leaving a trail.",
     "updated": "2025-01-16"
   },
   {
@@ -45,21 +18,15 @@
     "status": "Rough idea",
     "source": "My notes",
     "memo": "People struggle to manage their communities online. Whether it's a study group that keeps getting derailed by off-topic posts, or a professional community where people are afraid to ask real questions, or a hobby club where the conversation just dies because there's no structure. What if we had a platform where organizers could control exactly how their groups work? Like setting rules about what people can share, when conversations expire, and who can join. Most community platforms are either too rigid (like corporate Slack) or too chaotic (like Facebook groups). I want to build something in between - flexible enough to work for different types of communities, but structured enough to actually help people have better conversations. Think about a study group where only the teacher can post assignments, or a support group where conversations automatically expire after a week to protect privacy. The key is giving organizers the tools they need without making it complicated for regular members.",
-    "implementation": [
-      "Group management where organizers control who can join and what they can post",
-      "Role system with different permission levels for members and moderators",
-      "Conversation rules like 'no images on weekdays' or 'only text posts in this channel'",
-      "Scheduled content expiration where posts automatically delete after set time",
-      "Member approval system where new joiners need organizer approval",
-      "Nested groups with main communities and smaller project teams inside",
-      "Cross-group messaging for announcements to multiple groups at once",
-      "Content moderation tools to keep conversations on track",
-      "Templates for common community types (study groups, professional networks, hobby clubs)",
-      "Calendar integration to show when meetings and events are happening",
-      "Analytics dashboard for organizers to see what's working",
-      "Mobile and web apps that work seamlessly together"
-    ],
     "updated": "2025-01-16"
+  }
+  ,
+  {
+    "title": "WishTogether - Emotional Gifting & Wishlists",
+    "status": "Rough idea",
+    "source": "My notes",
+    "memo": "A wishlist that actually feels personal and useful. The goal is better gifts and feeling seen—not another shopping list. Onboarding asks what makes you feel loved. Items carry the ‘why’ behind them. Group gifts feel like people showing up, not just pooling cash. Support gifts are time and care—meals, babysitting, a note that lands. Quiet animations, soft sounds, and warm copy keep it gentle. Success here is smiles, small moments, and connection—not clicks.",
+    "updated": "2025-10-06"
   }
 ]
 
