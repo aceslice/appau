@@ -60,17 +60,21 @@ import { PAYSTACK_PUBLIC_KEY } from "../consts";
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
         <h2 class="font-semibold">Group gifts</h2>
-        <p class="mt-2 text-sm text-gray-600">Chip in on a big item. Swipe to choose.</p>
-        <div x-data="{ index: 0, items: [
-              { title: 'New laptop', goal: 'GHS 7,000', image: '' },
-              { title: 'Mobile device', goal: 'GHS 3,000', image: '' }
-            ], dragX: 0, dragging: false, startX: 0, hint: true,
+        <p class="mt-2 text-sm text-gray-600">Chip in on a big item. Swipe to choose. Your note means just as much as your cedis.</p>
+        <div x-data="{ index: 0,
+            items: [
+              { title: 'New laptop', goalGhs: 7000, raisedGhs: 0, tag: 'Most needed', desc: 'For builds, demos, and long-haul coding days', image: '' },
+              { title: 'Mobile device', goalGhs: 3000, raisedGhs: 0, tag: 'Nice to have', desc: 'For on-the-go testing and calls', image: '' }
+            ],
+            dragX: 0, dragging: false, startX: 0, hint: true,
             next(){ if(this.index < this.items.length - 1) { this.index++; this.resetDrag(); } },
             prev(){ if(this.index > 0) { this.index--; this.resetDrag(); } },
             resetDrag(){ this.dragX = 0; this.dragging = false; this.startX = 0; },
             onDown(e){ this.dragging = true; this.startX = (e.touches ? e.touches[0].clientX : e.clientX); },
             onMove(e){ if(!this.dragging) return; const x = (e.touches ? e.touches[0].clientX : e.clientX); this.dragX = x - this.startX; },
-            onUp(){ if(!this.dragging) return; const threshold = 80; if(this.dragX > threshold) { this.prev(); } else if(this.dragX < -threshold) { this.next(); } this.resetDrag(); this.hint = false; }
+            onUp(){ if(!this.dragging) return; const threshold = 80; if(this.dragX > threshold) { this.prev(); } else if(this.dragX < -threshold) { this.next(); } this.resetDrag(); this.hint = false; },
+            formatGhs(v){ try { return 'GHS ' + Number(v).toLocaleString(); } catch(e){ return 'GHS ' + v } },
+            percent(item){ if(!item || !item.goalGhs) return 0; const p = Math.max(0, Math.min(100, Math.round((item.raisedGhs / item.goalGhs) * 100))); return p; }
           }" x-init="setTimeout(() => { hint = false }, 2400)" class="relative mt-3" @keydown.window.arrow-right.prevent="next()" @keydown.window.arrow-left.prevent="prev()">
           <div class="h-[380px] sm:h-[360px] relative select-none">
               <template x-for="(item, i) in items" :key="item.title">
@@ -83,9 +87,14 @@ import { PAYSTACK_PUBLIC_KEY } from "../consts";
                     <div class="flex items-start justify-between">
                       <div class="space-y-0.5">
                         <div class="font-medium" x-text="item.title"></div>
-                        <div class="text-xs text-gray-500">Group gift</div>
+                        <div class="text-xs text-gray-500" x-text="item.desc"></div>
                       </div>
-                      <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] border border-zinc-200 text-zinc-600 bg-white/70" x-text="item.goal"></span>
+                      <div class="flex flex-col items-end gap-1">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px]"
+                              :class="item.tag === 'Most needed' ? 'border border-amber-200 text-amber-700 bg-amber-50/80' : 'border border-emerald-200 text-emerald-700 bg-emerald-50/80'"
+                              x-text="item.tag"></span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] border border-zinc-200 text-zinc-600 bg-white/70" x-text="formatGhs(item.goalGhs)"></span>
+                      </div>
                     </div>
                     <div class="mt-2 relative overflow-hidden rounded-lg border border-zinc-200 bg-zinc-50">
                       <template x-if="item.image">
@@ -99,10 +108,16 @@ import { PAYSTACK_PUBLIC_KEY } from "../consts";
                       <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/30 via-transparent to-transparent"></div>
                       <div x-show="hint && i === index" class="pointer-events-none absolute top-2 right-2 text-[11px] px-2 py-0.5 rounded-full bg-white/80 border border-zinc-200 text-zinc-600">Swipe →</div>
                     </div>
-                    <div class="mt-2 h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
-                      <div class="h-full w-0 bg-indigo-500 transition-all"></div>
+                    <div class="mt-2">
+                      <div class="flex items-center justify-between text-[11px] text-gray-600">
+                        <div><span x-text="formatGhs(item.raisedGhs)"></span> raised</div>
+                        <div><span x-text="percent(item)"></span>%</div>
+                      </div>
+                      <div class="mt-1 h-2 w-full bg-zinc-100 rounded-full overflow-hidden">
+                        <div class="h-full bg-indigo-500 transition-all" :style="'width: ' + percent(item) + '%'" aria-hidden="true"></div>
+                      </div>
                     </div>
-                    <div class="mt-3 flex flex-wrap items-center gap-2 gap-y-2 text-sm" x-data="{ amount: '', email: '', loading: false, error: '', success: '', setPreset(v){ this.amount = String(v) }, valid(){ return this.email && /.+@.+\\..+/.test(this.email) && Number(this.amount) >= 1 }, pay(){ if(!this.valid()){ this.error='Enter a valid email and amount (≥ 1)'; this.success=''; return; } this.error=''; this.loading=true; try { window.PaystackPop && window.PaystackPop.setup({ key: PAYSTACK_PUBLIC_KEY, email: this.email, amount: Math.round(Number(this.amount) * 100), currency: 'GHS', metadata: { purpose: 'Group gift: ' + item.title }, callback: () => { this.success='Thanks for contributing!'; this.loading=false; this.amount=''; }, onClose: () => { this.loading=false; } }).openIframe(); } catch (e) { this.error='Payment failed to initialize. Please try again.'; this.loading=false; } } }">
+                    <div class="mt-3 flex flex-wrap items-center gap-2 gap-y-2 text-sm" x-data="{ amount: '', email: '', loading: false, error: '', success: '', setPreset(v){ this.amount = String(v) }, valid(){ return this.email && /.+@.+\\..+/.test(this.email) && Number(this.amount) >= 1 }, pay(){ if(!this.valid()){ this.error='Enter a valid email and amount (≥ 1)'; this.success=''; return; } this.error=''; this.loading=true; try { window.PaystackPop && window.PaystackPop.setup({ key: PAYSTACK_PUBLIC_KEY, email: this.email, amount: Math.round(Number(this.amount) * 100), currency: 'GHS', metadata: { purpose: 'Group gift: ' + item.title }, callback: () => { this.success='Thanks for contributing! 🎉'; this.loading=false; this.amount=''; }, onClose: () => { this.loading=false; } }).openIframe(); } catch (e) { this.error='Payment failed to initialize. Please try again.'; this.loading=false; } } }">
                       <input x-model="email" type="email" inputmode="email" placeholder="you@example.com" aria-label="Your email" class="px-2 py-1 rounded-md border border-zinc-300 bg-white/90 focus:outline-none focus:ring-2 focus:ring-indigo-400 w-full sm:w-auto" :class="error && !/.+@.+\\..+/.test(email) ? 'border-rose-300' : ''" />
                       <div class="relative w-full sm:w-auto">
                         <input x-model="amount" type="number" min="1" step="1" placeholder="Amount" aria-label="Amount in GHS" class="pr-12 px-2 py-1 rounded-md border border-zinc-300 bg-white/90 w-full sm:w-36 focus:outline-none focus:ring-2 focus:ring-indigo-400" :class="error && Number(amount) < 1 ? 'border-rose-300' : ''" />
@@ -113,14 +128,17 @@ import { PAYSTACK_PUBLIC_KEY } from "../consts";
                         <button type="button" @click="setPreset(100)" class="px-2 py-1 rounded-md border border-zinc-200 text-[12px] hover:bg-white">GHS 100</button>
                         <button type="button" @click="setPreset(200)" class="px-2 py-1 rounded-md border border-zinc-200 text-[12px] hover:bg-white">GHS 200</button>
                       </div>
-                      <button @click="pay()" :disabled="!valid() || loading" class="underline decoration-dashed underline-offset-4 hover:text-indigo-600 disabled:opacity-60 disabled:cursor-not-allowed w-full sm:w-auto">Contribute</button>
+                      <button @click="pay()" :disabled="!valid() || loading" class="inline-flex items-center justify-center px-3 py-2 rounded-md border border-zinc-300 bg-white/90 hover:bg-white disabled:opacity-60 disabled:cursor-not-allowed transition-colors w-full sm:w-auto">
+                        <span x-show="!loading">Contribute</span>
+                        <span x-show="loading">Processing…</span>
+                      </button>
                       <div class="w-full">
                         <div class="text-[12px] text-gray-500">Your email is for the receipt only.</div>
                         <template x-if="error">
                           <div class="text-[12px] text-rose-600 mt-1" x-text="error" aria-live="polite"></div>
                         </template>
                         <template x-if="success">
-                          <div class="text-[12px] text-emerald-700 mt-1" x-text="success" aria-live="polite"></div>
+                        <div class="text-[12px] text-emerald-700 mt-1" x-text="success" aria-live="polite"></div>
                         </template>
                       </div>
                     </div>
@@ -165,14 +183,14 @@ import { PAYSTACK_PUBLIC_KEY } from "../consts";
 
       <div class="rounded-xl border border-zinc-200 bg-white/70 p-4">
         <h2 class="font-semibold">Support gifts</h2>
-        <p class="mt-2 text-sm text-gray-600">Non‑material gifts that matter just as much. If you pledge one, feel free to suggest a day that works.</p>
+        <p class="mt-2 text-sm text-gray-600">Everyday gestures that matter. If you pledge one, feel free to suggest a day that works.</p>
         <ul class="mt-3 text-sm text-gray-700 space-y-2">
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Home-cooked meal night</span></li>
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Help with a weekend errand</span></li>
-          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>A short note or card</span></li>
+          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>Waakye or Jollof lunch (your treat)</span></li>
+          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>A short WhatsApp note or prayer (or a LinkedIn shout)</span></li>
+          <li class="flex items-start gap-2"><span class="text-gray-400">•</span><span>1GB data or a small airtime top‑up</span></li>
         </ul>
         <div class="mt-3 text-sm">
-          <a href="mailto:gideonad.codez@gmail.com?subject=Support%20gift%20pledge&body=Hey%20Gideon%2C%0D%0A%0D%0AI%E2%80%99d%20love%20to%20help%20with%20___%20around%20____.%0D%0A(Optional)%20Short%20note%3A%20___" class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Pledge a support gift</a>
+          <a href="mailto:gideonad.codez@gmail.com?subject=Support%20gift%20pledge&body=Hey%20Gideon%2C%0D%0A%0D%0AI%E2%80%99d%20love%20to%20pledge%3A%20%5BWaakye%20lunch%20%7C%20Errand%20help%20%7C%20WhatsApp%20note%20%7C%201GB%20data%2Fairtime%5D.%0D%0AWhen%3A%20____.%0D%0A(Optional)%20Phone%20for%20WhatsApp%3A%20____.%0D%0A(Optional)%20Short%20note%3A%20___" class="underline decoration-dashed underline-offset-4 hover:text-indigo-600">Pledge a support gift</a>
         </div>
       </div>
 
