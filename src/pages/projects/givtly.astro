@@ -1,0 +1,142 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+---
+
+<Layout title="Givtly — Social Gifting Network (MERN, PWA)">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <div class="text-xs text-gray-500 mb-2">
+      <a href="/projects" class="underline decoration-dashed underline-offset-4">← Back to projects</a>
+    </div>
+
+    <div class="relative mb-3">
+      <span class="inline-flex items-center gap-2">
+        <span class="text-2xl md:text-3xl font-bold">Givtly</span>
+        <span class="px-2 py-0.5 rounded-full border text-[11px] border-emerald-100 text-emerald-700 bg-emerald-50/70">In development</span>
+      </span>
+    </div>
+
+    <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 mb-3 md:w-4/5">
+      <div class="text-sm text-gray-800">
+        <div class="font-semibold mb-1">In one line</div>
+        A modern social gifting network. Create shareable wishlists and group gifts, accept contributions transparently, celebrate together.
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2 text-[11px] mb-2">
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">MERN (MongoDB, Express, React, Node)</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Passport.js Auth</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Socket.IO Real‑time</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Vite + PWA</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Zustand State</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Tailwind CSS</span>
+    </div>
+
+    <p class="text-gray-700 md:w-3/4" style="line-height: 2">
+      Givtly is a full‑stack, production‑ready platform for organizing group gifts, managing personal wishlists and registries, and collecting funds — all wrapped in a delightful, transparent, and social experience. It’s built to work anywhere, with inclusive features and a clear focus on trust, collaboration, and celebration.
+    </p>
+
+    <section class="mt-6">
+      <h3 class="font-semibold mb-3">Core features</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+        <ul class="list-disc ms-5 space-y-1">
+          <li>Wishlists & registries with templates (Birthday, Wedding, Baby Shower, Personal Goal, Funeral)</li>
+          <li>Item gifts via link paste with link preview (image, title, price)</li>
+          <li>Cash funds with progress tracking and contribution tiers</li>
+          <li>Support gifts (non‑cash pledges like time, help, messages)</li>
+          <li>Shareable links and private/public visibility controls</li>
+        </ul>
+        <ul class="list-disc ms-5 space-y-1">
+          <li>Supporter Wall with real‑time updates and messages</li>
+          <li>Creator update loop — thank‑you posts distributed to contributors</li>
+          <li>Group Captain links for champion‑led gift coordination</li>
+          <li>Givtly Insider: points for positive actions and redemptions</li>
+          <li>Responsive PWA — installable, offline‑aware shell</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h3 class="font-semibold mb-3">Architecture & stack</h3>
+      <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+          <div>
+            <div class="font-semibold mb-1">Frontend</div>
+            <ul class="list-disc ms-5 space-y-1">
+              <li>React (Vite), Tailwind CSS, Zustand</li>
+              <li>PWA via Vite Plugin PWA (service worker + manifest)</li>
+              <li>Accessible, responsive UI with component primitives</li>
+            </ul>
+          </div>
+          <div>
+            <div class="font-semibold mb-1">Backend</div>
+            <ul class="list-disc ms-5 space-y-1">
+              <li>Node.js + Express.js</li>
+              <li>Passport.js (email/password + social login strategies)</li>
+              <li>Socket.IO (real‑time supporter wall and progress)</li>
+            </ul>
+          </div>
+          <div>
+            <div class="font-semibold mb-1">Database</div>
+            <ul class="list-disc ms-5 space-y-1">
+              <li>MongoDB Atlas with Mongoose</li>
+              <li>Schema validation, hooks, and indexes for performance</li>
+            </ul>
+          </div>
+          <div>
+            <div class="font-semibold mb-1">Integrations</div>
+            <ul class="list-disc ms-5 space-y-1">
+              <li>Payments (e.g., Paystack) for contributions and payouts</li>
+              <li>Microlink‑style link previews for item gifts</li>
+              <li>Push notifications (e.g., Firebase Cloud Messaging)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h3 class="font-semibold mb-3">Experience highlights</h3>
+      <div class="space-y-3 text-sm text-gray-700">
+        <p><strong>Creator‑first design:</strong> Templates and gentle defaults make setup fast, while visibility controls keep things private until shared.</p>
+        <p><strong>Social proof, built‑in:</strong> A real‑time Supporter Wall adds momentum and trust without manual updates.</p>
+        <p><strong>Inclusive giving:</strong> Support gifts enable meaningful participation beyond money.</p>
+        <p><strong>Post‑gift closure:</strong> When a goal completes, creators share a thank‑you photo/message that reaches all contributors automatically.</p>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h3 class="font-semibold mb-3">Security & privacy</h3>
+      <div class="space-y-3 text-sm text-gray-700">
+        <p>Account security via Passport strategies, hashed credentials, and session/JWT flows as appropriate. Sensitive operations gated by auth guards and server‑side validation.</p>
+        <p>Private by default. Lists are only discoverable when explicitly shared; contributors see only what’s necessary to participate.</p>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <h3 class="font-semibold mb-3">Roadmap</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+        <ul class="list-disc ms-5 space-y-1">
+          <li>Birthday reminders & drafts with friend/follow system</li>
+          <li>Micro‑Givts (small digital vouchers)</li>
+          <li>Insider Store for redeeming points</li>
+        </ul>
+        <ul class="list-disc ms-5 space-y-1">
+          <li>Advanced analytics for creators</li>
+          <li>Multi‑currency support</li>
+          <li>Accessibility audits and performance budgets</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="mt-6">
+      <div class="flex flex-wrap gap-2">
+        <a href="https://givtly.app" target="_blank" rel="noopener" class="px-4 py-2 rounded-full border border-indigo-600 bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 hover:border-indigo-700">Visit Givtly</a>
+        <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">Get in touch</a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+

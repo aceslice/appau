@@ -3,6 +3,16 @@ import larryLogo from "../assets/larrysmshub_logo.png";
 
 const featuredLinks = [
 	{
+		title: "Givtly",
+		description:
+			"Social gifting network — create shareable wishlists, group gifts, and transparent contribution pages. Real‑time updates, powerful templates, and a delightful PWA.",
+		link: "/projects/givtly",
+		footer: "MERN • Passport.js • Socket.IO • Vite PWA",
+		icon: "i-lucide-gift",
+		tags: ["MERN", "Passport.js", "Socket.IO", "PWA", "Tailwind", "Zustand"],
+		category: "Startups",
+	},
+	{
 		title: "Larry SMS Hub",
 		description:
 			"Branded bulk SMS for businesses — send messages under your business name, simply and reliably.",
