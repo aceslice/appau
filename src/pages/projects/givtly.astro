@@ -20,7 +20,7 @@ import Header from "../../components/Header.astro";
     <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 mb-3 md:w-4/5">
       <div class="text-sm text-gray-800">
         <div class="font-semibold mb-1">In one line</div>
-        A modern social gifting network. Create shareable wishlists and group gifts, accept contributions transparently, celebrate together.
+        Create, share, and fund gifts—clearly, quickly, together.
       </div>
     </div>
 
@@ -31,28 +31,29 @@ import Header from "../../components/Header.astro";
       <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Vite + PWA</span>
       <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Zustand State</span>
       <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Tailwind CSS</span>
+      <span class="px-2 py-0.5 rounded-full border border-indigo-200 text-indigo-700 bg-indigo-50/80">Payments: Paystack</span>
     </div>
 
     <p class="text-gray-700 md:w-3/4" style="line-height: 2">
-      Givtly is a full‑stack, production‑ready platform for organizing group gifts, managing personal wishlists and registries, and collecting funds — all wrapped in a delightful, transparent, and social experience. It’s built to work anywhere, with inclusive features and a clear focus on trust, collaboration, and celebration.
+      Givtly is a production‑ready social gifting platform. Build wishlists, run group gifts, track progress in real time, and celebrate with supporters. Built to work anywhere.
     </p>
 
     <section class="mt-6">
       <h3 class="font-semibold mb-3">Core features</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
         <ul class="list-disc ms-5 space-y-1">
-          <li>Wishlists & registries with templates (Birthday, Wedding, Baby Shower, Personal Goal, Funeral)</li>
-          <li>Item gifts via link paste with link preview (image, title, price)</li>
-          <li>Cash funds with progress tracking and contribution tiers</li>
-          <li>Support gifts (non‑cash pledges like time, help, messages)</li>
-          <li>Shareable links and private/public visibility controls</li>
+          <li>Wishlists & registries with simple templates</li>
+          <li>Item gifts from pasted links with rich previews</li>
+          <li>Cash funds with tiers and live progress</li>
+          <li>Support gifts for non‑cash contributions</li>
+          <li>Share links; control privacy per list</li>
         </ul>
         <ul class="list-disc ms-5 space-y-1">
-          <li>Supporter Wall with real‑time updates and messages</li>
-          <li>Creator update loop — thank‑you posts distributed to contributors</li>
-          <li>Group Captain links for champion‑led gift coordination</li>
-          <li>Givtly Insider: points for positive actions and redemptions</li>
-          <li>Responsive PWA — installable, offline‑aware shell</li>
+          <li>Real‑time Supporter Wall and messages</li>
+          <li>Creator updates sent to all contributors</li>
+          <li>Group Captain links to rally teams</li>
+          <li>Insider points with redemptions</li>
+          <li>Installable PWA; offline‑aware shell</li>
         </ul>
       </div>
     </section>
@@ -64,32 +65,32 @@ import Header from "../../components/Header.astro";
           <div>
             <div class="font-semibold mb-1">Frontend</div>
             <ul class="list-disc ms-5 space-y-1">
-              <li>React (Vite), Tailwind CSS, Zustand</li>
-              <li>PWA via Vite Plugin PWA (service worker + manifest)</li>
-              <li>Accessible, responsive UI with component primitives</li>
+              <li>React (Vite), Tailwind, Zustand</li>
+              <li>PWA via Vite Plugin PWA</li>
+              <li>Accessible, responsive UI</li>
             </ul>
           </div>
           <div>
             <div class="font-semibold mb-1">Backend</div>
             <ul class="list-disc ms-5 space-y-1">
-              <li>Node.js + Express.js</li>
-              <li>Passport.js (email/password + social login strategies)</li>
-              <li>Socket.IO (real‑time supporter wall and progress)</li>
+              <li>Node.js + Express</li>
+              <li>Passport.js (email/password, social)</li>
+              <li>Socket.IO (real‑time)</li>
             </ul>
           </div>
           <div>
             <div class="font-semibold mb-1">Database</div>
             <ul class="list-disc ms-5 space-y-1">
-              <li>MongoDB Atlas with Mongoose</li>
-              <li>Schema validation, hooks, and indexes for performance</li>
+              <li>MongoDB Atlas + Mongoose</li>
+              <li>Schemas, hooks, indexes</li>
             </ul>
           </div>
           <div>
             <div class="font-semibold mb-1">Integrations</div>
             <ul class="list-disc ms-5 space-y-1">
-              <li>Payments via Paystack for contributions and payouts</li>
-              <li>Link previews for item gifts (Open Graph/metadata scraping)</li>
-              <li>Push notifications via Firebase Cloud Messaging</li>
+              <li>Paystack payments (contributions, payouts)</li>
+              <li>Link previews (Open Graph/metadata)</li>
+              <li>Firebase Cloud Messaging</li>
             </ul>
           </div>
         </div>
@@ -99,18 +100,18 @@ import Header from "../../components/Header.astro";
     <section class="mt-6">
       <h3 class="font-semibold mb-3">Experience highlights</h3>
       <div class="space-y-3 text-sm text-gray-700">
-        <p><strong>Creator‑first design:</strong> Templates and gentle defaults make setup fast, while visibility controls keep things private until shared.</p>
-        <p><strong>Social proof, built‑in:</strong> A real‑time Supporter Wall adds momentum and trust without manual updates.</p>
-        <p><strong>Inclusive giving:</strong> Support gifts enable meaningful participation beyond money.</p>
-        <p><strong>Post‑gift closure:</strong> When a goal completes, creators share a thank‑you photo/message that reaches all contributors automatically.</p>
+        <p><strong>Fast setup:</strong> Smart templates; private until you share.</p>
+        <p><strong>Trust by default:</strong> Real‑time wall and transparent progress.</p>
+        <p><strong>Inclusive:</strong> Money, items, or support pledges all count.</p>
+        <p><strong>Closure:</strong> One‑click thank‑you updates to every supporter.</p>
       </div>
     </section>
 
     <section class="mt-6">
       <h3 class="font-semibold mb-3">Security & privacy</h3>
       <div class="space-y-3 text-sm text-gray-700">
-        <p>Account security via Passport strategies, hashed credentials, and session/JWT flows as appropriate. Sensitive operations gated by auth guards and server‑side validation.</p>
-        <p>Private by default. Lists are only discoverable when explicitly shared; contributors see only what’s necessary to participate.</p>
+        <p>Encrypted credentials, Passport strategies, and server‑side validation.</p>
+        <p>Private by default; explicit sharing controls per list.</p>
       </div>
     </section>
 
@@ -118,14 +119,14 @@ import Header from "../../components/Header.astro";
       <h3 class="font-semibold mb-3">Roadmap</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
         <ul class="list-disc ms-5 space-y-1">
-          <li>Birthday reminders & drafts with friend/follow system</li>
+          <li>Birthday reminders & private drafts</li>
           <li>Micro‑Givts (small digital vouchers)</li>
-          <li>Insider Store for redeeming points</li>
+          <li>Insider Store redemptions</li>
         </ul>
         <ul class="list-disc ms-5 space-y-1">
-          <li>Advanced analytics for creators</li>
-          <li>Multi‑currency support</li>
-          <li>Accessibility audits and performance budgets</li>
+          <li>Creator analytics</li>
+          <li>Multi‑currency</li>
+          <li>A11y and performance budgets</li>
         </ul>
       </div>
     </section>
