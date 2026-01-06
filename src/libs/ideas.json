@@ -1,31 +1,9 @@
 [
   {
-    "title": "Vex - Anonymous Video Answers",
+    "title": "Givtly - Emotional Gifting & Wishlists",
     "status": "Rough idea",
     "source": "My notes",
-    "memo": "People are scared to ask real questions online. What if we could get honest answers from real people without anyone knowing who's asking? Like a therapist explaining what anxiety actually feels like, or a firefighter talking about their first call. Social media rewards performance, not honesty. People post what gets likes, not what they actually think. When you ask something real, you either get trolled or ignored. I want to build something where the quality of the answer matters more than who's giving it. You could ask 'What does depression actually feel like?' and get real answers from people who've been there, not just generic advice. The key is making it anonymous so people feel safe to be vulnerable, but also making sure the answers are actually helpful.",
-    "updated": "2025-01-16"
-  },
-  {
-    "title": "Whispurr - Ephemeral Messenger",
-    "status": "Rough idea",
-    "source": "My notes",
-    "memo": "A messenger where messages are sent and received as emoji strings only you and the recipient can understand. To everyone else, it's harmless emoji gibberish. Simple privacy in plain sight—playful, low-pressure, and optional ephemerality (chats can disappear, nothing backed up by default). The goal is say-it-freely without leaving a trail.",
-    "updated": "2025-01-16"
-  },
-  {
-    "title": "Circles - Community Platform",
-    "status": "Rough idea",
-    "source": "My notes",
-    "memo": "People struggle to manage their communities online. Whether it's a study group that keeps getting derailed by off-topic posts, or a professional community where people are afraid to ask real questions, or a hobby club where the conversation just dies because there's no structure. What if we had a platform where organizers could control exactly how their groups work? Like setting rules about what people can share, when conversations expire, and who can join. Most community platforms are either too rigid (like corporate Slack) or too chaotic (like Facebook groups). I want to build something in between - flexible enough to work for different types of communities, but structured enough to actually help people have better conversations. Think about a study group where only the teacher can post assignments, or a support group where conversations automatically expire after a week to protect privacy. The key is giving organizers the tools they need without making it complicated for regular members.",
-    "updated": "2025-01-16"
-  }
-  ,
-  {
-    "title": "WishTogether - Emotional Gifting & Wishlists",
-    "status": "Rough idea",
-    "source": "My notes",
-    "memo": "A wishlist that actually feels personal and useful. The goal is better gifts and feeling seen—not another shopping list. Onboarding asks what makes you feel loved. Items carry the ‘why’ behind them. Group gifts feel like people showing up, not just pooling cash. Support gifts are time and care—meals, babysitting, a note that lands. Quiet animations, soft sounds, and warm copy keep it gentle. Success here is smiles, small moments, and connection—not clicks.",
+    "memo": "A wishlist that actually feels personal and useful. The goal is better gifts and feeling seen—not another shopping list. Onboarding asks what makes you feel loved. Items carry the 'why' behind them. Group gifts feel like people showing up, not just pooling cash. Support gifts are time and care—meals, babysitting, a note that lands. Quiet animations, soft sounds, and warm copy keep it gentle. Success here is smiles, small moments, and connection—not clicks.",
     "updated": "2025-10-06"
   }
 ]
