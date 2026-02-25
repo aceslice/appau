@@ -1,0 +1,54 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import clinkLogo from "../../assets/clink_logo.svg";
+---
+
+<Layout title="Clink">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <div class="text-xs text-gray-500 mb-2">
+      <a href="/projects" class="underline decoration-dashed underline-offset-4">← Back to projects</a>
+    </div>
+
+    <div class="relative mb-3">
+      <img
+        src={clinkLogo.src}
+        alt="Clink logo"
+        class="h-10 md:h-12 object-contain"
+        loading="lazy"
+      />
+      <span
+        class="absolute top-0 right-0 px-2 py-0.5 rounded-full border text-[11px] border-emerald-100 text-emerald-700 bg-emerald-50/70"
+      >
+        Live
+      </span>
+    </div>
+
+    <h1 class="text-3xl md:text-4xl font-bold mb-2">Clink</h1>
+
+    <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 mb-3 md:w-4/5">
+      <div class="text-sm text-gray-800">
+        <div class="font-semibold mb-1">In one line</div>
+        A digital ledger and debt recovery web application. Streamlines financial tracking and makes managing outstanding balances frictionless.
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2 text-[11px] mb-2">
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Digital Ledger</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Debt Recovery</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">React</span>
+      <span class="px-2 py-0.5 rounded-full border border-emerald-200 text-emerald-700 bg-emerald-50/80">Live</span>
+    </div>
+
+    <p class="text-[13px] text-gray-600 mb-4">
+      Financial tracking • Debt recovery • React architecture
+    </p>
+
+    <p class="text-gray-700 md:w-3/4" style="line-height: 2">
+      Clink keeps your numbers honest and your follow-ups clear. It gives you a living record of who owes what, when it was agreed, and how
+      balances are being recovered — without messy spreadsheets or forgotten notes.
+    </p>
+  </div>
+</Layout>
+
