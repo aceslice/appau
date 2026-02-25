@@ -2,6 +2,20 @@
   "name": "aceslice",
   "type": "module",
   "version": "0.0.1",
+  "description": "Personal website of Gideon Appau",
+  "author": "Gideon Appau",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aceslice/aceslice.github.io"
+  },
+  "homepage": "https://aceslice.github.io",
+  "keywords": [
+    "personal website",
+    "portfolio",
+    "blog",
+    "portfolio",
+    "portfolio"  ],
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
