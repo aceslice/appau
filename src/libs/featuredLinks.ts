@@ -35,6 +35,16 @@ const featuredLinks = [
 		tags: ["Digital Ledger", "Debt Recovery", "React", "Live"],
 		category: "Startups",
 	},
+	{
+		title: "Billion Tech Nest",
+		description:
+			"Client-grade telecom data reselling platform with MoMo wallet funding, QR POS delivery, and ledger-safe reconciliation.",
+		link: "/projects/billion-tech-nest",
+		footer: "MoMo funding • QR fulfillment • Idempotent webhooks",
+		icon: "i-lucide-signal",
+		tags: ["Telecom Reselling", "Mobile Money", "QR POS", "Commission Routing"],
+		category: "Client Work",
+	},
 	// {
 	// 	title: "Devlog",
 	// 	description:

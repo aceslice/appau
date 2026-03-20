@@ -1,0 +1,91 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+---
+
+<Layout title="Billion Tech Nest">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+    <Header />
+    <div class="text-xs text-gray-500 mb-2">
+      <a href="/projects" class="underline decoration-dashed underline-offset-4">← Back to projects</a>
+    </div>
+
+    <div class="relative mb-3">
+      <span class="inline-flex items-center gap-2">
+        <h1 class="text-3xl md:text-4xl font-bold">Billion Tech Nest</h1>
+        <span class="px-2 py-0.5 rounded-full border text-[11px] border-emerald-100 text-emerald-700 bg-emerald-50/70">
+          Live
+        </span>
+      </span>
+    </div>
+
+    <div class="rounded-xl border border-zinc-200 bg-white/60 backdrop-blur-2xl p-4 mb-3 md:w-4/5">
+      <div class="text-sm text-gray-800">
+        <div class="font-semibold mb-1">In one line</div>
+        A client-grade telecom data reselling platform for real-time wallet funding, QR point-of-sale delivery, and commission routing.
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2 text-[11px] mb-2">
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Telecom Reselling</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Mobile Money</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">QR POS</span>
+      <span class="px-2 py-0.5 rounded-full border border-zinc-300 bg-white/70">Idempotent Webhooks</span>
+      <span class="px-2 py-0.5 rounded-full border border-emerald-200 text-emerald-700 bg-emerald-50/80">Live</span>
+    </div>
+
+    <p class="text-[13px] text-gray-600 mb-6">
+      MoMo funding • Ledger-safe reconciliation • Queue-based fulfillment • Dynamic commission routing
+    </p>
+
+    <section class="mt-6">
+      <h3 class="font-semibold mb-3">Case study</h3>
+      <div class="space-y-4 text-sm text-gray-700">
+        <div>
+          <div class="font-semibold mb-1">Problem</div>
+          A client required an automated, multi-tier telecom reselling platform capable of handling real-time wallet funding,
+          QR point-of-sale delivery, and dynamic commission routing without manual admin intervention.
+        </div>
+
+        <div>
+          <div class="font-semibold mb-1">Constraints</div>
+          High reliability for financial transactions, strict latency limits for external telecom fulfillment, and the critical need
+          to prevent double-crediting during network/API failures.
+        </div>
+
+        <div>
+          <div class="font-semibold mb-1">Engineering</div>
+          Architected an async fulfillment queue backed by PostgreSQL (Neon). Implemented ledger-safe webhook handling with strict
+          idempotency checks (so confirmations could not double-post). Optimized database indexing to support high-frequency
+          dashboard polling while keeping compute usage low.
+        </div>
+
+        <div>
+          <div class="font-semibold mb-1">Impact</div>
+          Processed over GHS 10,000 in transaction volume (GMV) within the first 5 weeks of production, with automated accounting
+          accuracy and recovery-oriented reliability for referrers, agents, and sub-agents.
+          <p class="text-gray-600 mt-2" style="line-height: 1.7">
+            Where details are confidential, the focus here is on system design and reliability patterns (not proprietary implementation).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-8 mb-4">
+      <div class="flex flex-wrap gap-2">
+        <a
+          href="https://billiontechnest.netlify.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="px-4 py-2 rounded-full border border-emerald-600 bg-emerald-600 text-white text-sm font-semibold hover:bg-emerald-700 hover:border-emerald-700"
+        >
+          Visit Billion Tech Nest
+        </a>
+        <a href="/contact" class="px-4 py-2 rounded-full border border-zinc-300 bg-white/70 text-sm font-semibold hover:bg-white">
+          Discuss a similar build
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
