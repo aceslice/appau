@@ -2,9 +2,33 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import clinkLogo from "../../assets/clink_logo.svg";
+import { SITE_HOST } from "../../consts";
+
+const siteUrl = `https://${SITE_HOST}`;
+const pageUrl = `${siteUrl}/projects/clink`;
+
+const projectJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Clink",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: pageUrl,
+  description:
+    "A digital ledger and debt recovery web application that streamlines financial tracking and outstanding balance recovery.",
+  genre: ["Fintech", "Ledger", "Debt Recovery"],
+  audience: {
+    "@type": "Audience",
+    audienceType: "Merchants and service providers who sell on credit",
+  },
+};
 ---
 
-<Layout title="Clink">
+<Layout
+  title="Clink"
+  description="A digital ledger and debt recovery web application that streamlines financial tracking and makes outstanding balance recovery frictionless."
+  ogImage={clinkLogo.src}
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
     <div class="text-xs text-gray-500 mb-2">
@@ -131,6 +155,35 @@ import clinkLogo from "../../assets/clink_logo.svg";
     </section>
 
     <section class="mt-6">
+      <h3 class="font-semibold mb-3">Clink API (for partners)</h3>
+      <p class="text-gray-700 md:w-3/4 mb-3" style="line-height: 2">
+        If you’re building a tool that handles informal credit, Clink’s API lets you plug into the full flow: issue a receipt,
+        generate a payment link, and keep your ledger updated as customers pay. It’s designed for a “stupid simple DX” so you
+        can ship faster without building reconciliation from scratch.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+        <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+          <div class="font-semibold mb-2">What partners get</div>
+          <ul class="list-disc ms-5 space-y-1">
+            <li>Receipt creation that produces a ready-to-send payment link.</li>
+            <li>Ledger-safe updates so your system stays accurate even with unreliable networks.</li>
+            <li>Webhook events that notify your server when payment status changes.</li>
+          </ul>
+        </div>
+
+        <div class="rounded-xl border border-zinc-200 bg-white/50 backdrop-blur-2xl p-4">
+          <div class="font-semibold mb-2">Why it feels reliable</div>
+          <ul class="list-disc ms-5 space-y-1">
+            <li>Amounts are handled in the smallest unit to avoid rounding surprises.</li>
+            <li>Retries are safe to prevent double-crediting.</li>
+            <li>Security is built around authenticated requests and verified payment events.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="mt-6">
       <h3 class="font-semibold mb-3">Pricing snapshot</h3>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-sm text-gray-700">
         <div class="rounded-lg border border-zinc-200 bg-white/60 p-3">
@@ -199,6 +252,8 @@ import clinkLogo from "../../assets/clink_logo.svg";
         </a>
       </div>
     </section>
+
+    <script type="application/ld+json">{JSON.stringify(projectJsonLd)}</script>
   </div>
 </Layout>
 

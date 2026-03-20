@@ -2,9 +2,33 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import marketmateLogo from "../../assets/marketmate_logo.png";
+import { SITE_HOST } from "../../consts";
+
+const siteUrl = `https://${SITE_HOST}`;
+const pageUrl = `${siteUrl}/projects/marketmate`;
+
+const projectJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "MarketMate",
+  applicationCategory: "FoodDeliveryApplication",
+  operatingSystem: "Web",
+  url: pageUrl,
+  description:
+    "A fresh-food subscription and swap experience that connects customers with local Ghanaian farmers through weekly boxes and QR pickup.",
+  genre: ["Food", "Subscription", "Supply Chain"],
+  audience: {
+    "@type": "Audience",
+    audienceType: "Families and customers looking for fresh weekly produce without the stress",
+  },
+};
 ---
 
-<Layout title="MarketMate">
+<Layout
+  title="MarketMate"
+  description="A fresh-food subscription and swap experience that connects customers with local Ghanaian farmers through weekly boxes and QR pickup."
+  ogImage={marketmateLogo.src}
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
     <div class="text-xs text-gray-500 mb-2">
@@ -125,6 +149,8 @@ import marketmateLogo from "../../assets/marketmate_logo.png";
       </div>
     </section>
   </div>
+
+  <script type="application/ld+json">{JSON.stringify(projectJsonLd)}</script>
 </Layout>
 
 

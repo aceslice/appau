@@ -6,6 +6,10 @@ import Topnav from "../components/Topnav.astro";
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
 const canonicalUrl = `https://${SITE_HOST}${Astro.url?.pathname ?? "/"}`;
+const siteUrl = `https://${SITE_HOST}`;
+const description = Astro.props.description || SITE_DESCRIPTION;
+const ogImage = Astro.props.ogImage || "/ace 1.svg";
+const ogImageUrl = ogImage.startsWith("http") ? ogImage : `${siteUrl}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`;
 ---
 
 <!doctype html>
@@ -16,15 +20,22 @@ const canonicalUrl = `https://${SITE_HOST}${Astro.url?.pathname ?? "/"}`;
     <link rel="icon" type="image/svg+xml" href="/ace 1.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | {SITE_TITLE}</title>
-    <meta name="description" content={SITE_DESCRIPTION} />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow" />
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={`${title} | ${SITE_TITLE}`} />
-    <meta property="og:description" content={SITE_DESCRIPTION} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={SITE_TITLE} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={description} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={`${title} | ${SITE_TITLE}`} />
-    <meta name="twitter:description" content={SITE_DESCRIPTION} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="alternate" type="application/json" href="/ai-index.json" title="AI index" />
     
     <!-- Performance optimizations -->
     <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
@@ -40,7 +51,7 @@ const canonicalUrl = `https://${SITE_HOST}${Astro.url?.pathname ?? "/"}`;
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Gideon Appau",
-        "url": "https://appau.netlify.app",
+        "url": "${siteUrl}/",
         "description": "CS student and developer building real products",
         "jobTitle": "Software Developer & Student",
         "worksFor": {

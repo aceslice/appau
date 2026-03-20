@@ -1,9 +1,28 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
+import { SITE_HOST } from "../../consts";
+
+const siteUrl = `https://${SITE_HOST}`;
+const pageUrl = `${siteUrl}/projects/billion-tech-nest`;
+
+const projectJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  name: "Billion Tech Nest",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: pageUrl,
+  description:
+    "A client-grade telecom data reselling platform with MoMo wallet funding, QR point-of-sale delivery, and ledger-safe reconciliation.",
+  genre: ["Telecom", "Fintech", "Payments"],
+};
 ---
 
-<Layout title="Billion Tech Nest">
+<Layout
+  title="Billion Tech Nest"
+  description="A client-grade telecom data reselling platform with MoMo wallet funding, QR point-of-sale delivery, and ledger-safe reconciliation."
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
     <div class="text-xs text-gray-500 mb-2">
@@ -86,6 +105,8 @@ import Header from "../../components/Header.astro";
         </a>
       </div>
     </section>
+
+    <script type="application/ld+json">{JSON.stringify(projectJsonLd)}</script>
   </div>
 </Layout>
 

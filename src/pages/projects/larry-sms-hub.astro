@@ -2,9 +2,33 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import larryLogo from "../../assets/larrysmshub_logo.png";
+import { SITE_HOST } from "../../consts";
+
+const siteUrl = `https://${SITE_HOST}`;
+const pageUrl = `${siteUrl}/projects/larry-sms-hub`;
+
+const projectJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Larry SMS Hub",
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "MobileWeb",
+  url: pageUrl,
+  description:
+    "A branded SMS automation platform for businesses that streamlines scheduling, templates, groups, and delivery reporting.",
+  genre: ["Messaging", "Automation", "Fintech"],
+  audience: {
+    "@type": "Audience",
+    audienceType: "Businesses sending branded SMS reminders and promotions",
+  },
+};
 ---
 
-<Layout title="Larry SMS Hub">
+<Layout
+  title="Larry SMS Hub"
+  description="A branded SMS automation platform for businesses that streamlines scheduling, templates, groups, and delivery reporting."
+  ogImage={larryLogo.src}
+>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
     <Header />
     <div class="text-xs text-gray-500 mb-2">
@@ -149,4 +173,6 @@ import larryLogo from "../../assets/larrysmshub_logo.png";
       </div>
     </section>
   </div>
+
+  <script type="application/ld+json">{JSON.stringify(projectJsonLd)}</script>
 </Layout>

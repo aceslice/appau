@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# AI/LLM and search crawlers should discover pages via the sitemap
+Sitemap: https://appau.netlify.app/sitemap.xml
+
